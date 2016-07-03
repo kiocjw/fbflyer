@@ -16,7 +16,8 @@
                                 echo $this->Form->input('address',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                 echo $this->Form->input('website',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                 echo $this->Form->input('email',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
-                                echo $this->Form->input('phone',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
+                         ?>     <label for="phone">Phone</label> <?php
+				echo $this->Form->textarea('phone',array('div'=>array('class'=>'form-group'),'class' => 'form-control')); 
                                 echo $this->Form->input('longitude',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                 echo $this->Form->input('latitude',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                          ?>

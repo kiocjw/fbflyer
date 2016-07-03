@@ -49,7 +49,7 @@
                                                       <?= __('Description') ?>
                                                     </h4>
                                                         <p class="lead">
-                                                            <?= h($merchant->description) ?>
+                                                            <?=nl2br(h($merchant->description)) ?>
                                                         </p>
                                                         </div>
                                                     <div class="section-title-wr">
@@ -73,7 +73,7 @@
                                                       <?= __('Phone') ?>
                                                     </h4>
                                                         <p class="lead">
-                                                            <?= h($merchant->phone) ?>
+                                                            <?=nl2br(h($merchant->phone))  ?>
                                                           </p>
                                                     </div>
                                                     <div class="section-title-wr">

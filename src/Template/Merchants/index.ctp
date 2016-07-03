@@ -28,14 +28,14 @@
          
                       </div>
                       <p>
-                        <?= h($merchant->description) ?>
+                        <?=nl2br(h($merchant->description)) ?>
                       </p>
                     </div>
                     <!--/.entry content -->
                     <footer class="info_bar clearfix">
                       <ul class="unstyled list-inline row">
                         <li class="time col-sm-7 col-xs-6 col-lg-8">
-                          <?= h($merchant->phone) ?>
+                          <?=nl2br(h($merchant->phone))  ?>
                           </br>
                           <?= h($merchant->email) ?>
                           </br>

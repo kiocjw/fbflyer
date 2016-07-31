@@ -4,7 +4,7 @@
             <div class="panel-body frameLR bg-white shadow mTop-30">
              <hr data-symbol="<?= __('Merchants') ?>">
               <div class="row">
-                   <?php foreach ($merchants as $merchant): ?>
+                   <?php if (isset($merchants)){foreach ($merchants as $merchant): ?>
                         <div class="col-sm-6">
                   <div class="deal-entry  orange">
                     <div class="image">
@@ -51,7 +51,7 @@
                   </div>
                 </div>
                     
-                    <?php endforeach; ?>
+                    <?php endforeach; }?>
                 </div>      
             </div>
        </div>  

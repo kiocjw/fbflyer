@@ -18,21 +18,27 @@ class MerchantsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users']
-        ];
+
+            $this->paginate = [
+                'contain' => ['Users']
+            ];
+
+
 
          if($this->Auth->user('role')=='1')
          {
              $merchants = $this->paginate($this->Merchants);
+             $this->set(compact('merchants'));
+            $this->set('_serialize', ['merchants']);
          }
-         else
+         else if($this->Auth->user('role')=='2')
          {
             $merchants = $this->paginate($this->Merchants->findByUsers_id(2));
+            $this->set(compact('merchants'));
+            $this->set('_serialize', ['merchants']);
          }
 
-        $this->set(compact('merchants'));
-        $this->set('_serialize', ['merchants']);
+        
     }
 
     /**
@@ -126,4 +132,18 @@ class MerchantsController extends AppController
         parent::initialize();
     }
 
+    public function isAuthorized($user) {
+        // All registered users can add posts
+        if($this->Auth->user('role')==='1')
+        {
+            return true;
+        }
+        else if($this->Auth->user('role')==='2')
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

@@ -136,7 +136,7 @@ class UsersController extends AppController
         }
     }
     
-    public function loginMerchant()
+    public function loginmerchant()
     {
         
         $fields['role']=2;

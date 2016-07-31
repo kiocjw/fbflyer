@@ -41,41 +41,58 @@ class AppController extends Controller
     public function initialize()
     {
         parent::initialize();
+        
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+
         $this->loadComponent('Auth', [
+
             'authorize'=> 'Controller',
+
             'authenticate' => [
+
                 'Form' => [
+
                     'fields' => [
+
                         'role' => 'role',
+
                         'username' => 'email',
+
                         'password' => 'password'
+
                     ]
+
                 ]
-            ],
-            'loginAction' => [
-                'controller' => 'Admins',
-                'action' => 'login'
-            ],
-            'loginRedirect' => [
-                'controller' => 'Merchants',
-                'action' => 'index'
+
             ]
+
         ]);
 
+
+
          $this->loadComponent('AkkaFacebook.Graph', [
+
         'app_id' => '1718259035081270',
+
         'app_secret' => '1ad77e703f40f0020c08bbfe164d8c17',
+
         'app_scope' => 'email,public_profile', // https://developers.facebook.com/docs/facebook-login/permissions/v2.4
+
         'redirect_url' => Router::url( ['controller' => 'Admins','action' => 'add'], TRUE), // This should be enabled by default
+
         'post_login_redirect' => '',//ie. Router::url(['controller' => 'Users', 'action' => 'account'], TRUE)
+
         'user_columns' => ['first_name' => 'first_name','middle_name' => 'middle_name', 'last_name' => 'last_name', 'username' => 'username', 'password' => 'password'] //not required
-    ]);
+
+        ]);
+
+
 
         // Allow the display action so our pages controller
         // continues to work.
+
         $this->Auth->allow(['display']);
 
     }
@@ -92,17 +109,30 @@ class AppController extends Controller
     {
 
         if($this->Auth->user('role')==1)
+
         {
-           
+
             $this->set("role",$this->Auth->user('role'));
             $this->viewBuilder()->layout('default_admin');
+
+        }
+        elseif($this->Auth->user('role')==2)
+
+        {
+
+           
+            //2 is the role of merchant
+            $this->set("role",$this->Auth->user('role'));
+            $this->viewBuilder()->layout('default_merchant');
+
         }
         else
         {
+
             //3 is the role of normal users
             $this->set("role",3);
-            $this->viewBuilder()->layout('default');
-            
+            $this->viewBuilder()->layout('default');          
+
         }
         
 

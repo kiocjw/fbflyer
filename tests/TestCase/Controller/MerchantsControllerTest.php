@@ -16,7 +16,8 @@ class MerchantsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.merchants'
+        'app.merchants',
+        'app.users'
     ];
 
     /**

@@ -41,7 +41,7 @@ $cakeDescription = 'FBFlyer';
     <?= $this->Html->css('animate.min.css') ?>
     <?= $this->Html->css('animsition.css') ?>
     <?= $this->Html->css('plugins.min.css') ?>
-    <?= $this->Html->css('style.css') ?>
+    <?= $this->Html->css('style_merchant.css') ?>
 
     <!-- JS files -->
 	<?php
@@ -63,7 +63,7 @@ $cakeDescription = 'FBFlyer';
     <div class="site-wrapper animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
         <!-- /#header -->
         <header>
-            <div class="top-bar bg-light hdden-xs">
+            <div class="top-bar bg-orange hdden-xs">
                 <div class="container">
                     <div class="row">
                         <!--
@@ -85,18 +85,16 @@ $cakeDescription = 'FBFlyer';
                                             </i> Faq
                                     </a>
                                 </li>
-                                -->
-                                <li class="active">
-                                    <?php
-                                          echo $this->Html->link("Sign In", ['controller' => 'users','action' => 'login']);
-                                    ?>
+                                <li>
+                                    <a href="#">
+                                            Sign In
+                                        </a>
                                 </li>
                                 <li>
-                                    <?php
-                                          echo $this->Html->link("Sign Up", ['controller' => 'users','action' => 'add']);
-                                    ?>
+                                    <a href="#">
+                                            Sign Up
+                                        </a>
                                 </li>
-                                <!--
                                 <li>
                                     <a href="#">
                                         <i class="ti-shopping-cart">
@@ -105,15 +103,15 @@ $cakeDescription = 'FBFlyer';
                                 </li>
                                 -->
                                 <li>
-                                    <?php
-                                    if (isset($role))
-                                    {
-                                        if($role=='3')
-                                         {
-                                              echo $this->Html->link("Logout", ['controller' => 'users','action' => 'logout']);
-                                         }
-                                    }
-                                    ?>
+                                <?php
+                                if (isset($role))
+                                {
+                                    if($role=='2')
+                                     {
+                                          echo $this->Html->link("Logout", ['controller' => 'users','action' => 'logout']);
+                                     }
+                                }
+                                ?>
                                 </li>
                             </ul>
                         </div>
@@ -124,56 +122,9 @@ $cakeDescription = 'FBFlyer';
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-3">
-                            <a href="\" class="navbar-brand logo">
+                            <a href="" class="navbar-brand logo">
                                 <img src="/webroot/images/logo.png" alt="logo" class="img-responsive">
                             </a>
-                        </div>
-                        <div class="col-sm-9">
-                            <div class="search-form">
-
-                                <div class="col-sm-4">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <input class="form-control" placeholder="Search Deals &amp; Coupons" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.col 4 -->
-
-                                <div class="col-sm-4">
-                                    <select class="form-control">
-                                        <option value="0" selected="selected">
-                                            Select your categorie
-                                        </option>
-                                        <option value="1">
-                                            All
-                                        </option>
-                                        <option value="2">
-                                            Travel
-                                        </option>
-                                        <option value="3">
-                                            Beauty &amp; Spas
-                                        </option>
-                                        <option value="4">
-                                            Career &amp; skills
-                                        </option>
-                                        <option value="5">
-                                            Food &amp; Drinks
-                                        </option>
-                                        <option value="6">
-                                            Health &amp; Beauty
-                                        </option>
-                                    </select>
-                                </div>
-                                <!-- /.col 3 -->
-                                <div class="col-sm-4">
-                                    <a class="btn btn-raised ripple-effect btn-default btn-block" href="results.html">
-                                            Search Deals
-                                        </a>
-                                </div>
-                                <!-- /.col 1 -->
-
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -201,106 +152,23 @@ $cakeDescription = 'FBFlyer';
                             <div class="collapse navbar-collapse" id="Navbar">
                                 <!-- regular link -->
                                 <ul class="nav navbar-nav navbar-left">
-                                    <!--
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><!--aria-expanded="false"-->
-                                    <!--
                                             <i class="ti-home">
-                                                </i> Home
-                                            <span class="caret">
-                                            </span>
-                                        </a>
-                                        
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li>
-                                                <a href="#">
-                                                        Second Design
-                                                    </a>
-                                            </li>
-
-                                        </ul>
-
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" ><!--aria-expanded="false"-->
-                                    <!--
-                                            <i class=" ti-clipboard">
-                                                </i> Pages
+                                                </i> Merchants
                                             <span class="caret">
                                                 </span>
                                         </a>
                                         <ul class="dropdown-menu" role="menu">
                                             <li>
-                                                <a href="details_2.html">
-                                                        Deal Page 1
-                                                    </a>
+                                               <?php echo $this->Html->link("MERCHANTS", ['controller' => 'merchants','action' => 'index']);?>
                                             </li>
+
                                             <li>
-                                                <a href="details.html">
-                                                        Deal Page 2
-                                                    </a>
-                                            </li>
-                                            <li>
-                                                <a href="results.html">
-                                                        Search Results
-                                                    </a>
-                                            </li>
-                                            <li>
-                                                <a href="contact.html">
-                                                        Contact
-                                                    </a>
-                                            </li>
-                                            <li>
-                                                <a href="faq.html">
-                                                        FAQ page
-                                                    </a>
-                                            </li>
-                                            <li>
-                                                <a href="sumbit.html">
-                                                        Sumbit deal
-                                                    </a>
-                                            </li>
-                                            <li>
-                                                <a href="registration.html">
-                                                        Registration
-                                                    </a>
-                                            </li>
-                                            <li>
-                                                <a href="cart.html">
-                                                        Cart Page
-                                                    </a>
-                                            </li>
-                                            <li>
-                                                <a href="checkout.html">
-                                                        Checkout
-                                                    </a>
-                                            </li>
-                                            <li>
-                                                <a href="features.html">
-                                                        Shortcodes
-                                                    </a>
+                                               <?php echo $this->Html->link("NEW MERCHANT", ['controller' => 'merchants','action' => 'add']);?>
                                             </li>
                                         </ul>
                                     </li>
-                                    <li>
-                                        <a href="results.html">
-                                            <i class=" ti-list-ol">
-                                                </i> Categories
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="sumbit.html">
-                                            <i class="ti-settings">
-                                                </i> Sumbit
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="contact.html">
-                                            <i class="ti-email">
-                                                </i> Contact
-                                        </a>
-                                    </li>
-                                    -->
                                 </ul>
                             </div>
                         </nav>
@@ -318,28 +186,28 @@ $cakeDescription = 'FBFlyer';
         <!-- /#section render from ctp-->
 
         <!-- /#page ends -->
-       
+        <!--
         <div class="cta-box clearfix">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 col-sm-3 col-xs-12 pull-right">
-                        <?php
-                                   echo $this->Html->link("Merchant", ['controller' => 'users','action' => 'loginmerchant'],array('class' => 'btn btn-raised btn-success ripple-effect btn-lg'));
-                                   echo $this->Html->link("Admin", ['controller' => 'admins','action' => 'login'],array('class' => 'btn btn-raised btn-default ripple-effect btn-lg'));
-                        ?>
+                        <a href="#" class="btn btn-raised btn-danger ripple-effect btn-lg" data-original-title="" title="">
+                            <i class="ti-shopping-cart">
+                            </i> &nbsp; Sumbit Deal
+                        </a>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
                         <h3>
-                            Welcome to FBFLYER
+                            Welcome to Kupon. Responsive Deal Template
                         </h3>
                         <p>
-                            Please click on "Merchant" button if you would like to register.
+                            Carefully designed to bring you the best performance, usage and customization experience!
                         </p>
                     </div>
                 </div>
             </div>
         </div>
-     
+        -->
         <!-- /#page ends -->
 
         <!-- /#footer -->

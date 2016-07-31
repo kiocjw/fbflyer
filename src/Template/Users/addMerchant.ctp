@@ -4,9 +4,9 @@
             <div class="panel-body frameLR bg-white shadow space-sm">
             <?= $this->Form->create($user) ?>
                 <div class="col-md-6">
-                        <h3 class="dark-grey"><?= __('Register User') ?></h3>
+                        <h3 class="dark-grey"><?= __('Register Merchant') ?></h3>
                     <?php
-                                                            echo $this->Form->input('role', ['type' => 'hidden', 'value' => 3]);
+                                                            echo $this->Form->input('role', ['type' => 'hidden', 'value' => 2]);
                                                             echo $this->Form->input('title',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                                             echo $this->Form->input('first_name',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                                             echo $this->Form->input('middle_name',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));

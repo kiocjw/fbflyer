@@ -122,7 +122,7 @@ $cakeDescription = 'FBFlyer';
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-3">
-                            <a href="\" class="navbar-brand logo">
+                            <a href="" class="navbar-brand logo">
                                 <img src="/webroot/images/logo.png" alt="logo" class="img-responsive">
                             </a>
                         </div>
@@ -162,11 +162,11 @@ $cakeDescription = 'FBFlyer';
                                         <ul class="dropdown-menu" role="menu">
                                             
                                             <li>
-                                               <?php echo $this->Html->link("NEW MERCHANT", ['controller' => 'merchants','action' => 'add']);?>
+                                               <?php echo $this->Html->link("MERCHANTS", ['controller' => 'merchants','action' => 'index']);?>
                                             </li>
 
                                             <li>
-                                               <?php echo $this->Html->link("LIST OF MERCHANTS", ['controller' => 'merchants','action' => 'index']);?>
+                                               <?php echo $this->Html->link("NEW MERCHANT", ['controller' => 'merchants','action' => 'add']);?>
                                             </li>
 
                                         </ul>

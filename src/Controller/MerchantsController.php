@@ -18,7 +18,18 @@ class MerchantsController extends AppController
      */
     public function index()
     {
-        $merchants = $this->paginate($this->Merchants);
+        $this->paginate = [
+            'contain' => ['Users']
+        ];
+
+         if($this->Auth->user('role')=='1')
+         {
+             $merchants = $this->paginate($this->Merchants);
+         }
+         else
+         {
+            $merchants = $this->paginate($this->Merchants->findByUsers_id(2));
+         }
 
         $this->set(compact('merchants'));
         $this->set('_serialize', ['merchants']);
@@ -34,7 +45,7 @@ class MerchantsController extends AppController
     public function view($id = null)
     {
         $merchant = $this->Merchants->get($id, [
-            'contain' => []
+            'contain' => ['Users']
         ]);
 
         $this->set('merchant', $merchant);
@@ -50,6 +61,8 @@ class MerchantsController extends AppController
     {
         $merchant = $this->Merchants->newEntity();
         if ($this->request->is('post')) {
+            $this->request->data['users_id'] =$this->Auth->user('id');
+            $this->request->data['status'] =0;
             $merchant = $this->Merchants->patchEntity($merchant, $this->request->data);
             if ($this->Merchants->save($merchant)) {
                 $this->Flash->success(__('The merchant has been saved.'));
@@ -58,7 +71,8 @@ class MerchantsController extends AppController
                 $this->Flash->error(__('The merchant could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('merchant'));
+        $users = $this->Merchants->Users->find('list', ['limit' => 200]);
+        $this->set(compact('merchant', 'users'));
         $this->set('_serialize', ['merchant']);
     }
 
@@ -83,7 +97,8 @@ class MerchantsController extends AppController
                 $this->Flash->error(__('The merchant could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('merchant'));
+        $users = $this->Merchants->Users->find('list', ['limit' => 200]);
+        $this->set(compact('merchant', 'users'));
         $this->set('_serialize', ['merchant']);
     }
 
@@ -105,4 +120,10 @@ class MerchantsController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
+    public function initialize()
+    {
+        parent::initialize();
+    }
+
 }

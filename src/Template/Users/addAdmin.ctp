@@ -4,13 +4,16 @@
             <div class="panel-body frameLR bg-white shadow space-sm">
             <?= $this->Form->create($user) ?>
                 <div class="col-md-6">
-                        <h3 class="dark-grey"><?= __('Register User') ?></h3>
+                        <h3 class="dark-grey"><?= __('Add User') ?></h3>
                     <?php
-                                                            echo $this->Form->input('role', ['type' => 'hidden', 'value' => 3]);
+                                                            <?=  $this->Form->input('role', ['type' => 'hidden', 'value' => 2])?>
                                                             echo $this->Form->input('title',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                                             echo $this->Form->input('first_name',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                                             echo $this->Form->input('middle_name',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                                             echo $this->Form->input('last_name',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
+                                                            echo $this->Form->input('username',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
+                                                            echo $this->Form->input('facebook_id',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
+                                                            echo $this->Form->input('facebook_password',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                                             echo $this->Form->input('email',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                                             echo $this->Form->input('password',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                                         ?>
@@ -33,3 +36,10 @@
     </div>
 
 </section>
+
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
+    <ul class="side-nav">
+        <li class="heading"><?= __('Actions') ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
+    </ul>
+</nav>

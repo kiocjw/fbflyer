@@ -7,7 +7,7 @@ use Cake\ORM\Entity;
  * Merchant Entity.
  *
  * @property int $id
- * @property $photo
+ * @property string $photo
  * @property string $photo_dir
  * @property string $company_name
  * @property string $description
@@ -19,6 +19,9 @@ use Cake\ORM\Entity;
  * @property string $latitude
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
+ * @property int $status
+ * @property int $users_id
+ * @property \App\Model\Entity\User $user
  */
 class Merchant extends Entity
 {

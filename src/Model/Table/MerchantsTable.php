@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
 /**
  * Merchants Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Users
  */
 class MerchantsTable extends Table
 {
@@ -39,6 +40,11 @@ class MerchantsTable extends Table
             ],
         ]);
         $this->addBehavior('Timestamp');
+
+        $this->belongsTo('Users', [
+            'foreignKey' => 'users_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -108,6 +114,7 @@ class MerchantsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         //$rules->add($rules->isUnique(['email']));
+		$rules->add($rules->existsIn(['users_id'], 'Users'));
         return $rules;
     }
 }

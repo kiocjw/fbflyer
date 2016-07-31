@@ -62,6 +62,22 @@ class UsersController extends AppController
         $this->set('_serialize', ['user']);
     }
 
+     public function addmerchant()
+    {
+        $user = $this->Users->newEntity();
+        if ($this->request->is('post')) {
+            $user = $this->Users->patchEntity($user, $this->request->data);
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The user has been saved.'));
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            }
+        }
+        $this->set(compact('user'));
+        $this->set('_serialize', ['user']);
+    }
+
     /**
      * Edit method
      *
@@ -108,11 +124,27 @@ class UsersController extends AppController
 
     public function login()
     {
+     
+        $fields['role']=3;   
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
+            }
+            $this->Flash->error('Your username or password is incorrect.');
+        }
+    }
+    
+    public function loginMerchant()
+    {
+        
+        $fields['role']=2;
+        if ($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
+                return $this->redirect(['controller' => 'merchants','action' => 'index']);
             }
             $this->Flash->error('Your username or password is incorrect.');
         }
@@ -128,10 +160,25 @@ class UsersController extends AppController
     {
         parent::initialize();
         $this->Auth->allow(['logout', 'add']);
+        $this->Auth->allow(['logout', 'login']);
+
+        $this->Auth->allow(['logout', 'loginmerchant']);
+        $this->Auth->allow(['logout', 'addmerchant']);
+
     }
 
     public function beforeRender(Event $event)
     {
-        $this->viewBuilder()->layout('default');
+        
+        $action = $this->request->params['action'];
+        if (strpos($action, 'merchant') !== false) {
+            $this->viewBuilder()->layout('default_merchant');
+        }
+        elseif  (strpos($action, 'admin') !== false) {
+            $this->viewBuilder()->layout('default_admin');
+        }
+        else{
+            $this->viewBuilder()->layout('default');
+        }
     }
 }

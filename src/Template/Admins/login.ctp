@@ -3,12 +3,12 @@
         <div class="col-sm-12">
             <div class="panel-body frameLR bg-white shadow space-sm">
                 <div class="col-md-6">
-                    <h3 class="dark-grey">Login</h3>
+                    <h3 class="dark-grey"><?= __('Login Admin') ?></h3>
 			        <?= $this->Form->create() ?>
                     <?=  $this->Form->input('role', ['type' => 'hidden', 'value' => 1])?>
                     <?= $this->Form->input('email',array('div'=>array('class'=>'form-group'),'class' => 'form-control')) ?>
                     <?= $this->Form->input('password',array('div'=>array('class'=>'form-group'),'class' => 'form-control')) ?>
-                    <?= $this->Form->button('Forget Password',array('div'=>array('class'=>'form-group'),'class' => 'btn btn-link')) ?>
+                    <!--<?= $this->Form->button('Forget Password',array('div'=>array('class'=>'form-group'),'class' => 'btn btn-link')) ?>-->
                     <?= $this->Form->submit('Login',array('div'=>array('class'=>'form-group'),'class' => 'btn btn-primary')) ?>
                     <?= $this->Form->end() ?>                    
                 </div>

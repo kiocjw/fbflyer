@@ -80,7 +80,7 @@ class AppController extends Controller
 
         'app_scope' => 'email,public_profile', // https://developers.facebook.com/docs/facebook-login/permissions/v2.4
 
-        'redirect_url' => Router::url( ['controller' => 'Admins','action' => 'add'], TRUE), // This should be enabled by default
+        'redirect_url' => Router::url( ['controller' => 'users','action' => 'index'], TRUE), // This should be enabled by default
 
         'post_login_redirect' => '',//ie. Router::url(['controller' => 'Users', 'action' => 'account'], TRUE)
 
@@ -107,29 +107,22 @@ class AppController extends Controller
      */
     public function beforeRender(Event $event)
     {
+  
+        $this->set("role",$this->Auth->user('role'));
+
 
         if($this->Auth->user('role')==1)
-
         {
-
-            $this->set("role",$this->Auth->user('role'));
             $this->viewBuilder()->layout('default_admin');
 
         }
         elseif($this->Auth->user('role')==2)
-
         {
-
-           
-            //2 is the role of merchant
-            $this->set("role",$this->Auth->user('role'));
             $this->viewBuilder()->layout('default_merchant');
 
         }
         else
         {
-
-            //3 is the role of normal users
             $this->set("role",3);
             $this->viewBuilder()->layout('default');          
 
@@ -146,6 +139,7 @@ class AppController extends Controller
 
     public function isAuthorized($user)
     {
+        $this->set("role",$this->Auth->user('role'));
         return true;
     }
 }

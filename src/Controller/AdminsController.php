@@ -116,7 +116,7 @@ class AdminsController extends AppController
             if ($user) 
             {
                 $this->Auth->setUser($user);
-                return $this->redirect(['controller' => 'Merchants', 'action' => '']);
+                return $this->redirect(['controller' => 'merchants', 'action' => 'index']);
                 //return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('Your username or password is incorrect.');
@@ -142,5 +142,7 @@ class AdminsController extends AppController
     {
         $this->viewBuilder()->layout('default_admin');
     }
+
+
 
 }

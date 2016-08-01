@@ -130,20 +130,24 @@ class MerchantsController extends AppController
     public function initialize()
     {
         parent::initialize();
+         //$this->Auth->allow(['logout', 'index']);
     }
 
     public function isAuthorized($user) {
         // All registered users can add posts
-        if($this->Auth->user('role')==='1')
+        if($this->Auth->user('role')=='1')
         {
             return true;
         }
-        else if($this->Auth->user('role')==='2')
+        else if($this->Auth->user('role')=='2')
         {
             return true;
         }
-        else{
+        else
+        {
             return false;
         }
     }
+
+
 }

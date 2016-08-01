@@ -18,10 +18,10 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $users = $this->paginate($this->Users);
+        //$users = $this->paginate($this->Users);
 
-        $this->set(compact('users'));
-        $this->set('_serialize', ['users']);
+        //$this->set(compact('users'));
+        //$this->set('_serialize', ['users']);
     }
 
     /**
@@ -31,6 +31,8 @@ class UsersController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+
+    /*
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
@@ -40,6 +42,7 @@ class UsersController extends AppController
         $this->set('user', $user);
         $this->set('_serialize', ['user']);
     }
+    */
 
     /**
      * Add method
@@ -85,6 +88,7 @@ class UsersController extends AppController
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
+     /*
     public function edit($id = null)
     {
         $user = $this->Users->get($id, [
@@ -102,6 +106,7 @@ class UsersController extends AppController
         $this->set(compact('user'));
         $this->set('_serialize', ['user']);
     }
+    */
 
     /**
      * Delete method
@@ -110,6 +115,7 @@ class UsersController extends AppController
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+     /*
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
@@ -121,6 +127,7 @@ class UsersController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+    */
 
     public function login()
     {
@@ -130,7 +137,8 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
+                return $this->redirect(['controller' => 'users','action' => 'index']);
+                //return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('Your username or password is incorrect.');
         }
@@ -145,6 +153,7 @@ class UsersController extends AppController
             if ($user) {
                 $this->Auth->setUser($user);
                 return $this->redirect(['controller' => 'merchants','action' => 'index']);
+                //return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('Your username or password is incorrect.');
         }
@@ -171,13 +180,17 @@ class UsersController extends AppController
     {
         
         $action = $this->request->params['action'];
-        if (strpos($action, 'merchant') !== false) {
+
+        if (strpos($action, 'merchant') !== false) 
+        {
             $this->viewBuilder()->layout('default_merchant');
         }
-        elseif  (strpos($action, 'admin') !== false) {
+        elseif  (strpos($action, 'admin') !== false) 
+        {
             $this->viewBuilder()->layout('default_admin');
         }
-        else{
+        else
+        {
             $this->viewBuilder()->layout('default');
         }
     }

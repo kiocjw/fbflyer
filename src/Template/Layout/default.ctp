@@ -105,15 +105,15 @@ $cakeDescription = 'FBFlyer';
                                 </li>
                                 -->
                                 <li>
-                                    <?php
-                                    if (isset($role))
-                                    {
-                                        if($role=='3')
-                                         {
-                                              echo $this->Html->link("Logout", ['controller' => 'users','action' => 'logout']);
-                                         }
-                                    }
-                                    ?>
+                                 <?php
+                                if (isset($role))
+                                {
+                                    if($role=='3')
+                                     {
+                                          echo $this->Html->link("Logout", ['controller' => 'users','action' => 'logout']);
+                                     }
+                                }
+                                ?>
                                 </li>
                             </ul>
                         </div>

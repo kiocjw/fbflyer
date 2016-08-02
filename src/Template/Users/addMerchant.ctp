@@ -2,18 +2,23 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="panel-body frameLR bg-white shadow space-sm">
-            <?= $this->Form->create($user) ?>
+            <?= $this->Form->create() ?>
                 <div class="col-md-6">
                         <h3 class="dark-grey"><?= __('Register Merchant') ?></h3>
                     <?php
                                                             echo $this->Form->input('role', ['type' => 'hidden', 'value' => 2]);
-                                                            echo $this->Form->input('title',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
-                                                            echo $this->Form->input('first_name',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
-                                                            echo $this->Form->input('middle_name',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
-                                                            echo $this->Form->input('last_name',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                                             echo $this->Form->input('email',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                                             echo $this->Form->input('password',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
-                                                        ?>
+                                                        
+                                                            echo $this->Form->input('company.company_name',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
+                                                            echo $this->Form->input('company.brand',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
+                                                            echo $this->Form->input('company.business_address',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
+                                                            echo $this->Form->input('company.SSM',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
+                                                            echo $this->Form->input('company.telephone',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
+                                                            echo $this->Form->input('company.business_person_in_charge',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
+
+                                                    
+                                                           ?>
                 </div>
 
                 <div class="mBtm-20 visible-xs">

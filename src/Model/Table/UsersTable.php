@@ -28,6 +28,10 @@ class UsersTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
+        $this->hasOne('Companies', [
+           'foreignKey' => 'users_id',
+        ]);
+
         $this->addBehavior('Timestamp');
     }
 
@@ -48,15 +52,12 @@ class UsersTable extends Table
             ->notEmpty('role');
 
         $validator
-            ->requirePresence('first_name', 'create')
             ->notEmpty('first_name');
 
         $validator
-            ->requirePresence('middle_name', 'create')
             ->notEmpty('middle_name');
 
         $validator
-            ->requirePresence('last_name', 'create')
             ->notEmpty('last_name');
 
         $validator

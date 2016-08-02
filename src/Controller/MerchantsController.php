@@ -33,7 +33,7 @@ class MerchantsController extends AppController
          }
          else if($this->Auth->user('role')=='2')
          {
-            $merchants = $this->paginate($this->Merchants->findByUsers_id(2));
+            $merchants = $this->paginate($this->Merchants->findByUsers_id($this->Auth->user('id')));
             $this->set(compact('merchants'));
             $this->set('_serialize', ['merchants']);
          }

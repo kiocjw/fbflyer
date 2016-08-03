@@ -2,56 +2,56 @@
     <div class="row">
        <div class="col-sm-12">
             <div class="panel-body frameLR bg-white shadow mTop-30">
-             <hr data-symbol="<?= __('Outlets') ?>">
+             <hr data-symbol="<?= __('Merchants') ?>">
               <div class="row">
-                   <?php if (isset($merchants)){foreach ($merchants as $merchant): ?>
+                   <?php if (isset($users)){foreach ($users as $user): ?>
+                   <?php if (isset($user->company)){?>
                         <div class="col-sm-6">
                   <div class="deal-entry  orange">
-                    <div class="image">
-                      <a href="#" target="_blank" title="#">
-                          <img src="<?= "/".h($merchant->photo_dir).h($merchant->photo) ?>" alt="#" class="img-responsive">
-                      </a>
-                    </div>
-                    <!-- /.image -->
+                      <span class="bought">
+                      <i class="ti-tag">
+                      </i>
+                      <?php if (isset($user->status)){switch($user->status):case 0:echo ("Pending");break;case 1:echo ("Approved");break;case 2:echo ("Reworked");break;case 3:echo ("Rejected");break;endswitch;}?>
+                    </span>
+                
                     <div class="title">
                       <a href="#" target="_blank" title="ATLETIKA 3 mēnešu abonements">
-                        <?= h($merchant->company_name) ?>
+                        <?= h($user->company->company_name) ?>
                       </a>
                     </div>
                     <div class="entry-content">
                       <div class="prices clearfix">
-                        <div class="price">
-                          <b>
-
-                          </b>
-                        </div>
-         
+                      <div class="procent">
+                        <?=nl2br(h("Brand: ".$user->company->brand)) ?>
                       </div>
-                      <p>
-                        <?=nl2br(h($merchant->description)) ?>
+                    </div>
+
+                        <p>
+                        <?=nl2br(h("SSM: ".$user->company->SSM)) ?>
                       </p>
                     </div>
                     <!--/.entry content -->
                     <footer class="info_bar clearfix">
                       <ul class="unstyled list-inline row">
                         <li class="time col-sm-7 col-xs-6 col-lg-8">
-                          <?=nl2br(h($merchant->phone))  ?>
+
+                          <?= h($user->company->business_person_in_charge) ?>
                           </br>
-                          <?= h($merchant->email) ?>
+                          <?=nl2br(h($user->company->telephone))  ?>
                           </br>
-                          <?= h($merchant->address) ?>
+                          <?= h($user->email) ?>
+                          </br>
+                          <?= h($user->company->business_addres) ?>
                         </li>
                         <li class="info_link col-sm-5 col-xs-6 col-lg-4">
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $merchant->id],array('class'=>'btn btn-block btn-default btn-raised btn-sm')) ?>                         
-                            <?= $this->Html->link(__('View Detail'), ['action' => 'view', $merchant->id],array('class'=>'btn btn-block btn-default btn-raised btn-sm')) ?>
-                            <?= $this->Html->link(__('View Website'),h($merchant->website),array('class'=>'btn btn-block btn-default btn-raised btn-sm')) ?>
+                            <?= $this->Html->link(__('Approve/Reject'), ['action' => 'approveadmin', $user->id],array('class'=>'btn btn-block btn-default btn-raised btn-sm')) ?>                                              
                         </li>
                       </ul>
                     </footer>
                   </div>
                 </div>
                     
-                    <?php endforeach; }?>
+                    <?php }endforeach; }?>
                 </div>      
             </div>
        </div>  

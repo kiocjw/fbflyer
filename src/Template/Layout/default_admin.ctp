@@ -160,13 +160,38 @@ $cakeDescription = 'FBFlyer';
                                                 </span>
                                         </a>
                                         <ul class="dropdown-menu" role="menu">
-                                            
                                             <li>
-                                               <?php echo $this->Html->link("MERCHANTS", ['controller' => 'merchants','action' => 'index']);?>
+                                               <?php echo $this->Html->link("ALL MERCHANTS", ['controller' => 'users','action' => 'indexadmin']);?>
+                                            </li>
+                                            <li>
+                                               <?php echo $this->Html->link("PENDING MERCHANTS", ['controller' => 'users','action' => 'indexadmin',0]);?>
+                                            </li>
+                                            <li>
+                                               <?php echo $this->Html->link("APPROVED MERCHANTS", ['controller' => 'users','action' => 'indexadmin',1]);?>
+                                            </li>
+                                            <li>
+                                               <?php echo $this->Html->link("REWORKED MERCHANTS", ['controller' => 'users','action' => 'indexadmin',2]);?>
+                                            </li>
+                                            <li>
+                                               <?php echo $this->Html->link("REJECTED MERCHANTS", ['controller' => 'users','action' => 'indexadmin',3]);?>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><!--aria-expanded="false"-->
+                                            <i class="ti-home">
+                                                </i> Outlets
+                                            <span class="caret">
+                                                </span>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                               <?php echo $this->Html->link("OUTLETS", ['controller' => 'merchants','action' => 'index']);?>
                                             </li>
 
                                             <li>
-                                               <?php echo $this->Html->link("NEW MERCHANT", ['controller' => 'merchants','action' => 'add']);?>
+                                               <?php echo $this->Html->link("NEW OUTLET", ['controller' => 'merchants','action' => 'add']);?>
                                             </li>
 
                                         </ul>

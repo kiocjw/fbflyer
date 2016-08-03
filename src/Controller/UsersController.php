@@ -20,6 +20,115 @@ class UsersController extends AppController
     {
     }
 
+    public function indexadmin($status = null)
+    {
+        
+            $this->paginate = [
+                'contain' => ['Companies']
+            ];
+
+
+
+         if($this->Auth->user('role')=='1')
+         {
+             if($status!=null)
+             {
+                $users = $this->paginate($this->Users->findAllByStatusAndRole($status,2));
+             }
+             else
+             {
+                  $users = $this->paginate($this->Users->findAllByRole(2));
+             }
+             $this->set(compact('users'));
+             $this->set('_serialize', ['users']);
+         }
+         else 
+         {
+           
+         }
+
+        
+    }
+
+    public function editmerchant($id = null)
+    {
+
+        $user = $this->Users->get($id, [
+            'contain' => ['Companies']
+        ]);
+
+        if( $user->company['users_id'] == $this->Auth->user('id'))
+        { 
+             
+                if( $user['status']==2)
+                {
+                        $this->Flash->warning('Your account required rework on your info.');
+                        if($user['remark'])
+                            if($user['remark'] != "")
+                            {
+                                $this->Flash->info($user['remark']);
+                            }       
+                            if ($this->request->is(['patch', 'post', 'put'])) {
+                                $user = $this->Users->patchEntity($user, $this->request->data);
+                                $user['status']=0; 
+                                if ($this->Users->save($user)) {
+                                    $this->Flash->success(__('The user has been saved.'));
+                                    $this->logout();
+                                } else {
+                                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                                }
+                            }
+                            $this->set(compact('user'));
+                            $this->set('_serialize', ['user']);             
+                }
+                else
+                {
+                    $this->logout();
+                }
+            
+        }
+        else
+        {
+
+            return $this->redirect(['action' => 'index']);
+        }
+
+    }
+
+    public function approveadmin($id = null) {
+
+        if($this->Auth->user('role')=='1')
+        {
+            $user = $this->Users->get($id, [
+                'contain' => []
+            ]);
+            if ($this->request->is(['patch', 'post', 'put'])) {
+                $user = $this->Users->patchEntity($user, $this->request->data, [
+                'associated' => ['Companies']
+                ]);
+                if ($this->Users->save($user, [ 
+                    'validate' => true,
+                    'associated' => ['Companies']
+                ])) {
+                    $this->Flash->success(__('The user has been saved.'));
+                    return $this->redirect(['action' => 'indexadmin']);
+                } else {
+                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                }
+            }
+            $this->set(compact('user'));
+            $this->set('_serialize', ['user']);
+            if (!$this->Users->exists($id)) 
+            {
+                throw new NotFoundException(__('Invalid'));
+            }
+        }
+        else
+        {
+            return $this->redirect(['action' => 'index']);
+        }
+
+    }
 
     /**
      * Add method
@@ -111,19 +220,65 @@ class UsersController extends AppController
         $fields['role']=2;
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
-            if ($user) {
-                $this->Auth->setUser($user);
-                return $this->redirect(['controller' => 'merchants','action' => 'index']);
+            if ($user) 
+            {
+                switch($user['status'])
+                {
+                    case 0:
+                        $this->Flash->info('Your account still pending for approval.');
+                        if($user['remark'])
+                            if($user['remark'] != "")
+                            {
+                                $this->Flash->info($user['remark']);
+                            }
+                        break;
+                    case 1:
+                        $this->Auth->setUser($user);
+                        return $this->redirect(['controller' => 'merchants','action' => 'index']);
+                        break;
+                    case 2:
+                         $user['role']=-2;
+                         $this->Auth->setUser($user);
+                        return $this->redirect(['controller' => 'users','action' => 'editmerchant',$this->Auth->user('id')]);
+                        break;
+                    case 3:
+                        $this->Flash->alert('Your account had been rejected.');
+                        if($user['remark'])
+                            if($user['remark'] != "")
+                            {
+                                $this->Flash->info($user['remark']);
+                            }
+                    break;
+                }
                 //return $this->redirect($this->Auth->redirectUrl());
             }
-            $this->Flash->error('Your username or password is incorrect.');
+            else
+            {
+                $this->Flash->error('Your username or password is incorrect.');
+            }
         }
     }
 
     public function logout()
     {
         $this->Flash->success('You are now logged out.');
-        return $this->redirect($this->Auth->logout());
+        $role = $this->Auth->user('role');
+        $role = $role <= 0 ? $role : $role ;
+        
+        if($role==1)
+        {
+        return $this->redirect(['controller' => 'admins','action' => 'login']);
+        }
+        elseif($role==2)
+        {
+        return $this->redirect(['controller' => 'users','action' => 'loginmerchant']);
+        }
+        else
+        {
+        return $this->redirect(['controller' => 'users','action' => 'index']);
+        }
+    }
+        //return $this->redirect($this->Auth->logout());
     }
 
     public function initialize()

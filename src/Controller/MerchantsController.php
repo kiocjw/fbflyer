@@ -29,7 +29,7 @@ class MerchantsController extends AppController
          {
              $merchants = $this->paginate($this->Merchants);
              $this->set(compact('merchants'));
-            $this->set('_serialize', ['merchants']);
+             $this->set('_serialize', ['merchants']);
          }
          else if($this->Auth->user('role')=='2')
          {
@@ -37,6 +37,7 @@ class MerchantsController extends AppController
             $this->set(compact('merchants'));
             $this->set('_serialize', ['merchants']);
          }
+
 
         
     }

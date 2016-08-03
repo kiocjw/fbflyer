@@ -125,8 +125,21 @@ class AdminsController extends AppController
 
     public function logout()
     {
-        $this->Flash->success('You are now logged out.');
-        return $this->redirect($this->Auth->logout());
+        $role = $this->Auth->user('role');
+        $role = $role <= 0 ? $role : $role ;
+        
+        if($role==1)
+        {
+        return $this->redirect(['controller' => 'admins','action' => 'login']);
+        }
+        elseif($role==2)
+        {
+        return $this->redirect(['controller' => 'users','action' => 'loginmerchant']);
+        }
+        else
+        {
+        return $this->redirect(['controller' => 'users','action' => 'index']);
+        }
     }
 
     public function initialize()

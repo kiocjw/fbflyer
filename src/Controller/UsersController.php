@@ -263,18 +263,21 @@ class UsersController extends AppController
     {
         $this->Flash->success('You are now logged out.');
         $role = $this->Auth->user('role');
-        $role = $role <= 0 ? $role : $role ;
+        $role = $role <= 0 ? -$role : $role ;
         
         if($role==1)
         {
+        $this->Auth->logout();
         return $this->redirect(['controller' => 'admins','action' => 'login']);
         }
         elseif($role==2)
         {
+        $this->Auth->logout();
         return $this->redirect(['controller' => 'users','action' => 'loginmerchant']);
         }
         else
         {
+        $this->Auth->logout();
         return $this->redirect(['controller' => 'users','action' => 'index']);
         }
         //return $this->redirect($this->Auth->logout());

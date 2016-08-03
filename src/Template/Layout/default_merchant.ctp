@@ -106,7 +106,8 @@ $cakeDescription = 'FBFlyer';
                                 <?php
                                 if (isset($role))
                                 {
-                                    if($role=='2')
+                                    $role = $role <= 0 ? -$role : $role ;
+                                    if($role==2)
                                      {
                                           echo $this->Html->link("Logout", ['controller' => 'users','action' => 'logout']);
                                      }

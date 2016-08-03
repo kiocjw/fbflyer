@@ -15,7 +15,7 @@
                             ?>
                         <?= $this->Form->button(__('Submit'),array('div'=>array('class'=>'form-group'),'class' => 'btn btn-primary')) ?>
                     <?= $this->Form->end() ?>   
-                    <?=  $this->Html->link("Logout", ['controller' => 'users','action' => 'logout'])?>
+              
                   </div>
                     
             </div>

@@ -277,7 +277,6 @@ class UsersController extends AppController
         {
         return $this->redirect(['controller' => 'users','action' => 'index']);
         }
-    }
         //return $this->redirect($this->Auth->logout());
     }
 

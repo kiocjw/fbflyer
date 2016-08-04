@@ -333,7 +333,9 @@ $cakeDescription = 'FBFlyer';
                             Welcome to FBFLYER
                         </h3>
                         <p>
-                            Please click on "Merchant" button if you would like to register.
+                            Please click on "Merchant" button if you are Merchant.
+                        <br>
+                            Please click on "Admin" button if you are Admin
                         </p>
                     </div>
                 </div>

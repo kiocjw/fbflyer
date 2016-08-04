@@ -213,28 +213,30 @@ $cakeDescription = 'FBFlyer';
         <!-- /#section render from ctp-->
 
         <!-- /#page ends -->
-        <!--
+       
         <div class="cta-box clearfix">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 col-sm-3 col-xs-12 pull-right">
-                        <a href="#" class="btn btn-raised btn-danger ripple-effect btn-lg" data-original-title="" title="">
-                            <i class="ti-shopping-cart">
-                            </i> &nbsp; Sumbit Deal
-                        </a>
+                        <?php
+                                   echo $this->Html->link("Merchant", ['controller' => 'users','action' => 'loginmerchant'],array('class' => 'btn btn-raised btn-success ripple-effect btn-lg'));
+                                   echo $this->Html->link("User", ['controller' => 'users','action' => 'login'],array('class' => 'btn btn-primary btn-default ripple-effect btn-lg'));
+                        ?>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
                         <h3>
-                            Welcome to Kupon. Responsive Deal Template
+                            Welcome to FBFLYER
                         </h3>
                         <p>
-                            Carefully designed to bring you the best performance, usage and customization experience!
+                            Please click on "Merchant" button if you are Merchant.
+                        <br>
+                            Please click on "User" button if you are User.
                         </p>
                     </div>
                 </div>
             </div>
         </div>
-        -->
+     
         <!-- /#page ends -->
 
         <!-- /#footer -->

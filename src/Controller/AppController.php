@@ -80,9 +80,9 @@ class AppController extends Controller
 
         'app_scope' => 'email,public_profile', // https://developers.facebook.com/docs/facebook-login/permissions/v2.4
 
-        'redirect_url' => Router::url( ['controller' => 'users','action' => 'index'], TRUE), // This should be enabled by default
+        'redirect_url' => Router::url( ['controller' => 'users','action' => 'login'], TRUE), // This should be enabled by default
 
-        'post_login_redirect' => '',//ie. Router::url(['controller' => 'Users', 'action' => 'account'], TRUE)
+        'post_login_redirect' => Router::url(['controller' => 'users', 'action' => 'index'], TRUE),
 
         'user_columns' => ['first_name' => 'first_name','middle_name' => 'middle_name', 'last_name' => 'last_name', 'username' => 'username', 'password' => 'password'] //not required
 

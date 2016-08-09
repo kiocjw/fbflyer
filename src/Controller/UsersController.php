@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use Cake\Event\Event;
 use App\Controller\AppController;
+use Cake\Mailer\Email;
 
 /**
  * Users Controller
@@ -100,7 +101,7 @@ class UsersController extends AppController
         if($this->Auth->user('role')=='1')
         {
             $user = $this->Users->get($id, [
-                'contain' => []
+                'contain' => ['Companies']
             ]);
             if ($this->request->is(['patch', 'post', 'put'])) {
                 $user = $this->Users->patchEntity($user, $this->request->data, [
@@ -110,6 +111,7 @@ class UsersController extends AppController
                     'validate' => true,
                     'associated' => ['Companies']
                 ])) {
+                    $this->emailapproveadmin($user->company['company_name'], $user['email'], $user['status'], $user['remark']);
                     $this->Flash->success(__('The user has been saved.'));
                     return $this->redirect(['action' => 'indexadmin']);
                 } else {
@@ -128,6 +130,48 @@ class UsersController extends AppController
             return $this->redirect(['action' => 'index']);
         }
 
+    }
+
+    public function emailapproveadmin($username =null, $emailaddress= null, $status = null, $remark = null){
+        try 
+        {
+            $strStatus="";
+            $email =  new Email('default');
+            switch($status)
+            {
+                case 0:
+                $email->template('pending');
+                $strStatus="PENDING";
+                break;
+                case 1:
+                $email->template('approved');
+                $strStatus="APPROVED";
+                break;
+                case 2:
+                $email->template('reworked');
+                $strStatus="REWORD REQUIRED";
+                break;
+                case 3:
+                $email->template('rejected');
+                $strStatus="REJECTED";
+                break;
+
+            }
+            
+            $email->emailFormat('html')
+                  ->from(['noreply@fbflyer.com' => 'NO REPLY FBFLYER'])
+                  ->to($emailaddress)
+                  ->subject(sprintf('[%s] Thank you for joining FBFlyer',$strStatus))
+                  ->viewVars(['user' => ['username' => $username, 'remark' => $remark]])
+                  ->send();
+                   //$this->Flash->success(__('Email has been sent.'));
+
+        } 
+        catch (Exception $e) {
+
+            $this->Flash->error('Exception : '+  $e->getMessage()+"\n");
+
+        }
     }
 
     /**
@@ -162,6 +206,7 @@ class UsersController extends AppController
                 'validate' => true,
                 'associated' => ['Companies']
             ])) {
+                $this->emailapproveadmin($user->company['company_name'], $user['email'], $user['status'], $user['remark']);
                 $this->Flash->success(__('The user has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {

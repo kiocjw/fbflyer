@@ -170,6 +170,23 @@ $cakeDescription = 'FBFlyer';
                                             </li>
                                         </ul>
                                     </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><!--aria-expanded="false"-->
+                                            <i class="ti-home">
+                                                </i> Deals
+                                            <span class="caret">
+                                                </span>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                               <?php echo $this->Html->link("MY DEALS", ['controller' => 'deals','action' => 'index']);?>
+                                            </li>
+
+                                            <li>
+                                               <?php echo $this->Html->link("NEW DEALS", ['controller' => 'deals','action' => 'add']);?>
+                                            </li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
                         </nav>

@@ -57,6 +57,7 @@ class DealsController extends AppController
         if ($this->request->is('post')) {
             $this->request->data['users_id'] =$this->Auth->user('id');
             $this->request->data['status'] =0;
+            $this->request->data['purchased_number'] =0;
             $deal = $this->Deals->patchEntity($deal, $this->request->data);
             if ($this->Deals->save($deal)) {
                 $this->Flash->success(__('The deal has been saved.'));

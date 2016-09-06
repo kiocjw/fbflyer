@@ -15,7 +15,6 @@
 								echo $this->Form->input('promo_price',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
 								echo $this->Form->input('saved_amount',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
 								echo $this->Form->input('discount_percentage',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
-								echo $this->Form->input('purchased_number',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
 								echo $this->Form->input('deals_start_date',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
 								echo $this->Form->input('deals_end_date',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
 								echo $this->Form->input('additional_info',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));

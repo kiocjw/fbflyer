@@ -18,6 +18,7 @@
 								echo $this->Form->input('deals_start_date',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
 								echo $this->Form->input('deals_end_date',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
 								echo $this->Form->input('additional_info',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
+                                echo $this->Form->input('categories_id', ['options' => $categories],array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                 echo $this->Form->input('merchants._ids', ['options' => $merchants]);
                         ?>
                         <?= $this->Form->button(__('Submit'),array('div'=>array('class'=>'form-group'),'class' => 'btn btn-primary'))?>

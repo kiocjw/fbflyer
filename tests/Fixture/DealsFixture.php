@@ -34,6 +34,7 @@ class DealsFixture extends TestFixture
         'modified' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'status' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => '1', 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'users_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'categories_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
@@ -61,13 +62,14 @@ class DealsFixture extends TestFixture
             'saved_amount' => 1,
             'discount_percentage' => 1,
             'purchased_number' => 1,
-            'deals_start_date' => '2016-09-04 12:55:44',
-            'deals_end_date' => '2016-09-04 12:55:44',
+            'deals_start_date' => '2016-09-06 06:12:19',
+            'deals_end_date' => '2016-09-06 06:12:19',
             'additional_info' => 'Lorem ipsum dolor sit amet',
-            'created' => '2016-09-04 12:55:44',
-            'modified' => '2016-09-04 12:55:44',
+            'created' => '2016-09-06 06:12:19',
+            'modified' => '2016-09-06 06:12:19',
             'status' => 1,
-            'users_id' => 1
+            'users_id' => 1,
+            'categories_id' => 1
         ],
     ];
 }

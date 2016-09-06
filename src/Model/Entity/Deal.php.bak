@@ -8,7 +8,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $title
- * @property string $photo
+ * @property $photo
  * @property string $photo_dir
  * @property string $description
  * @property float $actual_price

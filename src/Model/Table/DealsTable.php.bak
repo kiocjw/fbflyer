@@ -31,18 +31,6 @@ class DealsTable extends Table
         $this->displayField('title');
         $this->primaryKey('id');
 
-        $this->addBehavior('Josegonzalez/Upload.Upload', [
-            'photo' => [
-                'fields' => [
-                    // if these fields or their defaults exist
-                    // the values will be set.
-                    'dir' => 'photo_dir', // defaults to `dir`
-                    'size' => 'photo_size', // defaults to `size`
-                    'type' => 'photo_type', // defaults to `type`
-                ],
-            ],
-        ]);
-
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Users', [
@@ -54,8 +42,8 @@ class DealsTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->belongsToMany('Merchants', [
-            'foreignKey' => 'deals_id',
-            'targetForeignKey' => 'merchants_id',
+            'foreignKey' => 'deal_id',
+            'targetForeignKey' => 'merchant_id',
             'joinTable' => 'merchants_deals'
         ]);
     }
@@ -77,10 +65,12 @@ class DealsTable extends Table
             ->notEmpty('title');
 
         $validator
-            ->allowEmpty('photo');
+            ->requirePresence('photo', 'create')
+            ->notEmpty('photo');
 
         $validator
-            ->allowEmpty('photo_dir');
+            ->requirePresence('photo_dir', 'create')
+            ->notEmpty('photo_dir');
 
         $validator
             ->requirePresence('description', 'create')

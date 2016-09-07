@@ -109,6 +109,9 @@
                                                         <tr>
                                                             <td><?= h($merchants->company_name) ?></td>
                                                         </tr>
+                                                        <tr>
+                                                            <td><?= h($merchants->address) ?></td>
+                                                        </tr>
                                                         <?php endforeach; ?>
                                                     </table>
                                                     <?php endif; ?>

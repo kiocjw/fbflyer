@@ -89,6 +89,7 @@ class AppController extends Controller
         ]);
 
 
+        $this->loadComponent('CakephpJqueryFileUpload.JqueryFileUpload');
 
         // Allow the display action so our pages controller
         // continues to work.
@@ -123,6 +124,9 @@ class AppController extends Controller
         }
         else
         {
+            $this->loadModel('Categories');
+            $categories = $this->Categories->find('list',  ['limit' => 200, 'valueField' => 'category']);
+            $this->set(compact('categories'));
             $this->set("role",3);
             $this->viewBuilder()->layout('default');          
 

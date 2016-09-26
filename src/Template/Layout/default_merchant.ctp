@@ -210,7 +210,7 @@ $cakeDescription = 'FBFlyer';
                 <div class="row">
                     <div class="col-md-3 col-sm-3 col-xs-12 pull-right">
                         <?php
-                                   echo $this->Html->link("Merchant", ['controller' => 'users','action' => 'loginmerchant'],array('class' => 'btn btn-raised btn-success ripple-effect btn-lg'));
+                                    echo $this->Html->link("User", ['controller' => 'users','action' => 'login'],array('class' => 'btn btn-primary btn-default ripple-effect btn-lg'));
                                     echo $this->Html->link("Admin", ['controller' => 'admins','action' => 'login'],array('class' => 'btn btn-raised btn-default ripple-effect btn-lg'));
                         ?>
                     </div>
@@ -219,7 +219,7 @@ $cakeDescription = 'FBFlyer';
                             Welcome to FBFLYER
                         </h3>
                         <p>
-                            Please click on "Merchant" button if you are Merchant.
+                            Please click on "User" button if you are User.
                         <br>
                             Please click on "Admin" button if you are Admin
                         </p>

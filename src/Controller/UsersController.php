@@ -19,6 +19,53 @@ class UsersController extends AppController
      */
     public function index()
     {
+            $category = null;
+            $text = null;
+
+            if (isset($_GET['title'])) {
+                $text =$_GET['title'];
+            }
+
+            if(isset($_GET['category'])){  
+                $category = $_GET['category'];
+            }
+
+            $this->paginate = [
+                'contain' => ['Users']
+            ];
+            if($this->Auth->user('role')=='3')
+            {
+                $this->loadModel('Deals');
+                if($text != null)
+                {
+                    if($category!=null)
+                    {
+                        $deals = $this->paginate($this->Deals->find('all', array('conditions' => array('Deals.title LIKE' => "%". $text ."%", 'Deals.categories_id' => $category))));
+                    }
+                    else
+                    {
+                        $deals = $this->paginate($this->Deals->find('all', array('conditions' => array('Deals.title LIKE' => "%". $text ."%"))));
+                    }
+                }
+                else
+                {
+                    if($category!=null)
+                    {
+                        $deals = $this->paginate($this->Deals->findAllByCategories_id($category));
+                    }
+                    else
+                    {
+                        $deals = $this->paginate($this->Deals->find('all'));
+                    }
+                }
+                $this->set(compact('deals'));
+                $this->set('_serialize', ['deals']);
+            }
+            else
+            {
+                return $this->redirect(['controller' => 'users','action' => 'login']);
+            }
+        
     }
 
     public function indexadmin($status = null)
@@ -356,6 +403,9 @@ class UsersController extends AppController
         }
         else
         {
+            $this->loadModel('Categories');
+            $categories = $this->Categories->find('list',  ['limit' => 200, 'valueField' => 'category']);
+            $this->set(compact('categories'));
             $this->viewBuilder()->layout('default');
         }
     }

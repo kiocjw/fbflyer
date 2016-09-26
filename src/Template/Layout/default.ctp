@@ -129,51 +129,32 @@ $cakeDescription = 'FBFlyer';
                             </a>
                         </div>
                         <div class="col-sm-9">
+                            <?php echo $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'index'],'type' => 'get']);?>
                             <div class="search-form">
 
                                 <div class="col-sm-4">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <input class="form-control" placeholder="Search Deals &amp; Coupons" type="text">
+                                            <?php echo $this->Form->input('title',array('label' => false ,'class'=>'form-control','placeholder'=>"Search Deals & Coupons" )); ?>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- /.col 4 -->
 
                                 <div class="col-sm-4">
-                                    <select class="form-control">
-                                        <option value="0" selected="selected">
-                                            Select your categorie
-                                        </option>
-                                        <option value="1">
-                                            All
-                                        </option>
-                                        <option value="2">
-                                            Travel
-                                        </option>
-                                        <option value="3">
-                                            Beauty &amp; Spas
-                                        </option>
-                                        <option value="4">
-                                            Career &amp; skills
-                                        </option>
-                                        <option value="5">
-                                            Food &amp; Drinks
-                                        </option>
-                                        <option value="6">
-                                            Health &amp; Beauty
-                                        </option>
-                                    </select>
+                                    
+                                    <?php echo $this->Form->input('category', ['label' => false ,'options' => $categories,'empty' => 'Select your category'],array('class'=>'form-control')); ?>
                                 </div>
                                 <!-- /.col 3 -->
                                 <div class="col-sm-4">
-                                    <a class="btn btn-raised ripple-effect btn-default btn-block" href="results.html">
-                                            Search Deals
-                                        </a>
+                                    <?php echo $this->Form->button('Search Deals', array('class'=>'btn btn-raised ripple-effect btn-default btn-block')); ?>
                                 </div>
                                 <!-- /.col 1 -->
 
                             </div>
+                            <?php echo $this->Form->end(); ?>
+
+                        
                         </div>
                     </div>
                 </div>

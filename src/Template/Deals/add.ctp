@@ -7,7 +7,7 @@
                     
                         <?= $this->Form->create($deal, ['type' => 'file']) ?>
                         <?php
-                                echo $this->Form->input('photo', ['type' => 'file'],array('div'=>array('class'=>'form-group'),'class' => 'btn btn-primary'));
+                                echo $this->Form->input('photo', array('type' => 'file', 'multiple' => true),array('div'=>array('class'=>'form-group'),'class' => 'btn btn-primary'));
                                 echo $this->Form->input('photo_dir', ['type' => 'hidden']);
                                 echo $this->Form->input('title',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
 								echo $this->Form->input('description',array('type' => 'textarea','div'=>array('class'=>'form-group'),'class' => 'form-control'));

@@ -180,18 +180,36 @@ $cakeDescription = 'FBFlyer';
                                     </li>
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><!--aria-expanded="false"-->
-                                            <i class="ti-home">
+                                            <i class="ti-direction">
                                                 </i> Outlets
                                             <span class="caret">
                                                 </span>
                                         </a>
                                         <ul class="dropdown-menu" role="menu">
                                             <li>
-                                               <?php echo $this->Html->link("OUTLETS", ['controller' => 'merchants','action' => 'index']);?>
+                                               <?php echo $this->Html->link("ALL OUTLETS", ['controller' => 'merchants','action' => 'index']);?>
                                             </li>
 
                                             <li>
                                                <?php echo $this->Html->link("NEW OUTLET", ['controller' => 'merchants','action' => 'add']);?>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><!--aria-expanded="false"-->
+                                            <i class="ti-tag">
+                                                </i> Categories
+                                            <span class="caret">
+                                                </span>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                               <?php echo $this->Html->link("ALL CATEGORIES", ['controller' => 'categories','action' => 'index']);?>
+                                            </li>
+
+                                            <li>
+                                               <?php echo $this->Html->link("NEW CATEGORY", ['controller' => 'categories','action' => 'add']);?>
                                             </li>
 
                                         </ul>

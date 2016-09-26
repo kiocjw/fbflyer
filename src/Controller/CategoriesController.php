@@ -50,6 +50,7 @@ class CategoriesController extends AppController
     {
         $category = $this->Categories->newEntity();
         if ($this->request->is('post')) {
+            $this->request->data['status'] =0;
             $category = $this->Categories->patchEntity($category, $this->request->data);
             if ($this->Categories->save($category)) {
                 $this->Flash->success(__('The category has been saved.'));

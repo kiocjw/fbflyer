@@ -1,34 +1,59 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Category'), ['action' => 'edit', $category->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Category'), ['action' => 'delete', $category->id], ['confirm' => __('Are you sure you want to delete # {0}?', $category->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Categories'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Category'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="categories view large-9 medium-8 columns content">
-    <h3><?= h($category->id) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($category->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Status') ?></th>
-            <td><?= $this->Number->format($category->status) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Created') ?></th>
-            <td><?= h($category->created) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Modified') ?></th>
-            <td><?= h($category->modified) ?></td>
-        </tr>
-    </table>
-    <div class="row">
-        <h4><?= __('Category') ?></h4>
-        <?= $this->Text->autoParagraph(h($category->category)); ?>
-    </div>
-</div>
+  <section id="inner-page" class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row mTop-20">
+                        <div class="categories view large-9 medium-8 columns content">
+                        <div class="col-sm-12">
+
+                            <div class="widget-inner bg-white shadow mBtm-20">
+                                <div role="tabpanel" id="tabs" class="tabbable responsive">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active">
+                                            <a href="#tab-1" aria-controls="home" role="tab" data-toggle="tab">
+                          Overview
+                        </a>
+                                        </li>
+                                    </ul>
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane active" id="home">
+                                            <div class="tab-content">
+                                                <div class="tab-pane fade active in" id="tab-1">
+                                                    <div class="section-title-wr">
+                                                        <h4 class="section-title left">
+                                                      <?= __('Category Name') ?>
+                                                    </h4>
+                                                        <p class="lead">
+                                                            <?= h($category->category) ?>
+                                                        </p>
+                                                        </div>
+                                                    <div class="section-title-wr">
+                                                        <h4 class="section-title left">
+                                                      <?= __('Status') ?>
+                                                    </h4>
+                                                        <p class="lead">
+                                                            <?=nl2br(h($category->status)) ?>
+                                                        </p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- /tab content -->
+                                                <!-- /tab -->
+                                            </div>
+                                        </div>
+                                        <!--/tabs -->
+                                    </div>
+                                    <!-- /inner widget -->
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+            <!-- /main row -->
+        </section>

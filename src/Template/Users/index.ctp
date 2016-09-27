@@ -74,8 +74,7 @@
                           </b>
                           min(s)
                         </li>
-                        <li class="info_link col-sm-5 col-xs-6 col-lg-4">
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $deal->id],array('class'=>'btn btn-block btn-default btn-raised btn-sm')) ?>                         
+                        <li class="info_link col-sm-5 col-xs-6 col-lg-4">                         
                             <?= $this->Html->link(__('View Deal'), ['action' => 'view', $deal->id],array('class'=>'btn btn-block btn-default btn-raised btn-sm')) ?>
                         </li>
                       </ul>

@@ -68,6 +68,21 @@ class UsersController extends AppController
         
     }
 
+    public function view($id = null)
+    {
+            if($this->Auth->user('role')=='3')
+            {
+                $this->loadModel('Deals');
+
+                $deal = $this->Deals->get($id, [
+                    'contain' => ['Users', 'Merchants']
+                ]);
+
+                $this->set('deal', $deal);
+                $this->set('_serialize', ['deal']);
+            }
+    }
+
     public function indexadmin($status = null)
     {
         

@@ -269,8 +269,8 @@
                                     </h3>
                                 </div>
                                 <div class="price">
-                                    <h1>
-                                          $<?= $this->Number->format($deal->promo_price) ?>    
+                                    <h1 class="ti-money">
+                                          <?= $this->Number->format($deal->promo_price) ?>    
                                     </h1>
                                 </div>
                                 <div class="buy-now mBtm-30">
@@ -283,8 +283,8 @@
                                 <div class="dealAttributes">
                                     <div class="valueInfo bg-light shadow">
                                         <div class="value">
-                                            <p class="value">
-                                                $<?= $this->Number->format($deal->actual_price) ?>
+                                            <p class="ti-money value">
+                                                <?= $this->Number->format($deal->actual_price) ?>
                                             </p>
                                             <p class="text">
                                                 Value
@@ -299,8 +299,8 @@
                                             </p>
                                         </div>
                                         <div class="save">
-                                            <p class="value">
-                                                $<?= $this->Number->format($deal->saved_amount) ?>
+                                            <p class="ti-money value">
+                                                <?= $this->Number->format($deal->saved_amount) ?>
                                             </p>
                                             <p class="text">
                                                 SAVINGS

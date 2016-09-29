@@ -443,8 +443,10 @@
 .ti-mouse-alt:before {
 	content: "\e68b";
 }
+
 .ti-money:before {
-	content: "\e68c";
+    /*content: "\e68c";*/
+	content: "RM";
 }
 .ti-microphone:before {
 	content: "\e68d";

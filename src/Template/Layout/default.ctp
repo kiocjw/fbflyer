@@ -88,12 +88,26 @@ $cakeDescription = 'FBFlyer';
                                 -->
                                 <li class="active">
                                     <?php
+                                    if (!isset($role))
+                                    {
                                           echo $this->Html->link("Sign In", ['controller' => 'users','action' => 'login']);
+                                    }
+                                    elseif ($role!='3')
+                                    {
+                                          echo $this->Html->link("Sign In", ['controller' => 'users','action' => 'login']);
+                                    }
                                     ?>
                                 </li>
                                 <li>
                                     <?php
+                                    if (!isset($role))
+                                    {
                                           echo $this->Html->link("Sign Up", ['controller' => 'users','action' => 'add']);
+                                    }
+                                    elseif ($role!='3')
+                                    {
+                                          echo $this->Html->link("Sign Up", ['controller' => 'users','action' => 'add']);
+                                    }
                                     ?>
                                 </li>
                                 <!--

@@ -33,8 +33,8 @@ class UsersController extends AppController
             $this->paginate = [
                 'contain' => ['Users']
             ];
-            if($this->Auth->user('role')=='3')
-            {
+            #if($this->Auth->user('role')=='3')
+            #{
                 $this->loadModel('Deals');
                 if($text != null)
                 {
@@ -60,18 +60,18 @@ class UsersController extends AppController
                 }
                 $this->set(compact('deals'));
                 $this->set('_serialize', ['deals']);
-            }
-            else
-            {
-                return $this->redirect(['controller' => 'users','action' => 'login']);
-            }
+            #}
+            #else
+            #{
+                #return $this->redirect(['controller' => 'users','action' => 'login']);
+            #}
         
     }
 
     public function view($id = null)
     {
-            if($this->Auth->user('role')=='3')
-            {
+            #if($this->Auth->user('role')=='3')
+            #{
                 $this->loadModel('Deals');
 
                 $deal = $this->Deals->get($id, [
@@ -80,7 +80,7 @@ class UsersController extends AppController
 
                 $this->set('deal', $deal);
                 $this->set('_serialize', ['deal']);
-            }
+            #}
     }
 
     public function indexadmin($status = null)
@@ -393,14 +393,22 @@ class UsersController extends AppController
     public function initialize()
     {
         parent::initialize();
-        //$this->Auth->allow(['logout', 'index']);
+        $this->Auth->allow(['logout']);
 
-        $this->Auth->allow(['logout', 'add']);
-        $this->Auth->allow(['logout', 'login']);
+        $this->Auth->allow(['add']);
+        $this->Auth->allow(['login']);
 
-        $this->Auth->allow(['logout', 'loginmerchant']);
-        $this->Auth->allow(['logout', 'addmerchant']);
+        $this->Auth->allow(['loginmerchant']);
+        $this->Auth->allow(['addmerchant']);
 
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event); 
+        $this->Auth->allow('index'); 
+        $this->Auth->allow('view');
+        $this->set("role",$this->Auth->user('role'));
     }
 
     public function beforeRender(Event $event)

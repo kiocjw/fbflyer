@@ -319,8 +319,16 @@ $cakeDescription = 'FBFlyer';
                 <div class="row">
                     <div class="col-md-3 col-sm-3 col-xs-12 pull-right">
                         <?php
-                                   echo $this->Html->link("Merchant", ['controller' => 'users','action' => 'loginmerchant'],array('class' => 'btn btn-raised btn-success ripple-effect btn-lg'));
-                                   echo $this->Html->link("Admin", ['controller' => 'admins','action' => 'login'],array('class' => 'btn btn-raised btn-default ripple-effect btn-lg'));
+                        if (!isset($role))
+                        {
+                                    echo $this->Html->link("Merchant", ['controller' => 'users','action' => 'loginmerchant'],array('class' => 'btn btn-raised btn-success ripple-effect btn-lg'));
+                                    echo $this->Html->link("Admin", ['controller' => 'admins','action' => 'login'],array('class' => 'btn btn-raised btn-default ripple-effect btn-lg'));
+                        }
+                        elseif ($role!='3')
+                        {
+                                    echo $this->Html->link("Merchant", ['controller' => 'users','action' => 'loginmerchant'],array('class' => 'btn btn-raised btn-success ripple-effect btn-lg'));
+                                    echo $this->Html->link("Admin", ['controller' => 'admins','action' => 'login'],array('class' => 'btn btn-raised btn-default ripple-effect btn-lg'));
+                        }
                         ?>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
@@ -328,9 +336,16 @@ $cakeDescription = 'FBFlyer';
                             Welcome to FBFLYER
                         </h3>
                         <p>
-                            Please click on "Merchant" button if you are Merchant.
-                        <br>
-                            Please click on "Admin" button if you are Admin
+                         <?php
+                        if (!isset($role))
+                        {
+                                 echo "Please click on \"Merchant\" button if you are Merchant.<br>Please click on \"Admin\" button if you are Admin";
+                        }
+                        elseif ($role!='3')
+                        {
+                                  echo "Please click on \"Merchant\" button if you are Merchant.<br>Please click on \"Admin\" button if you are Admin";     
+                        }
+                        ?>
                         </p>
                     </div>
                 </div>

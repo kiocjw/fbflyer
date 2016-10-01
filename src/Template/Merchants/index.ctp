@@ -8,7 +8,7 @@
                         <div class="col-sm-6">
                   <div class="deal-entry  orange">
                     <div class="image">
-                      <a href="#" target="_blank" title="#">
+                      <a href="<?= "/merchants/view/".h($merchant->id) ?>" target="_blank" title="#">
                           <img src="<?= "/".h($merchant->photo_dir).h($merchant->photo) ?>" alt="#" class="img-responsive">
                       </a>
                     </div>

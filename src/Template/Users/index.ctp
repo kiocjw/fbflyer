@@ -6,7 +6,14 @@
                 <?php
                 $now = new DateTime();
                 $date2 = $deal->deals_end_date;
-                $difference = $now->diff($date2);              
+                $difference = $now->diff($date2);
+                $isExpired = 0;
+                if ($difference->invert == 1) 
+                {
+                   $isExpired = 1;                
+                   $difference = $date2->diff($date2);
+                }
+                           
                 ?>
                 <div class="col-sm-6">
                   <div class="deal-entry  orange">
@@ -14,7 +21,7 @@
                       <?= h($deal->discount_percentage) ?>%
                     </div>
                     <div class="image">
-                       <a href="#" target="_blank" title="#">
+                       <a href="<?= "/users/view/".h($deal->id) ?>" target="_blank" title="#">
                           <img src="<?= "/".h($deal->photo_dir).h($deal->photo) ?>" alt="#" class="img-responsive">
                       </a>
                       <span class="bought">
@@ -60,19 +67,27 @@
                         <li class="time col-sm-7 col-xs-6 col-lg-8">
                           <i class="ti-timer">
                           </i>
-                           
-                          <b>
-                            <?= h($difference->format('%d'))?> 
-                          </b>
-                          day(s)
-                          <b>
-                           <?= h($difference->format('%h'))?> 
-                          </b>
-                          hour(s)
-                          <b>
-                            <?= h($difference->format('%i'))?> 
-                          </b>
-                          min(s)
+                         
+                           <?php if ($isExpired==0){ ?>
+                              <b>
+                                <?= h($difference->format('%d'))?> 
+                              </b>
+                              day(s)
+                              <b>
+                               <?= h($difference->format('%h'))?> 
+                              </b>
+                              hour(s)
+                              <b>
+                                <?= h($difference->format('%i'))?> 
+                              </b>
+                              min(s)
+                            <?php 
+                            }
+                            else
+                            {
+                                echo "Expired";
+                            }
+                            ?>
                         </li>
                         <li class="info_link col-sm-5 col-xs-6 col-lg-4">                         
                             <?= $this->Html->link(__('View Deal'), ['action' => 'view', $deal->id],array('class'=>'btn btn-block btn-default btn-raised btn-sm')) ?>

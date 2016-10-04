@@ -312,27 +312,41 @@
                                             REMAINING TIME:
                                         </p>
                                         <span class="time">
-                            <i class="ti-timer color-green">
-                            </i>
-                            <b>
-                            <?php
-                            $now = new DateTime();
-                            $date2 = $deal->deals_end_date;
-                            $difference = $now->diff($date2);              
-                            ?>
-                            <?= h($difference->format('%d'))?> 
-                          </b>
-                          day(s)
-                          <b>
-                           <?= h($difference->format('%h'))?> 
-                          </b>
-                          hour(s)
-                          <b>
-                            <?= h($difference->format('%i'))?> 
-                          </b>
-                          min(s)
-                          </span>
-
+                                            <i class="ti-timer color-green">
+                                            </i>
+                                            <?php
+                                            $now = new DateTime();
+                                            $date2 = $deal->deals_end_date;
+                                            $difference = $now->diff($date2);
+                                            $isExpired = 0;
+                                            if ($difference->invert == 1) 
+                                            {
+                                               $isExpired = 1;                
+                                               $difference = $date2->diff($date2);
+                                            }
+                           
+                                            ?>
+                                            <?php if ($isExpired==0){ ?>
+                                              <b>
+                                                <?= h($difference->format('%d'))?> 
+                                              </b>
+                                              day(s)
+                                              <b>
+                                               <?= h($difference->format('%h'))?> 
+                                              </b>
+                                              hour(s)
+                                              <b>
+                                                <?= h($difference->format('%i'))?> 
+                                              </b>
+                                              min(s)
+                                            <?php 
+                                            }
+                                            else
+                                            {
+                                                echo "Expired";
+                                            }
+                                            ?>
+                                        </span>
                                 </div>
                             </div>
                         </div>

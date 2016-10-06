@@ -271,8 +271,24 @@ class UsersController extends AppController
                 $this->emailapproveadmin($user->company['company_name'], $user['email'], $user['status'], $user['remark']);
                 $this->Flash->success(__('The user has been saved.'));
                 return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            } else 
+            {
+                if($user->errors()){
+                     // This shows all the error messages except the one specified in the  buildRules for unique email.
+                     
+                    foreach($user->errors()as $row)
+                    {
+                        foreach($row as $key => $val)
+                        {
+
+                            $this->Flash->error(__($val)); 
+                        }
+                    }
+                  }
+                  else
+                  {
+                       $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                  }
             }
         }
         $this->set(compact('user'));

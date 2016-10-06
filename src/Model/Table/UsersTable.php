@@ -97,8 +97,8 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['username']));
-        $rules->add($rules->isUnique(['email']));
+        $rules->add($rules->isUnique(['username'], 'Username should be unique'));
+        $rules->add($rules->isUnique(['email'], 'Email should be unique'));
         return $rules;
     }
 }

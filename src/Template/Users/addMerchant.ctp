@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="panel-body frameLR bg-white shadow space-sm">
-            <?= $this->Form->create() ?>
+            <?= $this->Form->create($user) ?>
                 <div class="col-md-6">
                         <h3 class="dark-grey"><?= __('Register Merchant') ?></h3>
                     <?php

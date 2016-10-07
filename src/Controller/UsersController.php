@@ -280,8 +280,14 @@ class UsersController extends AppController
                     {
                         foreach($row as $key => $val)
                         {
-
-                            $this->Flash->error(__($val)); 
+                            if(!is_array($val))
+                            {
+                                $this->Flash->error(__($val)); 
+                            }
+                            else
+                            {
+                                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                            }
                         }
                     }
                   }

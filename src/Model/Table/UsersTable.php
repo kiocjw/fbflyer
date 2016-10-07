@@ -48,6 +48,9 @@ class UsersTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
+            ->notEmpty('title');
+
+        $validator
             ->integer('role')
             ->notEmpty('role');
 
@@ -97,8 +100,8 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['username'], 'Username should be unique'));
-        $rules->add($rules->isUnique(['email'], 'Email should be unique'));
+        $rules->add($rules->isUnique(['username'], 'Username had been registered'));
+        $rules->add($rules->isUnique(['email'], 'Email had been registered'));
         return $rules;
     }
 }

@@ -19,7 +19,8 @@
                     <p>
                         Already have an account on Facebook? Use it to sign in to FBFlyer Malaysia!
                     </p>      
-                    <?php echo $this->Facebook->loginLink($options = []); ?>             
+                    <?php echo $this->Facebook->loginLink($options = ['div'=>array('class'=>'form-group'),'class' => 'btn btn-primary btn-lg btn-raised ripple-effect']); ?>             
+
                 </div>
                 <?= $this->Form->end() ?>  
         </div>

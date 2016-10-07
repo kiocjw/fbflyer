@@ -24,10 +24,22 @@
                     <p>
                         By clicking on "Register" you agree to our Terms and Conditions
                     </p>                  
+                
+                <?= $this->Form->submit('Register',array('div'=>array('class'=>'form-group'),'class' => 'btn btn-danger btn-lg btn-raised ripple-effect')) ?>
+                <?= $this->Form->end() ?>
                 </div>
-            <?= $this->Form->submit('Register',array('div'=>array('class'=>'form-group'),'class' => 'btn btn-danger btn-lg btn-raised ripple-effect')) ?>
-            <?= $this->Form->end() ?>
-        </div>
+                <div class="col-md-6">
+                 <p>
+                           <br>
+                 </p>
+                </div> 
+                <div class="col-md-6">
+                 <p>
+                            Already have an account on Facebook? Use it to sign in to FBFlyer Malaysia!
+                 </p>   
+                 <?php echo $this->Facebook->loginLink($options = ['div'=>array('class'=>'form-group'),'class' => 'btn btn-primary btn-lg btn-raised ripple-effect']); ?>             
+                </div>
+            </div>
             <!-- /inner wrap -->
         </div>
     </div>

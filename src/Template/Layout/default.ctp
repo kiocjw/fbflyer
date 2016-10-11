@@ -143,7 +143,7 @@ $cakeDescription = 'FBFlyer';
                             </a>
                         </div>
                         <div class="col-sm-9">
-                            <?php echo $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'index'],'type' => 'get']);?>
+                            <?php echo $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'result'],'type' => 'get']);?>
                             <div class="search-form">
 
                                 <div class="col-sm-4">

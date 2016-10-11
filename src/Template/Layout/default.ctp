@@ -196,26 +196,41 @@ $cakeDescription = 'FBFlyer';
                             <div class="collapse navbar-collapse" id="Navbar">
                                 <!-- regular link -->
                                 <ul class="nav navbar-nav navbar-left">
-                                    <!--
+                                     <li>
+                                         <?php
+                                            echo $this->Html->link($this->Html->tag('i',"", array('class' => 'ti-home'))."Home", ['controller' => 'users','action' => 'index'],array('escape'=>false));
+                                          ?>
+                                    </li>
+
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><!--aria-expanded="false"-->
-                                    <!--
-                                            <i class="ti-home">
-                                                </i> Home
+                                            <i class="ti-list-ol">
+                                                </i> Category
                                             <span class="caret">
                                             </span>
                                         </a>
                                         
                                         <ul class="dropdown-menu" role="menu">
                                             <li>
-                                                <a href="#">
-                                                        Second Design
-                                                    </a>
+                                                <?php 
+                                                    echo $this->Html->link("All", ['controller' => 'users','action' => 'result']);
+                                                ?>
                                             </li>
+                                            <?php if (isset($categories)){foreach ($categories as $key => $category): ?>
+                                            
+                                            <li>
+                                                <?php echo $this->Html->link( $category,array(
+                                                "controller" => "users",
+                                                "action" => "result",
+                                                "?" => array("category" => $key)
+                                            )); ?>
+                                            </li>
+                                            <?php endforeach; }?>
 
                                         </ul>
 
                                     </li>
+                                    <!--
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" ><!--aria-expanded="false"-->
                                     <!--

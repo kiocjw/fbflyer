@@ -1,3 +1,309 @@
+<div class="container">
+          <div class="row">
+            <div class="col-sm-3 sidebar">
+                        <div class="bg-white shadow">
+              
+              
+                          <div class="widget-menu">
+                 
+                
+                            <div class="cat-text">
+                                 <?php echo $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'result'],'type' => 'get']);?>
+                                 <?php echo $this->Form->input('title',array('label' => false ,'class'=>'form-control','placeholder'=>"Search Deals & Coupons" )); ?>
+                                 <?php echo $this->Form->end(); ?>
+                            </div>
+               
+                            <!-- Sidebar navigation -->
+
+                            <ul class="nav sidebar-nav">
+
+           
+                                <!--<li class="dropdown"> -->
+                                <li>
+                                <!--<a class="ripple-effect dropdown-toggle" href="#" data-toggle="dropdown">-->
+                                <a class="ripple-effect" href="#">
+
+                                  <i class="ti-shine">
+                                  </i>
+                                  Travel
+                                  <span class="sidebar-badge">
+                                    <!--10-->
+                                  </span>
+                                  <!--
+                                    <b class="caret">
+                                    </b>
+                                   -->
+                                </a>
+                                <!--
+                                <ul class="dropdown-menu">
+                                  <li>
+                                    <a href="#" tabindex="-1">
+                                      Europe
+                                      <span class="sidebar-badge">
+                                        12
+                                      </span>
+                                    </a>
+                                  </li>
+                     
+                                </ul>
+                                -->
+                              </li>
+                  
+    
+                              <li>
+                                <a href="#">
+                                  <i class="ti-gift">
+                                  </i>
+                                  Gifts
+                                  <span class="sidebar-badge">
+                                    <!--10-->
+                                  </span>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <i class="ti-shopping-cart">
+                                  </i>
+                                  Products
+                                  <span class="sidebar-badge">
+                                    <!--10-->
+                                  </span>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <i class="ti-ticket">
+                                  </i>
+                                  Tickets
+                                  <span class="sidebar-badge badge-circle">
+                                    <!--10-->
+                                  </span>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <i class="ti-pulse">
+                                  </i>
+                                  Health
+                                  <span class="sidebar-badge badge-circle">
+                                    <!--10-->
+                                  </span>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <i class="ti-direction-alt">
+                                  </i>
+                                  Things To Do
+                                  <span class="sidebar-badge badge-circle">
+                                    <!--10-->
+                                  </span>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <i class="ti-cut">
+                                  </i>
+                                  Fashion
+                                  <span class="sidebar-badge badge-circle">
+                                   <!--10-->
+                                  </span>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <i class="ti-music-alt">
+                                  </i>
+                                  Fun Stuff
+                                  <span class="sidebar-badge badge-circle">
+                                    <!--10-->
+                                  </span>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="#">
+                                  <i class="ti-harddrives">
+                                  </i>
+                                  Electronics
+                                  <span class="sidebar-badge badge-circle">
+                                    <!--10-->
+                                  </span>
+                                </a>
+                              </li>
+                            </ul>
+                            <!-- Sidebar divider -->
+                          </div>
+                          <!-- /.widget -->
+              
+             
+              
+                        </div>
+                        <!-- /col 4 - sidebar -->
+                      </div>
+            <div class="col-sm-9">
+                <div class="slider">
+                  <div class="row">
+                    <div id="grid-slider" class="flexslider">
+                      <ul class="slides">
+                        <?php if (isset($deals)){foreach ($deals as $deal): ?>
+                        <?php
+                        $now = new DateTime();
+                        $date2 = $deal->deals_end_date;
+                        $difference = $now->diff($date2);
+                        $isExpired = 0;
+                        if ($difference->invert == 1) 
+                        {
+                           $isExpired = 1;                
+                           $difference = $date2->diff($date2);
+                        }
+                           
+                        ?>                
+                        <li>
+                          <div class="col-sm-7 col-lg-7 omega">
+                              <article class="bg-image entry-lg" data-image-src="<?= "/".h(str_replace("\\", "/", $deal->photo_dir)).h(str_replace("\\", "/",$deal->photo)) ?>">
+                               <!--<div class="deal-short-entry">
+                               
+                                  <p class="lead">
+                                   
+                                  </p>
+                                
+                              </div>
+                                -->
+                            </article>
+                          </div>
+                          <div class="col-sm-5 col-lg-5 alpha entry-lg">
+                            <div class="buyPanel animated fadeInLeft bg-white Aligner shadow">
+                              <div class="content">
+                                <div class="deal-content">
+                                  <h3>
+                                    <?= h($deal->title) ?>
+                                  </h3>
+                                  <p>
+                                    <?= h($deal->description) ?>
+                                  </p>
+                                </div>
+                                <ul class="deal-price list-unstyled list-inline">
+                                  <li class="price ti-money">
+                                    <h3>
+                                      <?= h($deal->promo_price) ?>
+                                    </h3>
+                                  </li>
+                                  <li class="buy-now">
+                                    <a class="btn btn-danger btn-lg btn-raised ripple-effect">
+                                      BUY NOW
+                                    </a>
+                                  </li>
+                                </ul>
+                                <div class="dealAttributes">
+                                  <div class="valueInfo bg-light shadow">
+                                    <div class="value">
+                                      <p class="value ti-money">
+                                        <?= h($deal->actual_price) ?>
+                                      </p>
+                                      <p class="text">
+                                        Value
+                                      </p>
+                                    </div>
+                                    <div class="discount">
+                                      <p class="value">
+                                         <?= h($deal->discount_percentage) ?>%
+                                      </p>
+                                      <p class="text">
+                                        Discount
+                                      </p>
+                                    </div>
+                                    <div class="save">
+                                      <p class="value ti-money">
+                                        <?= h($deal->saved_amount) ?>
+                                      </p>
+                                      <p class="text">
+                                        SAVINGS
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <!-- /.value info -->
+                                  <div class="timeLeft text-center">
+                                    <p>
+                                      Hurry up Only a few deals left
+                                    </p>
+                                    <span class="time">
+                                      <i class="ti-timer color-green">
+                                      </i>
+                                      <?php if ($isExpired==0){ ?>
+                                      <b>
+                                        <?= h($difference->format('%d'))?> 
+                                      </b>
+                                      day(s)
+                                      <b>
+                                       <?= h($difference->format('%h'))?> 
+                                      </b>
+                                      hour(s)
+                                      <b>
+                                        <?= h($difference->format('%i'))?> 
+                                      </b>
+                                      min(s)
+                                    <?php 
+                                    }
+                                    else
+                                    {
+                                        echo "Expired";
+                                    }
+                                    ?>
+                                    </span>
+                                  </div>
+                                  <ul class="statistic list-unstyled list-inline">
+                                    <li>
+                                      <i class="ti-tag">
+                                      </i>
+                                      <b>
+                                        <?= h($deal->purchased_number) ?>
+                                      </b>
+                                      Bought
+                                    </li>
+
+                                  </ul>
+                                  <!--<div class="social-sharing text-center" data-permalink="http://labs.carsonshold.com/social-sharing-buttons"> -->
+                                    <!-- https://developers.facebook.com/docs/plugins/share-button/ -->
+                                    <!--<a target="_blank" href="http://www.facebook.com/sharer.php?u=http://themeforest.net/user/codenpixel" class="share-facebook">
+                                      <span class="icon icon-facebook">
+                                      </span>
+                                      <span class="share-title">
+                                        Share
+                                      </span>
+                                      <span class="share-count is-loaded">288</span>
+                                    </a>
+                                    -->
+                                    <!-- https://dev.twitter.com/docs/intents -->
+                                    <!--
+                                    <a target="_blank" href="http://twitter.com/share?url=http://themeforest.net/user/codenpixel" class="share-twitter">
+                                      <span class="icon icon-twitter">
+                                      </span>
+                                      <span class="share-title">
+                                        Tweet
+                                      </span>
+                                      <span class="share-count is-loaded">78</span>
+                                    </a>
+                                    
+                                  </div>
+                                    -->
+                                  <!--/.social sharing -->
+                                </div>
+                              </div>
+                            </div>
+                            <!-- /#buypanel -->
+                          </div>
+                        </li>
+                         <?php endforeach; }?>
+                      </ul>
+                    </div>
+                  </div>       
+                </div>
+                <!-- /slider --> 
+            </div><!-- /.col -9  -->             
+          </div><!-- /.row -->
+</div><!-- /.container -->
+      
+<!-- /#page ends -->
 <section id="page" class="container mTop-30 mBtm-50">
     <!--/.row -->
     <hr data-symbol="DEALS">

@@ -38,5 +38,6 @@ class AppView extends View
     {
         $this->loadHelper('CakephpJqueryFileUpload.JqueryFileUpload');
         $this->loadHelper('QrCode');
+        $this->loadHelper('Coupon');
     }
 }

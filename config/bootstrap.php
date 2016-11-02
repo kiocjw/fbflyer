@@ -192,7 +192,27 @@ Request::addDetector('tablet', function ($request) {
 
 Plugin::load('Migrations');
 Plugin::load('AkkaFacebook', ['bootstrap' => false, 'routes' => true]);
+Plugin::load('CakePdf', ['bootstrap' => true]);
 Plugin::loadAll();
+
+Plugin::load('CakePdf', ['bootstrap' => true, 'routes' => true]);
+Configure::write('CakePdf', [
+    'engine' => 'CakePdf.dompdf',
+    'pageSize' => 'A4',
+    'options' => array(
+        'print-media-type' => true,
+        'outline' => true,
+        'dpi' => 96
+    ),
+    'margin' => [
+            'bottom' => 15,
+            'left' => 50,
+            'right' => 30,
+            'top' => 45
+        ],
+    'orientation' => 'landscape',
+    'download' => false
+]);
 
 // Only try to load DebugKit in development mode
 // Debug Kit should not be installed on a production system

@@ -274,11 +274,11 @@
                                     </h1>
                                 </div>
                                 <div class="buy-now mBtm-30">
-                                    <a class="btn btn-danger btn-lg btn-raised ripple-effect btn-block" data-toggle="modal" data-target="#myModal">
-                          BUY NOW
-                          <span class="ink animate">
-                          </span>
-                        </a>
+                                    <a href="<?= "/vouchers/add/".h($deal->id) ?>" class="btn btn-danger btn-lg btn-raised ripple-effect btn-block" data-toggle="modal" data-target="#myModal">
+                                      BUY NOW
+                                      <span class="ink animate">
+                                      </span>
+                                    </a>
                                 </div>
                                 <div class="dealAttributes">
                                     <div class="valueInfo bg-light shadow">

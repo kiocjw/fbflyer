@@ -87,7 +87,9 @@ $cakeDescription = 'FBFlyer';
                                 </li>
                                 -->
                                 <li class="active">
+
                                     <?php
+
                                     if (!isset($role))
                                     {
                                           echo $this->Html->link("Sign In", ['controller' => 'users','action' => 'login']);

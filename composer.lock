@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "942d9547bad2539c93524af090f7a12d",
-    "content-hash": "96e4189ec680e712d25bc2dae31cb8a7",
+    "hash": "e915bf3149860bdd285d7b6fa1cbb10f",
+    "content-hash": "4d4fdf936ada0e549db86b1daa35efdf",
     "packages": [
         {
             "name": "akkaweb/cakephp-facebook",
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/akkaweb/AKKA-CakePHP-Facebook-Plugin.git",
-                "reference": "5444669c016925eeeb4a23dd0904a277b926fb75"
+                "reference": "cc7d43b3d3f85d70a838e9d4aa9b4ee0e0ae97b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/akkaweb/AKKA-CakePHP-Facebook-Plugin/zipball/5444669c016925eeeb4a23dd0904a277b926fb75",
-                "reference": "5444669c016925eeeb4a23dd0904a277b926fb75",
+                "url": "https://api.github.com/repos/akkaweb/AKKA-CakePHP-Facebook-Plugin/zipball/cc7d43b3d3f85d70a838e9d4aa9b4ee0e0ae97b2",
+                "reference": "cc7d43b3d3f85d70a838e9d4aa9b4ee0e0ae97b2",
                 "shasum": ""
             },
             "require": {
@@ -53,7 +53,50 @@
                 "cakephp3",
                 "facebook"
             ],
-            "time": "2016-03-23 17:39:04"
+            "time": "2016-10-05 13:58:15"
+        },
+        {
+            "name": "alaxos/cakephp3-libs",
+            "version": "1.0.23",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alaxos/cakephp3-libs.git",
+                "reference": "770e7e282e8ba01a5d6e3ff9dd522fed4c50d851"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alaxos/cakephp3-libs/zipball/770e7e282e8ba01a5d6e3ff9dd522fed4c50d851",
+                "reference": "770e7e282e8ba01a5d6e3ff9dd522fed4c50d851",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "~3.0",
+                "cakephp/plugin-installer": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "cakephp-plugin",
+            "extra": {
+                "installer-name": "Alaxos"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Alaxos\\": "src",
+                    "Alaxos\\Test\\Fixture\\": "tests\\Fixture"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Custom libraries for CakePHP 3.x framework",
+            "homepage": "https://github.com/alaxos/cakephp3-libs",
+            "keywords": [
+                "cakephp",
+                "libraries"
+            ],
+            "time": "2016-09-09 07:07:39"
         },
         {
             "name": "aura/installer-default",
@@ -175,26 +218,77 @@
             "time": "2014-08-24 00:00:00"
         },
         {
-            "name": "cakephp/cakephp",
-            "version": "3.2.10",
+            "name": "blueimp/jquery-file-upload",
+            "version": "v9.12.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cakephp/cakephp.git",
-                "reference": "f8f48386f77f3638c4686d9f7ec6ee3b5ac52a68"
+                "url": "https://github.com/vkhramtsov/jQuery-File-Upload.git",
+                "reference": "ae2e0e7637da6c8f94d37655b5429b74faf37b3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/f8f48386f77f3638c4686d9f7ec6ee3b5ac52a68",
-                "reference": "f8f48386f77f3638c4686d9f7ec6ee3b5ac52a68",
+                "url": "https://api.github.com/repos/vkhramtsov/jQuery-File-Upload/zipball/ae2e0e7637da6c8f94d37655b5429b74faf37b3a",
+                "reference": "ae2e0e7637da6c8f94d37655b5429b74faf37b3a",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Tschan",
+                    "homepage": "https://blueimp.net"
+                }
+            ],
+            "description": "File Upload widget for jQuery.",
+            "homepage": "https://github.com/blueimp/jQuery-File-Upload",
+            "keywords": [
+                "bootstrap",
+                "chunk",
+                "cross-domain",
+                "cross-site",
+                "drag",
+                "drop",
+                "file",
+                "gae",
+                "go",
+                "jquery",
+                "multiple",
+                "php",
+                "preview",
+                "progress",
+                "python",
+                "resume",
+                "selection",
+                "upload",
+                "widget"
+            ],
+            "time": "2016-10-18 06:01:31"
+        },
+        {
+            "name": "cakephp/cakephp",
+            "version": "3.3.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cakephp/cakephp.git",
+                "reference": "71a2cf6bf38ef53423e63922669b6f526625a906"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/71a2cf6bf38ef53423e63922669b6f526625a906",
+                "reference": "71a2cf6bf38ef53423e63922669b6f526625a906",
                 "shasum": ""
             },
             "require": {
                 "aura/intl": "1.1.*",
-                "cakephp/chronos": "*",
+                "cakephp/chronos": "~1.0",
                 "ext-intl": "*",
                 "ext-mbstring": "*",
                 "php": ">=5.5.9",
-                "psr/log": "1.0"
+                "psr/log": "1.0",
+                "zendframework/zend-diactoros": "~1.0"
             },
             "replace": {
                 "cakephp/cache": "self.version",
@@ -211,7 +305,7 @@
                 "cakephp/validation": "self.version"
             },
             "require-dev": {
-                "cakephp/cakephp-codesniffer": "dev-master",
+                "cakephp/cakephp-codesniffer": "~2.1",
                 "phpunit/phpunit": "*"
             },
             "suggest": {
@@ -244,20 +338,20 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-05-26 08:22:04"
+            "time": "2016-10-15 01:26:47"
         },
         {
             "name": "cakephp/chronos",
-            "version": "0.4.11",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/chronos.git",
-                "reference": "39db65d38488d6edd88bab5f33e19b1205ceeeda"
+                "reference": "a40b330d84a74975119c10a4e890391e0611e5ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/chronos/zipball/39db65d38488d6edd88bab5f33e19b1205ceeeda",
-                "reference": "39db65d38488d6edd88bab5f33e19b1205ceeeda",
+                "url": "https://api.github.com/repos/cakephp/chronos/zipball/a40b330d84a74975119c10a4e890391e0611e5ef",
+                "reference": "a40b330d84a74975119c10a4e890391e0611e5ef",
                 "shasum": ""
             },
             "require": {
@@ -299,20 +393,20 @@
                 "datetime",
                 "time"
             ],
-            "time": "2016-06-15 06:26:37"
+            "time": "2016-07-14 05:16:14"
         },
         {
             "name": "cakephp/migrations",
-            "version": "1.6.2",
+            "version": "1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/migrations.git",
-                "reference": "71850bdce921998c4b6aebadbb8a7b4a0a5864a8"
+                "reference": "b683daebb6d0f0ea41546b14f8a9ea591cebedfd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/migrations/zipball/71850bdce921998c4b6aebadbb8a7b4a0a5864a8",
-                "reference": "71850bdce921998c4b6aebadbb8a7b4a0a5864a8",
+                "url": "https://api.github.com/repos/cakephp/migrations/zipball/b683daebb6d0f0ea41546b14f8a9ea591cebedfd",
+                "reference": "b683daebb6d0f0ea41546b14f8a9ea591cebedfd",
                 "shasum": ""
             },
             "require": {
@@ -349,7 +443,7 @@
                 "cakephp",
                 "migrations"
             ],
-            "time": "2016-06-14 21:01:47"
+            "time": "2016-06-23 17:18:29"
         },
         {
             "name": "cakephp/plugin-installer",
@@ -392,16 +486,77 @@
             "time": "2016-04-28 03:01:34"
         },
         {
+            "name": "dompdf/dompdf",
+            "version": "v0.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dompdf/dompdf.git",
+                "reference": "5c98652b1a5beb7e3cc8ec35419b2828dd63ab14"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/5c98652b1a5beb7e3cc8ec35419b2828dd63ab14",
+                "reference": "5c98652b1a5beb7e3cc8ec35419b2828dd63ab14",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-gd": "*",
+                "ext-mbstring": "*",
+                "phenx/php-font-lib": "0.4.*",
+                "phenx/php-svg-lib": "0.1.*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dompdf\\": "src/"
+                },
+                "classmap": [
+                    "lib/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Ménager",
+                    "email": "fabien.menager@gmail.com"
+                },
+                {
+                    "name": "Brian Sweeney",
+                    "email": "eclecticgeek@gmail.com"
+                },
+                {
+                    "name": "Gabriel Bull",
+                    "email": "me@gabrielbull.com"
+                }
+            ],
+            "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
+            "homepage": "https://github.com/dompdf/dompdf",
+            "time": "2016-05-11 00:36:29"
+        },
+        {
             "name": "facebook/php-sdk-v4",
             "version": "4.0.23",
             "source": {
                 "type": "git",
-                "url": "https://github.com/facebook/facebook-php-sdk-v4.git",
+                "url": "https://github.com/facebook/php-graph-sdk.git",
                 "reference": "c82611e05596622c9bd7abfa1cea1512d885c95e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/facebook-php-sdk-v4/zipball/c82611e05596622c9bd7abfa1cea1512d885c95e",
+                "url": "https://api.github.com/repos/facebook/php-graph-sdk/zipball/c82611e05596622c9bd7abfa1cea1512d885c95e",
                 "reference": "c82611e05596622c9bd7abfa1cea1512d885c95e",
                 "shasum": ""
             },
@@ -438,20 +593,105 @@
                 "facebook",
                 "sdk"
             ],
+            "abandoned": "facebook/graph-sdk",
             "time": "2015-04-03 20:31:47"
         },
         {
-            "name": "josegonzalez/cakephp-upload",
-            "version": "3.4.0",
+            "name": "friendsofcake/cakepdf",
+            "version": "3.2.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/josegonzalez/cakephp-upload.git",
-                "reference": "c2985689318a1b01bc117c2f55fd67ff9dafa2a2"
+                "url": "https://github.com/FriendsOfCake/CakePdf.git",
+                "reference": "edc55dc2dabbd94340584f7238062bfbf2e43d39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/josegonzalez/cakephp-upload/zipball/c2985689318a1b01bc117c2f55fd67ff9dafa2a2",
-                "reference": "c2985689318a1b01bc117c2f55fd67ff9dafa2a2",
+                "url": "https://api.github.com/repos/FriendsOfCake/CakePdf/zipball/edc55dc2dabbd94340584f7238062bfbf2e43d39",
+                "reference": "edc55dc2dabbd94340584f7238062bfbf2e43d39",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "~3.1",
+                "php": ">=5.4.16"
+            },
+            "replace": {
+                "ceeram/cakepdf": "self.version"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "suggest": {
+                "dompdf/dompdf": "If you wish to use the DomPdf engine",
+                "mpdf/mpdf": "If you wish to use the Mpdf engine",
+                "tecnick.com/tcpdf": "If you wish to use the Tcpdf engine"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "CakePdf\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "CakePHP plugin for creating and/or rendering Pdfs, several Pdf engines supported.",
+            "homepage": "http://github.com/friendsofcake/CakePdf",
+            "time": "2016-08-22 21:51:12"
+        },
+        {
+            "name": "hashmode/cakephp-jquery-file-upload",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hashmode/cakephp-jquery-file-upload.git",
+                "reference": "56c828c10679d2c94911eb8e57b1418dfa20bd08"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hashmode/cakephp-jquery-file-upload/zipball/56c828c10679d2c94911eb8e57b1418dfa20bd08",
+                "reference": "56c828c10679d2c94911eb8e57b1418dfa20bd08",
+                "shasum": ""
+            },
+            "require": {
+                "blueimp/jquery-file-upload": "~9.0",
+                "cakephp/cakephp": "~3.0"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "CakephpJqueryFileUpload\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "hashmode"
+                }
+            ],
+            "description": "Cakephp 3.x Jquery File Upload",
+            "keywords": [
+                "cakephp",
+                "file-upload",
+                "jquery"
+            ],
+            "time": "2016-08-02 08:36:45"
+        },
+        {
+            "name": "josegonzalez/cakephp-upload",
+            "version": "3.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/josegonzalez/cakephp-upload.git",
+                "reference": "53f96756c087934e27f7a0fe1d55d8d7b4c661a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/josegonzalez/cakephp-upload/zipball/53f96756c087934e27f7a0fe1d55d8d7b4c661a6",
+                "reference": "53f96756c087934e27f7a0fe1d55d8d7b4c661a6",
                 "shasum": ""
             },
             "require": {
@@ -492,24 +732,24 @@
                 "orm",
                 "upload"
             ],
-            "time": "2016-03-26 21:42:22"
+            "time": "2016-09-13 09:35:57"
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.24",
+            "version": "1.0.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "9aca859a303fdca30370f42b8c611d9cf0dedf4b"
+                "reference": "1b5c4a0031697f46e779a9d1b309c2e1b24daeab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/9aca859a303fdca30370f42b8c611d9cf0dedf4b",
-                "reference": "9aca859a303fdca30370f42b8c611d9cf0dedf4b",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/1b5c4a0031697f46e779a9d1b309c2e1b24daeab",
+                "reference": "1b5c4a0031697f46e779a9d1b309c2e1b24daeab",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0"
+                "php": ">=5.5.9"
             },
             "conflict": {
                 "league/flysystem-sftp": "<1.0.6"
@@ -518,7 +758,7 @@
                 "ext-fileinfo": "*",
                 "mockery/mockery": "~0.9",
                 "phpspec/phpspec": "^2.2",
-                "phpunit/phpunit": "~4.8 || ~5.0"
+                "phpunit/phpunit": "~4.8"
             },
             "suggest": {
                 "ext-fileinfo": "Required for MimeType",
@@ -575,7 +815,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2016-06-03 19:11:39"
+            "time": "2016-10-19 20:38:46"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -630,6 +870,124 @@
                 "php mobile detect"
             ],
             "time": "2016-04-24 09:47:16"
+        },
+        {
+            "name": "phenx/php-font-lib",
+            "version": "0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PhenX/php-font-lib.git",
+                "reference": "b8af0cacdc3cbf1e41a586fcb78f506f4121a088"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PhenX/php-font-lib/zipball/b8af0cacdc3cbf1e41a586fcb78f506f4121a088",
+                "reference": "b8af0cacdc3cbf1e41a586fcb78f506f4121a088",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "FontLib\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Ménager",
+                    "email": "fabien.menager@gmail.com"
+                }
+            ],
+            "description": "A library to read, parse, export and make subsets of different types of font files.",
+            "homepage": "https://github.com/PhenX/php-font-lib",
+            "time": "2015-05-06 20:02:39"
+        },
+        {
+            "name": "phenx/php-svg-lib",
+            "version": "0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PhenX/php-svg-lib.git",
+                "reference": "b419766515b3426c6da74b0e29e93d71c4f17099"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PhenX/php-svg-lib/zipball/b419766515b3426c6da74b0e29e93d71c4f17099",
+                "reference": "b419766515b3426c6da74b0e29e93d71c4f17099",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Svg\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Ménager",
+                    "email": "fabien.menager@gmail.com"
+                }
+            ],
+            "description": "A library to read, parse and export to PDF SVG files.",
+            "homepage": "https://github.com/PhenX/php-svg-lib",
+            "time": "2015-05-06 18:49:49"
+        },
+        {
+            "name": "psr/http-message",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-message.git",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Message\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP messages",
+            "homepage": "https://github.com/php-fig/http-message",
+            "keywords": [
+                "http",
+                "http-message",
+                "psr",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "time": "2016-08-06 14:39:51"
         },
         {
             "name": "psr/log",
@@ -732,16 +1090,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v3.1.1",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "048dc47e07f92333203c3b7045868bbc864fc40e"
+                "reference": "949e7e846743a7f9e46dc50eb639d5fde1f53341"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/048dc47e07f92333203c3b7045868bbc864fc40e",
-                "reference": "048dc47e07f92333203c3b7045868bbc864fc40e",
+                "url": "https://api.github.com/repos/symfony/config/zipball/949e7e846743a7f9e46dc50eb639d5fde1f53341",
+                "reference": "949e7e846743a7f9e46dc50eb639d5fde1f53341",
                 "shasum": ""
             },
             "require": {
@@ -781,7 +1139,7 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2016-05-20 11:48:17"
+            "time": "2016-09-25 08:27:07"
         },
         {
             "name": "symfony/console",
@@ -845,16 +1203,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v3.1.1",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "5751e80d6f94b7c018f338a4a7be0b700d6f3058"
+                "reference": "682fd8fdb3135fdf05fc496a01579ccf6c85c0e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/5751e80d6f94b7c018f338a4a7be0b700d6f3058",
-                "reference": "5751e80d6f94b7c018f338a4a7be0b700d6f3058",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/682fd8fdb3135fdf05fc496a01579ccf6c85c0e5",
+                "reference": "682fd8fdb3135fdf05fc496a01579ccf6c85c0e5",
                 "shasum": ""
             },
             "require": {
@@ -890,7 +1248,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2016-04-12 18:27:47"
+            "time": "2016-09-14 00:18:46"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -953,16 +1311,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.1.1",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "c5a7e7fc273c758b92b85dcb9c46149ccda89623"
+                "reference": "368b9738d4033c8b93454cb0dbd45d305135a6d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/c5a7e7fc273c758b92b85dcb9c46149ccda89623",
-                "reference": "c5a7e7fc273c758b92b85dcb9c46149ccda89623",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/368b9738d4033c8b93454cb0dbd45d305135a6d3",
+                "reference": "368b9738d4033c8b93454cb0dbd45d305135a6d3",
                 "shasum": ""
             },
             "require": {
@@ -998,30 +1356,195 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-06-14 11:18:07"
+            "time": "2016-09-25 08:27:07"
+        },
+        {
+            "name": "tecnickcom/tcpdf",
+            "version": "6.2.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tecnickcom/TCPDF.git",
+                "reference": "2f732eaa91b5665274689b1d40b285a7bacdc37f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/2f732eaa91b5665274689b1d40b285a7bacdc37f",
+                "reference": "2f732eaa91b5665274689b1d40b285a7bacdc37f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "fonts",
+                    "config",
+                    "include",
+                    "tcpdf.php",
+                    "tcpdf_parser.php",
+                    "tcpdf_import.php",
+                    "tcpdf_barcodes_1d.php",
+                    "tcpdf_barcodes_2d.php",
+                    "include/tcpdf_colors.php",
+                    "include/tcpdf_filters.php",
+                    "include/tcpdf_font_data.php",
+                    "include/tcpdf_fonts.php",
+                    "include/tcpdf_images.php",
+                    "include/tcpdf_static.php",
+                    "include/barcodes/datamatrix.php",
+                    "include/barcodes/pdf417.php",
+                    "include/barcodes/qrcode.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPLv3"
+            ],
+            "authors": [
+                {
+                    "name": "Nicola Asuni",
+                    "email": "info@tecnick.com",
+                    "homepage": "http://nicolaasuni.tecnick.com"
+                }
+            ],
+            "description": "TCPDF is a PHP class for generating PDF documents and barcodes.",
+            "homepage": "http://www.tcpdf.org/",
+            "keywords": [
+                "PDFD32000-2008",
+                "TCPDF",
+                "barcodes",
+                "datamatrix",
+                "pdf",
+                "pdf417",
+                "qrcode"
+            ],
+            "time": "2015-09-12 10:08:34"
+        },
+        {
+            "name": "wemersonjanuario/wkhtmltopdf-windows",
+            "version": "0.12.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wemersonjanuario/wkhtmltopdf-windows.git",
+                "reference": "90fcd3487cad5931287742113c449b926e9e48d8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wemersonjanuario/wkhtmltopdf-windows/zipball/90fcd3487cad5931287742113c449b926e9e48d8",
+                "reference": "90fcd3487cad5931287742113c449b926e9e48d8",
+                "shasum": ""
+            },
+            "suggest": {
+                "h4cc/wkhtmltopdf-amd64": "*",
+                "h4cc/wkhtmltopdf-i386": "*",
+                "wemersonjanuario/laravelpdf": "1.0.*"
+            },
+            "bin": [
+                "bin/32bit/wkhtmltopdf.exe",
+                "bin/32bit/wkhtmltoimage.exe",
+                "bin/64bit/wkhtmltopdf.exe",
+                "bin/64bit/wkhtmltoimage.exe"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL Version 3"
+            ],
+            "authors": [
+                {
+                    "name": "Wemerson Januario",
+                    "email": "wemerson.januario@gmail.com",
+                    "homepage": "http://wemersonjanuario.com.br"
+                }
+            ],
+            "description": "Convert html to pdf using webkit (qtwebkit). Static linked windows binary for 32 bit and 64 bit systems.",
+            "homepage": "http://wkhtmltopdf.org/",
+            "keywords": [
+                "binary",
+                "convert",
+                "htmltoimage",
+                "htmltopdf",
+                "pdf",
+                "snapshot",
+                "thumbnail",
+                "wkhtmltopdf"
+            ],
+            "time": "2015-06-30 20:19:22"
+        },
+        {
+            "name": "zendframework/zend-diactoros",
+            "version": "1.3.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-diactoros.git",
+                "reference": "969ff423d3f201da3ff718a5831bb999bb0669b0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/969ff423d3f201da3ff718a5831bb999bb0669b0",
+                "reference": "969ff423d3f201da3ff718a5831bb999bb0669b0",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4 || ^7.0",
+                "psr/http-message": "~1.0"
+            },
+            "provide": {
+                "psr/http-message-implementation": "~1.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.6 || ^5.5",
+                "squizlabs/php_codesniffer": "^2.3.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3-dev",
+                    "dev-develop": "1.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Diactoros\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "description": "PSR HTTP Message implementations",
+            "homepage": "https://github.com/zendframework/zend-diactoros",
+            "keywords": [
+                "http",
+                "psr",
+                "psr-7"
+            ],
+            "time": "2016-10-11 13:25:21"
         }
     ],
     "packages-dev": [
         {
             "name": "cakephp/bake",
-            "version": "1.2.4",
+            "version": "1.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/bake.git",
-                "reference": "a98e988b154b30e20a5cfe917dcda5ae918bec85"
+                "reference": "dfa20d4113253dc02e6fccd2115a8ba3f8cb51b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/bake/zipball/a98e988b154b30e20a5cfe917dcda5ae918bec85",
-                "reference": "a98e988b154b30e20a5cfe917dcda5ae918bec85",
+                "url": "https://api.github.com/repos/cakephp/bake/zipball/dfa20d4113253dc02e6fccd2115a8ba3f8cb51b8",
+                "reference": "dfa20d4113253dc02e6fccd2115a8ba3f8cb51b8",
                 "shasum": ""
             },
             "require": {
                 "cakephp/cakephp": ">=3.2.0",
+                "cakephp/plugin-installer": "*",
                 "php": ">=5.5.9"
             },
             "require-dev": {
-                "cakephp/cakephp-codesniffer": "dev-master",
+                "cakephp/cakephp-codesniffer": "^2.1",
                 "phpunit/phpunit": "*"
             },
             "type": "cakephp-plugin",
@@ -1046,24 +1569,25 @@
                 "bake",
                 "cakephp"
             ],
-            "time": "2016-05-05 01:13:34"
+            "time": "2016-09-03 13:29:04"
         },
         {
             "name": "cakephp/debug_kit",
-            "version": "3.2.9",
+            "version": "3.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/debug_kit.git",
-                "reference": "5c351136576b05a386eb2bbb02267529123edf7b"
+                "reference": "0f893a06b1208d49d92c0537d43f5e512bfd3738"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/5c351136576b05a386eb2bbb02267529123edf7b",
-                "reference": "5c351136576b05a386eb2bbb02267529123edf7b",
+                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/0f893a06b1208d49d92c0537d43f5e512bfd3738",
+                "reference": "0f893a06b1208d49d92c0537d43f5e512bfd3738",
                 "shasum": ""
             },
             "require": {
                 "cakephp/cakephp": ">=3.1.0 <4.0",
+                "cakephp/plugin-installer": "*",
                 "jdorn/sql-formatter": "~1.2"
             },
             "require-dev": {
@@ -1102,7 +1626,7 @@
                 "debug",
                 "kit"
             ],
-            "time": "2016-05-28 15:47:46"
+            "time": "2016-10-24 02:10:49"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1276,16 +1800,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v2.1.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "47b254ea51f1d6d5dc04b9b299e88346bf2369e3"
+                "reference": "4dd659edadffdc2143e4753df655d866dbfeedf0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/47b254ea51f1d6d5dc04b9b299e88346bf2369e3",
-                "reference": "47b254ea51f1d6d5dc04b9b299e88346bf2369e3",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/4dd659edadffdc2143e4753df655d866dbfeedf0",
+                "reference": "4dd659edadffdc2143e4753df655d866dbfeedf0",
                 "shasum": ""
             },
             "require": {
@@ -1323,7 +1847,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2016-04-19 13:41:41"
+            "time": "2016-09-16 12:04:44"
         },
         {
             "name": "psy/psysh",
@@ -1399,16 +1923,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v3.1.1",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "436195b421e8c0493ca3e390c1fbecd8ee08c546"
+                "reference": "70bfe927b86ba9999aeebd829715b0bb2cd39a10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/436195b421e8c0493ca3e390c1fbecd8ee08c546",
-                "reference": "436195b421e8c0493ca3e390c1fbecd8ee08c546",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/70bfe927b86ba9999aeebd829715b0bb2cd39a10",
+                "reference": "70bfe927b86ba9999aeebd829715b0bb2cd39a10",
                 "shasum": ""
             },
             "require": {
@@ -1458,7 +1982,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2016-05-24 10:06:56"
+            "time": "2016-09-29 14:13:09"
         }
     ],
     "aliases": [],

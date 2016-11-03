@@ -189,11 +189,8 @@
                                     </h3>
                                   </li>
                                   <li class="buy-now">
-                                      <?php echo $this->Form->create(null, [
-    'url' => ['controller' => 'Vouchers', 'action' => 'add']
-]); ?>
-                                      <?php echo $this->Form->input('deals_id', ['type' => 'hidden', 'value' => h($deal->id)]);?>
-                                    
+                                      <?php echo $this->Form->create(null, ['url' => ['controller' => 'Vouchers', 'action' => 'add']]); ?>
+                                      <?php echo $this->Form->input('deals_id', ['type' => 'hidden', 'value' => h($deal->id)]);?>                                    
                                       <?= $this->Form->submit('BUY NOW',array('div'=>array('class'=>'form-group'),'class' => 'btn btn-danger btn-lg btn-raised ripple-effect')) ?>
                                       <?= $this->Form->end() ?>
                                   </li>

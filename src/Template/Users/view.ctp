@@ -274,11 +274,10 @@
                                     </h1>
                                 </div>
                                 <div class="buy-now mBtm-30">
-                                    <a href="<?= "/vouchers/add/".h($deal->id) ?>" class="btn btn-danger btn-lg btn-raised ripple-effect btn-block" data-toggle="modal" data-target="#myModal">
-                                      BUY NOW
-                                      <span class="ink animate">
-                                      </span>
-                                    </a>
+                                     <?php echo $this->Form->create(null, ['url' => ['controller' => 'Vouchers', 'action' => 'add']]); ?>
+                                      <?php echo $this->Form->input('deals_id', ['type' => 'hidden', 'value' => h($deal->id)]);?>                                    
+                                      <?= $this->Form->submit('BUY NOW',array('div'=>array('class'=>'form-group'),'class' => 'btn btn-danger btn-lg btn-raised ripple-effect')) ?>
+                                      <?= $this->Form->end() ?>
                                 </div>
                                 <div class="dealAttributes">
                                     <div class="valueInfo bg-light shadow">

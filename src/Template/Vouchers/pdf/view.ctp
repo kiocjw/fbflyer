@@ -1,5 +1,5 @@
 
-<?php $path=getcwd();  $path= str_replace("webroot","",$path);?>
+<?php $path= str_replace("webroot",".",h($voucher->deal->photo_dir));?>
 
 
 <div class="container">  
@@ -9,17 +9,18 @@
             <div class="panel panel-primary coupon">          
               <div class="panel-body" align="center">
                 <div id="head">
-                <?php echo $this->Html->image($path.'/webroot/images/logo.png' , ['fullBase' => true]);?>
+                <img id="logo" src="<?='./images/logo.png'?>" alt="Logo">
+                
                 </div>
                 <br>
-                <?php echo $this->Html->image($path.h($voucher->deal->photo_dir).h($voucher->deal->photo), ['class'=>"coupon-img img-rounded", 'fullBase' => true]);?>
+                <img id="logo" src="<?=$path.h($voucher->deal->photo)?>" alt="Voucher" class="coupon-img img-rounded">
                 <br>
                 <b><?php echo $voucher->deal->title; ?></b>
                 <br>
                 <?php echo $voucher->deal->description; ?>
                 <br>
                 <br>
-                <?php echo $this->Html->image($path.'webroot\\files\\Vouchers\\'.$voucher->id.'.png' , ['fullBase' => true]);?>
+                 <img id="logo" src="<?='./files/Vouchers/'.$voucher->id.'.png'?>" alt="QRCode">
                  <br>
                 <?php echo $voucher->code;?>
                 <div id="footer">

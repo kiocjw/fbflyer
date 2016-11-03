@@ -78,10 +78,10 @@ class VouchersController extends AppController
             $this->request->data['status'] =0;
             $voucher = $this->Vouchers->patchEntity($voucher, $this->request->data);
             if ($this->Vouchers->save($voucher)) {
-                $this->Flash->success(__('The voucher has been saved.'));
+                //$this->Flash->success(__('The voucher has been saved.'));
                 $image = file_get_contents('https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl='.$code.'&chld=L|1&choe=UTF-8'); 
-                $this->Flash->success(__($voucher->id));
-                file_put_contents('files\\Vouchers\\'.$voucher->id.'.png',$image);
+                
+                file_put_contents('files/Vouchers/'.$voucher->id.'.png',$image);
                 return $this->redirect(['action' => 'view', $voucher->id, '_ext' => 'pdf']);
             } else {
                 $this->Flash->error(__('The voucher could not be saved. Please, try again.'));

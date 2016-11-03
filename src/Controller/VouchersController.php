@@ -46,18 +46,26 @@ class VouchersController extends AppController
      */
     public function view($id = null)
     {
+         
             $voucher = $this->Vouchers->get($id, [
                     'contain' => ['Deals']
                 ]);
             
-
-            $this->viewBuilder()->options([
-                'pdfConfig' => [
-                    'orientation' => 'portrait',
-                    'filename' => 'Voucher_' . $id
-                ]
-            ]);
-            $this->set('voucher', $voucher);
+            if($voucher->users_id ==$this->Auth->user('id'))
+            {
+                $this->viewBuilder()->options([
+                    'pdfConfig' => [
+                        'orientation' => 'portrait',
+                        'filename' => 'Voucher_' . $id
+                    ]
+                ]);
+            
+                $this->set('voucher', $voucher);
+            }
+            else
+            {
+                return $this->redirect(['controller' => 'users', 'action' => 'index']);
+            }
     }
 
     /**

@@ -100,6 +100,59 @@ class VouchersController extends AppController
         $this->set('_serialize', ['voucher']);
     }
 
+    public function redeem()
+    {
+        if($this->Auth->user('role')=='2')
+        {
+            if ($this->request->is('post')) {
+            
+            
+                $vouchers = $this->Vouchers->findByCode($this->request->data['code']);
+                //$vouchers = $this->Vouchers->find('all',  array('keyField' => 'id','valueField' => 'code','conditions' => array('Vouchers.Users_id' => $this->Auth->user('id'))));
+                $vouchers->matching('Deals', function ($q) {
+                    return $q->where(['Deals.Users_id' => $this->Auth->user('id')]);
+                });
+                if(!$vouchers->isEmpty())
+                {
+                   $voucher = $vouchers->first();
+                    if($voucher->status==0)
+                    {
+                        if($this->request->data['btn'] == 'Validate') 
+                        {
+                            $this->Flash->success(__("This is Valid Voucher Code."));     
+                        }
+                        elseif($this->request->data['btn'] == 'Redeem') 
+                        {
+                            $v = $this->Vouchers->get($voucher->id, [
+                                'contain' => []
+                            ]);
+
+                            $v->status=1;                             
+                            if ($this->Vouchers->save($v)) {
+                                $this->Flash->success(__("Successfully redeemed."));
+                            } else {
+                                $this->Flash->error(__('Fail to redeeem this voucher.'));
+                            }
+                        
+                        }
+                    }
+                    else
+                    {
+                        $this->Flash->error(__('Voucher had been redeemed!'));
+                    }
+            }
+                else
+                {
+                    $this->Flash->error(__('Invalid Voucher Code!'));
+                }
+            }
+        }
+        else
+        {
+            return $this->redirect(['controller' => 'users', 'action' => 'index']);
+        }
+    }
+
     /**
      * Edit method
      *

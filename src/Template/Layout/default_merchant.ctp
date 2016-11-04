@@ -187,6 +187,11 @@ $cakeDescription = 'FBFlyer';
                                             </li>
                                         </ul>
                                     </li>
+                                    <li>
+                                         <?php
+                                            echo $this->Html->link($this->Html->tag('i',"", array('class' => 'ti-home'))."Redeem", ['controller' => 'vouchers','action' => 'redeem'],array('escape'=>false));
+                                          ?>
+                                    </li>
                                 </ul>
                             </div>
                         </nav>

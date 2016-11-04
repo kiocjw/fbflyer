@@ -124,12 +124,14 @@ class VouchersController extends AppController
                         elseif($this->request->data['btn'] == 'Redeem') 
                         {
                             $v = $this->Vouchers->get($voucher->id, [
-                                'contain' => []
+                                'contain' => ['Deals']
                             ]);
 
                             $v->status=1;                             
                             if ($this->Vouchers->save($v)) {
                                 $this->Flash->success(__("Successfully redeemed."));
+                                $deal = $this->Vouchers->Deals->get($voucher->deals_id);
+                                $this->Flash->info(__($deal->title));
                             } else {
                                 $this->Flash->error(__('Fail to redeeem this voucher.'));
                             }

@@ -19,7 +19,8 @@
         "friendsofcake/CakePdf": "^3.2",
         "dompdf/dompdf": "^0.7.0",
         "tecnickcom/tcpdf": "^6.2",
-        "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3"
+        "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3",
+        "paypal/rest-api-sdk-php": "*"
     },
     "require-dev": {
         "psy/psysh": "@stable",

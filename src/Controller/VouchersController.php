@@ -5,6 +5,19 @@ use App\Controller\AppController;
 use App\View\Helper\CouponHelper;
 //use Cake\View\Helper\CouponHelper;
 
+use Cake\Mailer\Email;
+use Cake\Core\Configure;
+use PayPal\Api\Amount;
+use PayPal\Api\Details;
+use PayPal\Api\Item;
+use PayPal\Api\ItemList;
+use PayPal\Api\Payer;
+use PayPal\Api\Payment;
+use PayPal\Api\RedirectUrls;
+use PayPal\Api\Transaction;
+use PayPal\Api\ExecutePayment;
+use PayPal\Api\PaymentExecution;
+
 
 /**
  * Vouchers Controller
@@ -75,30 +88,218 @@ class VouchersController extends AppController
      */
     public function add()
     {
-        $voucher = $this->Vouchers->newEntity();
-        if ($this->request->is('post')) {
-            //$this->request->data['deals_id'] =$deals_id;
-            $this->request->data['users_id'] =$this->Auth->user('id');
-            $CouponH = new CouponHelper(new \Cake\View\View());
-            $code=$CouponH->generate(array("length"=>8, "numbers"=>True, "letters"=>True)); 
+        
+        if ($this->request->is('post')) 
+        {
             
-            $this->request->data['code'] =$code.'-'.sprintf('%04u', $this->request->data['deals_id']);
-            $this->request->data['status'] =0;
-            $voucher = $this->Vouchers->patchEntity($voucher, $this->request->data);
-            if ($this->Vouchers->save($voucher)) {
-                //$this->Flash->success(__('The voucher has been saved.'));
-                $image = file_get_contents('https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl='.$code.'&chld=L|1&choe=UTF-8'); 
-                
-                file_put_contents('files/Vouchers/'.$voucher->id.'.png',$image);
-                return $this->redirect(['action' => 'view', $voucher->id, '_ext' => 'pdf']);
-            } else {
-                $this->Flash->error(__('The voucher could not be saved. Please, try again.'));
+            $clientId = Configure::read('Paypal.clientId');
+            $clientSecret = Configure::read('Paypal.clientSecret');
+            $apiContext = getApiContext($clientId, $clientSecret);
+
+            // ### Payer
+            // A resource representing a Payer that funds a payment
+            // For paypal account payments, set payment method
+            // to 'paypal'.
+            $payer = new Payer();
+            $payer->setPaymentMethod("paypal");
+
+            // ### Itemized information
+            // (Optional) Lets you specify item wise
+            // information
+            $item1 = new Item();         
+            $itemList = new ItemList();
+            $details = new Details();
+            // ### Amount
+            // Lets you specify a payment amount.
+            // You can also specify additional details
+            // such as shipping, tax.
+            $amount = new Amount();
+            $this->loadModel('Deals');
+            $deal = $this->Deals->findById($this->request->data['deals_id']);
+          
+            if(!$deal->isEmpty())
+            {
+                    $current_deal = $deal->first();
+                    if($current_deal->status==0)
+                    {
+                         $item1->setName($current_deal->title)
+                        ->setCurrency('MYR')
+                        ->setQuantity(1)
+                        ->setSku($current_deal->id) // Similar to `item_number` in Classic API
+                        ->setPrice($current_deal->promo_price);
+
+                        $itemList->setItems(array($item1));
+
+
+                        $details->setSubtotal($current_deal->promo_price);
+                        //->setShipping(0)
+                        //->setTax(0)
+
+ 
+                        $amount->setCurrency("MYR")
+                            ->setTotal($current_deal->promo_price)
+                            ->setDetails($details);
+                    }
             }
+
+            // ### Transaction
+            // A transaction defines the contract of a
+            // payment - what is the payment for and who
+            // is fulfilling it. 
+            $transaction = new Transaction();
+            $transaction->setAmount($amount)
+                ->setItemList($itemList)
+                ->setDescription("Payment description")
+                ->setInvoiceNumber(uniqid());
+
+            // ### Redirect urls
+            // Set the urls that the buyer must be redirected to after 
+            // payment approval/ cancellation.
+            $baseUrl = getBaseUrl();
+            $baseUrl= str_replace("webroot","",$baseUrl);
+            $redirectUrls = new RedirectUrls();
+            $redirectUrls->setReturnUrl($baseUrl."vouchers/ExecutePayment?success=true")
+                ->setCancelUrl($baseUrl."vouchers/ExecutePayment?success=false");
+
+            // ### Payment
+            // A Payment Resource; create one using
+            // the above types and intent set to 'sale'
+            $payment = new Payment();
+            $payment->setIntent("sale")
+                ->setPayer($payer)
+                ->setRedirectUrls($redirectUrls)
+                ->setTransactions(array($transaction));
+
+
+            // For Sample Purposes Only.
+            $request = clone $payment;
+
+            // ### Create Payment
+            // Create a payment by calling the 'create' method
+            // passing it a valid apiContext.
+            // (See bootstrap.php for more on `ApiContext`)
+            // The return object contains the state and the
+            // url to which the buyer must be redirected to
+            // for payment approval
+            try {
+                $payment->create($apiContext);
+            } catch (Exception $ex) {
+                // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
+                $this->Flash->error(__("Created Payment Using PayPal. Please visit the URL to Approve.", "Payment", null, $request, $ex));
+                exit(1);
+            }
+
+            // ### Get redirect url
+            // The API response provides the url that you must redirect
+            // the buyer to. Retrieve the url from the $payment->getApprovalLink()
+            // method
+            $approvalUrl = $payment->getApprovalLink();
+
+            // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
+            //$this->Flash->success("Created Payment Using PayPal. Please visit the URL to Approve.", "Payment", "<a href='$approvalUrl' >$approvalUrl</a>", $request, $payment);
+
+            return $this->redirect($approvalUrl);
+            
         }
-        $deals = $this->Vouchers->Deals->find('list', ['limit' => 200]);
-        $this->set(compact('voucher', 'deals'));
-        $this->set('_serialize', ['voucher']);
+        //$deals = $this->Vouchers->Deals->find('list', ['limit' => 200]);
+        // $this->set(compact('voucher', 'deals'));
+        //$this->set('_serialize', ['voucher']);
     }
+
+
+    public function ExecutePayment()
+    {
+
+        // ### Approval Status
+        // Determine if the user approved the payment or not
+        if (isset($_GET['success']) && $_GET['success'] == 'true') {
+
+                $clientId = Configure::read('Paypal.clientId');
+                $clientSecret = Configure::read('Paypal.clientSecret');
+
+                /**
+                 * All default curl options are stored in the array inside the PayPalHttpConfig class. To make changes to those settings
+                 * for your specific environments, feel free to add them using the code shown below
+                 * Uncomment below line to override any default curl options.
+                 */
+                //PayPalHttpConfig::$defaultCurlOptions[CURLOPT_SSLVERSION] = CURL_SSLVERSION_TLSv1_2;
+
+
+                /** @var \Paypal\Rest\ApiContext $apiContext */
+                $apiContext = getApiContext($clientId, $clientSecret);
+                // Get the payment Object by passing paymentId
+                // payment id was previously stored in session in
+                // CreatePaymentUsingPayPal.php
+                $paymentId = $_GET['paymentId'];
+                $payment = Payment::get($paymentId, $apiContext);
+
+                // ### Payment Execute
+                // PaymentExecution object includes information necessary
+                // to execute a PayPal account payment.
+                // The payer_id is added to the request query parameters
+                // when the user is redirected from paypal back to your site
+                $execution = new PaymentExecution();
+                $execution->setPayerId($_GET['PayerID']);
+
+                try {
+                    // Execute the payment
+                    // (See bootstrap.php for more on `ApiContext`)
+                    $result = $payment->execute($execution, $apiContext);
+
+                    // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
+                    //$this->Flash->success("Executed Payment id: ".$payment->getId());          
+
+                    try {
+                        $payment = Payment::get($paymentId, $apiContext);
+                    } catch (Exception $ex) {
+                        // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
+                        $this->Flash->error(__("Get Payment Error: ".$ex));
+                        exit(1);
+                    }
+                } catch (Exception $ex) {
+                    // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
+                    $this->Flash->error(__("Executed Payment Error: ".$ex));
+                    exit(1);
+                }
+
+                // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
+                //$this->Flash->success(__("Get Payment id: ".$payment->getId()));
+                    
+                $transactions = $payment->getTransactions();
+                $transaction = $transactions[0];
+                $itemList = $transaction->getItemList();
+                $items = $itemList->getItems();
+                $item = $items[0];
+
+                $deals_id=$item->sku;
+                $CouponH = new CouponHelper(new \Cake\View\View());
+                $code=$CouponH->generate(array("length"=>8, "numbers"=>True, "letters"=>True)); 
+            
+                $voucher = $this->Vouchers->newEntity();
+                $voucher->code = $code.'-'.sprintf('%04u', $deals_id);
+                $voucher->status=0;
+                $voucher->users_id=$this->Auth->user('id');
+                $voucher->deals_id=$deals_id;
+                if ($this->Vouchers->save($voucher)) {
+                    //$this->Flash->success(__('The voucher has been saved.'));
+                    $image = file_get_contents('https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl='.$code.'&chld=L|1&choe=UTF-8'); 
+                
+                    file_put_contents('files/Vouchers/'.$voucher->id.'.png',$image);
+                    return $this->redirect(['action' => 'view', $voucher->id, '_ext' => 'pdf']);
+                } else {
+                    $this->Flash->error(__('The voucher could not be saved. Please, try again.'));
+                }
+                //return $payment;
+            } 
+            else 
+            {
+                // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
+                $this->Flash->error(__("User Cancelled the Approval"));
+                return $this->redirect(['controller' => 'users', 'action' => 'index']);
+                //exit;
+            }
+    }
+
 
     public function redeem()
     {

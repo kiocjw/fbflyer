@@ -17,6 +17,8 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Api\ExecutePayment;
 use PayPal\Api\PaymentExecution;
+use Cake\Routing\RouteBuilder;
+use Cake\Routing\Router;
 
 
 /**
@@ -26,13 +28,11 @@ use PayPal\Api\PaymentExecution;
  */
 class VouchersController extends AppController
 {
-
      public function initialize()
     {
         parent::initialize();
         $this->loadComponent('RequestHandler');
     }
-
 
     /**
      * Index method
@@ -86,14 +86,16 @@ class VouchersController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
+
     public function add()
     {
         
         if ($this->request->is('post')) 
         {
             
-            $clientId = Configure::read('Paypal.clientId');
-            $clientSecret = Configure::read('Paypal.clientSecret');
+            $clientId = Configure::read('PayPal.clientId');
+            $clientSecret = Configure::read('PayPal.clientSecret');
+
             $apiContext = getApiContext($clientId, $clientSecret);
 
             // ### Payer
@@ -214,8 +216,8 @@ class VouchersController extends AppController
         // Determine if the user approved the payment or not
         if (isset($_GET['success']) && $_GET['success'] == 'true') {
 
-                $clientId = Configure::read('Paypal.clientId');
-                $clientSecret = Configure::read('Paypal.clientSecret');
+                $clientId = Configure::read('PayPal.clientId');
+                $clientSecret = Configure::read('PayPal.clientSecret');
 
                 /**
                  * All default curl options are stored in the array inside the PayPalHttpConfig class. To make changes to those settings
@@ -285,6 +287,9 @@ class VouchersController extends AppController
                     $image = file_get_contents('https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl='.$code.'&chld=L|1&choe=UTF-8'); 
                 
                     file_put_contents('files/Vouchers/'.$voucher->id.'.png',$image);
+                    $baseUrl = getBaseUrl();
+                    $baseUrl= str_replace("/webroot","",$baseUrl);
+                    $this->emailuservoucher($this->Auth->user('username').$this->Auth->user('email'),'kiocjw@gmail.com', $voucher->status, $baseUrl.Router::url(['action' => 'view', $voucher->id, '_ext' => 'pdf']));
                     return $this->redirect(['action' => 'view', $voucher->id, '_ext' => 'pdf']);
                 } else {
                     $this->Flash->error(__('The voucher could not be saved. Please, try again.'));
@@ -301,6 +306,28 @@ class VouchersController extends AppController
     }
 
 
+    public function emailuservoucher($username =null, $emailaddress= null, $status = null, $link = null){
+        try 
+        {
+            $strStatus="Success";
+            $email =  new Email('default');
+            $email->template('voucher');
+            
+            $email->emailFormat('html')
+                  ->from(['noreply@fbflyer.com' => 'NO REPLY FBFLYER'])
+                  ->to($emailaddress)
+                  ->subject(sprintf('[%s] Thank you for purchase from FBFlyer',$strStatus))
+                  ->viewVars(['voucher' => ['username' => $username, 'link' => $link]])
+                  ->send();
+                   //$this->Flash->success(__('Email has been sent.'));
+
+        } 
+        catch (Exception $e) {
+
+            $this->Flash->error('Exception : '+  $e->getMessage()+"\n");
+
+        }
+    }
     public function redeem()
     {
         if($this->Auth->user('role')=='2')

@@ -193,13 +193,8 @@ Request::addDetector('tablet', function ($request) {
 Plugin::load('Migrations');
 Plugin::load('AkkaFacebook', ['bootstrap' => false, 'routes' => true]);
 Plugin::load('CakePdf', ['bootstrap' => true, 'routes' => true]);
-Plugin::load('Paypal', ['bootstrap' => true, 'routes' => false]);
+Plugin::load('PayPal', ['bootstrap' => true, 'routes' => false]);
 Plugin::loadAll();
-
-Configure::write('Paypal', [
-   'clientId' => 'AWMT4htQmNdeg4npIYipAaO1H6QFl1afPVGi-vvCK6JLbE1MFx2HemnoIntMaxEnZx_CVDemR0JXL7t9',
-   'clientSecret' => 'EMIalJRJi41zs5rSzK9AJ5VScfryHqo8EvZcRKsFpDAIO34Oih9EHApAMrR2QvfzbxooBUML3gJCAHcK'
-]);
 
 Configure::write('CakePdf', [
     'engine' => 'CakePdf.DomPdf',

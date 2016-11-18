@@ -289,7 +289,7 @@ class VouchersController extends AppController
                     file_put_contents('files/Vouchers/'.$voucher->id.'.png',$image);
                     $baseUrl = getBaseUrl();
                     $baseUrl= str_replace("/webroot","",$baseUrl);
-                    $this->emailuservoucher($this->Auth->user('username').$this->Auth->user('email'),'kiocjw@gmail.com', $voucher->status, $baseUrl.Router::url(['action' => 'view', $voucher->id, '_ext' => 'pdf']));
+                    $this->emailuservoucher($this->Auth->user('username'), $this->Auth->user('email'), $voucher->status, $baseUrl.Router::url(['action' => 'view', $voucher->id, '_ext' => 'pdf']));
                     return $this->redirect(['action' => 'view', $voucher->id, '_ext' => 'pdf']);
                 } else {
                     $this->Flash->error(__('The voucher could not be saved. Please, try again.'));

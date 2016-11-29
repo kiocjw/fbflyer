@@ -19,6 +19,7 @@ use PayPal\Api\ExecutePayment;
 use PayPal\Api\PaymentExecution;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
+use Cake\Validation\Validator;
 
 
 /**
@@ -53,9 +54,43 @@ class VouchersController extends AppController
 
     public function payout()
     {
+
       if ($this->request->is('post')) 
       {
-           
+      $validators = new Validator();
+      $validators
+            ->requirePresence('year')
+            ->notEmpty('year', 'Start Date must be filled.')
+            ->requirePresence('month')
+            ->notEmpty('month', 'Start Date must be filled.')
+            ->requirePresence('day')
+            ->notEmpty('day', 'Start Date must be filled.')
+            ->requirePresence('hour')
+            ->notEmpty('hour', 'Start Date must be filled.')
+            ->requirePresence('minute')
+            ->notEmpty('minute', 'Start Date must be filled.');
+      $validatore = new Validator();
+      $validatore
+            ->requirePresence('year')
+            ->notEmpty('year', 'End Date must be filled.')
+            ->requirePresence('month')
+            ->notEmpty('month', 'End Date must be filled.')
+            ->requirePresence('day')
+            ->notEmpty('day', 'End Date must be filled.')
+            ->requirePresence('hour')
+            ->notEmpty('hour', 'End Date must be filled.')
+            ->requirePresence('minute')
+            ->notEmpty('minute', 'End Date must be filled.');
+      $validatorm = new Validator();
+      $validatorm
+            ->requirePresence('_ids')
+            ->notEmpty('_ids', 'Merchant(s) must be selected.');
+
+      $errors1 = $validators->errors($this->request->data['Start_Date']);
+      $errors2 = $validatore->errors($this->request->data['End_Date']);
+      $errors3 = $validatorm->errors($this->request->data['merchants']);
+      if (empty($errors) && empty($errors2) && empty($errors3))
+      {
            //pr($this->request->data);
            //pr($this->request->data['Start_Date']);
            //pr($this->request->data['End_Date']);
@@ -69,9 +104,51 @@ class VouchersController extends AppController
             $vouchers = $this->paginate($this->Vouchers);
             //$this->requestAction(array('action' => 'payoutreport', '_ext' => 'pdf'),$this->request->data);
             return $this->redirect(array('action' => 'payoutreport', '_ext' => 'pdf','pass' => $this->request->data));
-        }
-        $merchants = $this->Vouchers->Deals->Users->Companies->find('list',  array('keyField' => 'users_id','valueField' => 'company_name'));
-        $this->set(compact('merchants'));
+      }
+      else
+      {
+                $error_msg = [];
+                foreach( $errors1 as $errors){
+                    if(is_array($errors)){
+                        foreach($errors as $error){
+                            $error_msg[]    =   $error;
+                        }
+                    }else{
+                        $error_msg[]    =   $errors;
+                    }
+                }
+
+                foreach( $errors2 as $errors){
+                    if(is_array($errors)){
+                        foreach($errors as $error){
+                            $error_msg[]    =   $error;
+                        }
+                    }else{
+                        $error_msg[]    =   $errors;
+                    }
+                }
+
+                foreach( $errors3 as $errors){
+                    if(is_array($errors)){
+                        foreach($errors as $error){
+                            $error_msg[]    =   $error;
+                        }
+                    }else{
+                        $error_msg[]    =   $errors;
+                    }
+                }
+
+                if(!empty($error_msg)){
+                    $this->Flash->error(__("Error(s):<br>".implode("<br>", $error_msg))
+                    );
+                }
+            
+      }
+        
+      }
+      
+      $merchants = $this->Vouchers->Deals->Users->Companies->find('list',  array('keyField' => 'users_id','valueField' => 'company_name'));
+      $this->set(compact('merchants'));
     }
 
     public function payoutreport()

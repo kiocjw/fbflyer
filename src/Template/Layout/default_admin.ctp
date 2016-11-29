@@ -214,6 +214,11 @@ $cakeDescription = 'FBFlyer';
 
                                         </ul>
                                     </li>
+                                    <li>
+                                         <?php
+                                            echo $this->Html->link($this->Html->tag('i',"", array('class' => 'ti-tag'))."Payout", ['controller' => 'vouchers','action' => 'payout'],array('escape'=>false));
+                                          ?>
+                                    </li>
                                 </ul>
                             </div>
                         </nav>

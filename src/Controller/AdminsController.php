@@ -116,7 +116,7 @@ class AdminsController extends AppController
             if ($user) 
             {
                 $this->Auth->setUser($user);
-                return $this->redirect(['controller' => 'Users', 'action' => 'indexadmin']);
+                return $this->redirect(['controller' => 'users', 'action' => 'indexadmin']);
                 //return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('Your username or password is incorrect.');

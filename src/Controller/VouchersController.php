@@ -45,9 +45,81 @@ class VouchersController extends AppController
             'contain' => ['Deals']
         ];
         $vouchers = $this->paginate($this->Vouchers);
+                
 
         $this->set(compact('vouchers'));
         $this->set('_serialize', ['vouchers']);
+    }
+
+    public function payout()
+    {
+      if ($this->request->is('post')) 
+      {
+           
+           //pr($this->request->data);
+           //pr($this->request->data['Start_Date']);
+           //pr($this->request->data['End_Date']);
+           //pr($this->request->data['merchants']);
+           //$start_date_array= $this->request->data['Start_Date'];
+           //$end_date_array=$this->request->data['End_Date'];
+           //$merchants_array=$this->request->data['merchants'];
+           $this->paginate = [
+            'contain' => ['Deals']
+            ];
+            $vouchers = $this->paginate($this->Vouchers);
+            //$this->requestAction(array('action' => 'payoutreport', '_ext' => 'pdf'),$this->request->data);
+            return $this->redirect(array('action' => 'payoutreport', '_ext' => 'pdf','pass' => $this->request->data));
+        }
+        $merchants = $this->Vouchers->Deals->Users->Companies->find('list',  array('keyField' => 'users_id','valueField' => 'company_name'));
+        $this->set(compact('merchants'));
+    }
+
+    public function payoutreport()
+    {
+        if($this->Auth->user('role')=='1')
+        {
+            //pr($this->request->query['pass']);
+            $start_date_array= $this->request->query['pass']['Start_Date'];
+            $end_date_array=$this->request->query['pass']['End_Date'];
+            $merchants_array=$this->request->query['pass']['merchants']['_ids'];
+            //pr($merchants_array);
+            $start_date = $start_date_array['year'] . '-' .$start_date_array['month'] . '-' . $start_date_array['day'].' ' . $start_date_array['hour'].  ':' . $start_date_array['minute']. ':00' ;
+            $end_date = $end_date_array['year'] . '-' .$end_date_array['month'] . '-' . $end_date_array['day'].' ' . $end_date_array['hour'].  ':' . $end_date_array['minute']. ':00' ;
+          
+            $conditions = array(
+            'conditions' => array(
+                            array('Vouchers.created <= ' => $end_date,
+                                  'Vouchers.created >= ' => $start_date,
+                                  'Vouchers.status =' => 1,
+                                  "Deals.users_id IN" => $merchants_array
+                                 )
+                ));
+
+            $vouchers= $this->Vouchers->find('all', $conditions)->contain([
+             'Deals',
+            ]);
+    
+            if(true)
+            {
+                $this->viewBuilder()->options([
+                    'pdfConfig' => [
+                        'orientation' => 'portrait',
+                        'filename' => 'Payout Report'
+                    ]
+                ]);
+            
+                $this->set('vouchers', $vouchers);
+                $this->set('title',"Payout Report of ".$start_date." till ".$end_date);
+            }
+            else
+            {
+                return $this->redirect(['controller' => 'users', 'action' => 'index']);
+            }
+        }
+        else
+        {
+            return $this->redirect(['controller' => 'admins','action' => 'login']);
+        }
     }
 
     /**
@@ -64,7 +136,7 @@ class VouchersController extends AppController
                     'contain' => ['Deals']
                 ]);
             
-            if($voucher->users_id ==$this->Auth->user('id'))
+            if($voucher->users_id ==$this->Auth->user('id') || $this->Auth->user('role')=='1')
             {
                 $this->viewBuilder()->options([
                     'pdfConfig' => [
@@ -74,6 +146,7 @@ class VouchersController extends AppController
                 ]);
             
                 $this->set('voucher', $voucher);
+                //$this->set('title',"Voucher");
             }
             else
             {
@@ -208,7 +281,6 @@ class VouchersController extends AppController
         //$this->set('_serialize', ['voucher']);
     }
 
-
     public function ExecutePayment()
     {
 
@@ -305,7 +377,6 @@ class VouchersController extends AppController
             }
     }
 
-
     public function emailuservoucher($username =null, $emailaddress= null, $status = null, $link = null){
         try 
         {
@@ -328,6 +399,7 @@ class VouchersController extends AppController
 
         }
     }
+
     public function redeem()
     {
         if($this->Auth->user('role')=='2')

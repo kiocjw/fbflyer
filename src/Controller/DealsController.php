@@ -53,25 +53,32 @@ class DealsController extends AppController
      */
     public function add()
     {
-        $deal = $this->Deals->newEntity();
-        if ($this->request->is('post')) {
-            $this->request->data['users_id'] =$this->Auth->user('id');
-            $this->request->data['status'] =0;
-            $this->request->data['purchased_number'] =0;
-            $deal = $this->Deals->patchEntity($deal, $this->request->data);
-            if ($this->Deals->save($deal)) {
-                $this->Flash->success(__('The deal has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The deal could not be saved. Please, try again.'));
+        if($this->Auth->user('role')=='2')
+        {
+            $deal = $this->Deals->newEntity();
+            if ($this->request->is('post')) {
+                $this->request->data['users_id'] =$this->Auth->user('id');
+                $this->request->data['status'] =0;
+                $this->request->data['purchased_number'] =0;
+                $deal = $this->Deals->patchEntity($deal, $this->request->data);
+                if ($this->Deals->save($deal)) {
+                    $this->Flash->success(__('The deal has been saved.'));
+                    return $this->redirect(['action' => 'index']);
+                } else {
+                    $this->Flash->error(__('The deal could not be saved. Please, try again.'));
+                }
             }
+            $users = $this->Deals->Users->find('list', ['limit' => 200]);
+            $categories = $this->Deals->Categories->find('list', ['limit' => 200, 'valueField' => 'category']);
+            //$merchants = $this->Deals->Merchants->find('list', ['limit' => 200]);
+            $merchants = $this->Deals->Merchants->find('list',  array('keyField' => 'id','valueField' => 'company_name','conditions' => array('Merchants.Users_id' => $this->Auth->user('id'))));
+            $this->set(compact('deal', 'users','categories', 'merchants'));
+            $this->set('_serialize', ['deal']);
         }
-        $users = $this->Deals->Users->find('list', ['limit' => 200]);
-        $categories = $this->Deals->Categories->find('list', ['limit' => 200, 'valueField' => 'category']);
-        //$merchants = $this->Deals->Merchants->find('list', ['limit' => 200]);
-        $merchants = $this->Deals->Merchants->find('list',  array('keyField' => 'id','valueField' => 'company_name','conditions' => array('Merchants.Users_id' => $this->Auth->user('id'))));
-        $this->set(compact('deal', 'users','categories', 'merchants'));
-        $this->set('_serialize', ['deal']);
+        else
+        {
+            return $this->redirect(['controller' => 'users','action' => 'loginmerchant']);
+        }
     }
 
     /**

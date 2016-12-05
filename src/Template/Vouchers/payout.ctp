@@ -8,7 +8,7 @@
                     
                         <?php
                                 echo $this->Form->label('Start Date');
-                                echo $this->Form->datetime('Start Date', [
+                                echo $this->Form->date('Start Date', [
                                     'year' => [
                                         'class' => 'year-classname',
                                     ],
@@ -16,10 +16,12 @@
                                         'class' => 'month-class',
                                         'data-type' => 'month',
                                     ],
+                                    'type' => 'date',
+                                    'format' => 'Y-m-d','default' => date('Y-m-d'),
                                     'value' => !empty($item->date) ? $item->date->format('Y-m-d') : date('Y-m-d')
                                 ],array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                 echo $this->Form->label('End Date');
-                                echo $this->Form->datetime('End Date', [
+                                echo $this->Form->date('End Date', [
                                     'year' => [
                                         'class' => 'year-classname',
                                     ],
@@ -27,7 +29,9 @@
                                         'class' => 'month-class',
                                         'data-type' => 'month',
                                     ],
-                                    'value' => !empty($item->date) ? $item->date->format('Y-m-d H:i:s') : date('Y-m-d  H:i:s')
+                                    'type' => 'date',
+                                    'format' => 'Y-m-d','default' => date('Y-m-d'),
+                                    'value' => !empty($item->date) ? $item->date->format('Y-m-d') : date('Y-m-d')
                                 ],array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                 echo $this->Form->input('merchants._ids', ['options' => $merchants]);
                         ?>
@@ -39,9 +43,3 @@
         </div>
     </div>
 </section>
-
-<script type="text/javascript">
-$(function() {
-	$("#format").change(function() { $('#datepicker2').datepicker('option', {dateFormat: $(this).val()}); });
-});
-</script>

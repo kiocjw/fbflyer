@@ -64,11 +64,7 @@ class VouchersController extends AppController
             ->requirePresence('month')
             ->notEmpty('month', 'Start Date must be filled.')
             ->requirePresence('day')
-            ->notEmpty('day', 'Start Date must be filled.')
-            ->requirePresence('hour')
-            ->notEmpty('hour', 'Start Date must be filled.')
-            ->requirePresence('minute')
-            ->notEmpty('minute', 'Start Date must be filled.');
+            ->notEmpty('day', 'Start Date must be filled.');
       $validatore = new Validator();
       $validatore
             ->requirePresence('year')
@@ -76,11 +72,7 @@ class VouchersController extends AppController
             ->requirePresence('month')
             ->notEmpty('month', 'End Date must be filled.')
             ->requirePresence('day')
-            ->notEmpty('day', 'End Date must be filled.')
-            ->requirePresence('hour')
-            ->notEmpty('hour', 'End Date must be filled.')
-            ->requirePresence('minute')
-            ->notEmpty('minute', 'End Date must be filled.');
+            ->notEmpty('day', 'End Date must be filled.');
       $validatorm = new Validator();
       $validatorm
             ->requirePresence('_ids')
@@ -160,8 +152,10 @@ class VouchersController extends AppController
             $end_date_array=$this->request->query['pass']['End_Date'];
             $merchants_array=$this->request->query['pass']['merchants']['_ids'];
             //pr($merchants_array);
-            $start_date = $start_date_array['year'] . '-' .$start_date_array['month'] . '-' . $start_date_array['day'].' ' . $start_date_array['hour'].  ':' . $start_date_array['minute']. ':00' ;
-            $end_date = $end_date_array['year'] . '-' .$end_date_array['month'] . '-' . $end_date_array['day'].' ' . $end_date_array['hour'].  ':' . $end_date_array['minute']. ':00' ;
+            $start_date = $start_date_array['year'] . '-' .$start_date_array['month'] . '-' . $start_date_array['day'].' 00:00:00' ;
+            $end_date = $end_date_array['year'] . '-' .$end_date_array['month'] . '-' . $end_date_array['day'].' 23:59:59' ;
+            $start_date_title = $start_date_array['year'] . '-' .$start_date_array['month'] . '-' . $start_date_array['day'] ;
+            $end_date_title = $end_date_array['year'] . '-' .$end_date_array['month'] . '-' . $end_date_array['day'];
           
             $conditions = array(
             'conditions' => array(
@@ -173,7 +167,7 @@ class VouchersController extends AppController
                 ));
 
             $vouchers= $this->Vouchers->find('all', $conditions)->contain([
-             'Deals',
+             'Deals'=>['Users'=>['Companies']],
             ]);
     
             if(true)
@@ -186,7 +180,7 @@ class VouchersController extends AppController
                 ]);
             
                 $this->set('vouchers', $vouchers);
-                $this->set('title',"Payout Report of ".$start_date." till ".$end_date);
+                $this->set('title',"Payout Report of ".$start_date_title." till ".$end_date_title);
             }
             else
             {

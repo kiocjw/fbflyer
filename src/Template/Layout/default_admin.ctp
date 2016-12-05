@@ -161,19 +161,19 @@ $cakeDescription = 'FBFlyer';
                                         </a>
                                         <ul class="dropdown-menu" role="menu">
                                             <li>
-                                               <?php echo $this->Html->link("ALL MERCHANTS", ['controller' => 'users','action' => 'indexadmin']);?>
+                                               <?php echo $this->Html->link("ALL MERCHANTS", ['controller' => 'admins','action' => 'index']);?>
                                             </li>
                                             <li>
-                                               <?php echo $this->Html->link("PENDING MERCHANTS", ['controller' => 'users','action' => 'indexadmin',0]);?>
+                                               <?php echo $this->Html->link("PENDING MERCHANTS", ['controller' => 'admins','action' => 'index',0]);?>
                                             </li>
                                             <li>
-                                               <?php echo $this->Html->link("APPROVED MERCHANTS", ['controller' => 'users','action' => 'indexadmin',1]);?>
+                                               <?php echo $this->Html->link("APPROVED MERCHANTS", ['controller' => 'admins','action' => 'index',1]);?>
                                             </li>
                                             <li>
-                                               <?php echo $this->Html->link("REWORKED MERCHANTS", ['controller' => 'users','action' => 'indexadmin',2]);?>
+                                               <?php echo $this->Html->link("REWORKED MERCHANTS", ['controller' => 'admins','action' => 'index',2]);?>
                                             </li>
                                             <li>
-                                               <?php echo $this->Html->link("REJECTED MERCHANTS", ['controller' => 'users','action' => 'indexadmin',3]);?>
+                                               <?php echo $this->Html->link("REJECTED MERCHANTS", ['controller' => 'admins','action' => 'index',3]);?>
                                             </li>
 
                                         </ul>

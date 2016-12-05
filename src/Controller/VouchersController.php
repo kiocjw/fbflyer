@@ -57,85 +57,85 @@ class VouchersController extends AppController
 
       if ($this->request->is('post')) 
       {
-      $validators = new Validator();
-      $validators
-            ->requirePresence('year')
-            ->notEmpty('year', 'Start Date must be filled.')
-            ->requirePresence('month')
-            ->notEmpty('month', 'Start Date must be filled.')
-            ->requirePresence('day')
-            ->notEmpty('day', 'Start Date must be filled.');
-      $validatore = new Validator();
-      $validatore
-            ->requirePresence('year')
-            ->notEmpty('year', 'End Date must be filled.')
-            ->requirePresence('month')
-            ->notEmpty('month', 'End Date must be filled.')
-            ->requirePresence('day')
-            ->notEmpty('day', 'End Date must be filled.');
-      $validatorm = new Validator();
-      $validatorm
-            ->requirePresence('_ids')
-            ->notEmpty('_ids', 'Merchant(s) must be selected.');
+          $validators = new Validator();
+          $validators
+                ->requirePresence('year')
+                ->notEmpty('year', 'Start Date must be filled.')
+                ->requirePresence('month')
+                ->notEmpty('month', 'Start Date must be filled.')
+                ->requirePresence('day')
+                ->notEmpty('day', 'Start Date must be filled.');
+          $validatore = new Validator();
+          $validatore
+                ->requirePresence('year')
+                ->notEmpty('year', 'End Date must be filled.')
+                ->requirePresence('month')
+                ->notEmpty('month', 'End Date must be filled.')
+                ->requirePresence('day')
+                ->notEmpty('day', 'End Date must be filled.');
+          $validatorm = new Validator();
+          $validatorm
+                ->requirePresence('_ids')
+                ->notEmpty('_ids', 'Merchant(s) must be selected.');
 
-      $errors1 = $validators->errors($this->request->data['Start_Date']);
-      $errors2 = $validatore->errors($this->request->data['End_Date']);
-      $errors3 = $validatorm->errors($this->request->data['merchants']);
-      if (empty($errors) && empty($errors2) && empty($errors3))
-      {
-           //pr($this->request->data);
-           //pr($this->request->data['Start_Date']);
-           //pr($this->request->data['End_Date']);
-           //pr($this->request->data['merchants']);
-           //$start_date_array= $this->request->data['Start_Date'];
-           //$end_date_array=$this->request->data['End_Date'];
-           //$merchants_array=$this->request->data['merchants'];
-           $this->paginate = [
-            'contain' => ['Deals']
-            ];
-            $vouchers = $this->paginate($this->Vouchers);
-            //$this->requestAction(array('action' => 'payoutreport', '_ext' => 'pdf'),$this->request->data);
-            return $this->redirect(array('action' => 'payoutreport', '_ext' => 'pdf','pass' => $this->request->data));
-      }
-      else
-      {
-                $error_msg = [];
-                foreach( $errors1 as $errors){
-                    if(is_array($errors)){
-                        foreach($errors as $error){
-                            $error_msg[]    =   $error;
+          $errors1 = $validators->errors($this->request->data['Start_Date']);
+          $errors2 = $validatore->errors($this->request->data['End_Date']);
+          $errors3 = $validatorm->errors($this->request->data['merchants']);
+          if (empty($errors) && empty($errors2) && empty($errors3))
+          {
+               //pr($this->request->data);
+               //pr($this->request->data['Start_Date']);
+               //pr($this->request->data['End_Date']);
+               //pr($this->request->data['merchants']);
+               //$start_date_array= $this->request->data['Start_Date'];
+               //$end_date_array=$this->request->data['End_Date'];
+               //$merchants_array=$this->request->data['merchants'];
+               $this->paginate = [
+                'contain' => ['Deals']
+                ];
+                $vouchers = $this->paginate($this->Vouchers);
+                //$this->requestAction(array('action' => 'payoutreport', '_ext' => 'pdf'),$this->request->data);
+                return $this->redirect(array('action' => 'payoutreport', '_ext' => 'pdf','pass' => $this->request->data));
+          }
+          else
+          {
+                    $error_msg = [];
+                    foreach( $errors1 as $errors){
+                        if(is_array($errors)){
+                            foreach($errors as $error){
+                                $error_msg[]    =   $error;
+                            }
+                        }else{
+                            $error_msg[]    =   $errors;
                         }
-                    }else{
-                        $error_msg[]    =   $errors;
                     }
-                }
 
-                foreach( $errors2 as $errors){
-                    if(is_array($errors)){
-                        foreach($errors as $error){
-                            $error_msg[]    =   $error;
+                    foreach( $errors2 as $errors){
+                        if(is_array($errors)){
+                            foreach($errors as $error){
+                                $error_msg[]    =   $error;
+                            }
+                        }else{
+                            $error_msg[]    =   $errors;
                         }
-                    }else{
-                        $error_msg[]    =   $errors;
                     }
-                }
 
-                foreach( $errors3 as $errors){
-                    if(is_array($errors)){
-                        foreach($errors as $error){
-                            $error_msg[]    =   $error;
+                    foreach( $errors3 as $errors){
+                        if(is_array($errors)){
+                            foreach($errors as $error){
+                                $error_msg[]    =   $error;
+                            }
+                        }else{
+                            $error_msg[]    =   $errors;
                         }
-                    }else{
-                        $error_msg[]    =   $errors;
                     }
-                }
 
-                if(!empty($error_msg)){
-                    $this->Flash->error(__("Error(s):<br>".implode("<br>", $error_msg))
-                    );
-                }
+                    if(!empty($error_msg)){
+                        $this->Flash->error(__("Error(s):<br>".implode("<br>", $error_msg))
+                        );
+                    }
             
-      }
+          }
         
       }
       
@@ -184,7 +184,7 @@ class VouchersController extends AppController
             }
             else
             {
-                return $this->redirect(['controller' => 'users', 'action' => 'index']);
+                return $this->redirect(['controller' => 'admins', 'action' => 'index']);
             }
         }
         else

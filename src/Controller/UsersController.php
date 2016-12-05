@@ -33,6 +33,18 @@ class UsersController extends AppController
             $this->paginate = [
                 'contain' => ['Users']
             ];
+
+            if($this->Auth->user('role')=='1')
+            {
+                return $this->redirect(['controller' => 'admins','action' => 'index']);
+            }
+
+            if($this->Auth->user('role')=='2')
+            {
+                return $this->redirect(['controller' => 'merchants','action' => 'index']);
+            }
+
+
             #if($this->Auth->user('role')=='3')
             #{
                 $this->loadModel('Deals');
@@ -225,7 +237,7 @@ class UsersController extends AppController
                 ])) {
                     $this->emailapproveadmin($user->company['company_name'], $user['email'], $user['status'], $user['remark']);
                     $this->Flash->success(__('The user has been saved.'));
-                    return $this->redirect(['action' => 'indexadmin']);
+                    return $this->redirect(['controller' => 'admins', 'action' => 'index']);
                 } else {
                     $this->Flash->error(__('The user could not be saved. Please, try again.'));
                 }
@@ -381,13 +393,18 @@ class UsersController extends AppController
     public function login()
     {
      
+        if($this->Auth->user('role')=='3')
+        {
+            return $this->redirect(['controller' => 'users', 'action' => 'index']);
+        }
+
         $fields['role']=3;   
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
-                return $this->redirect(['controller' => 'users','action' => 'index']);
-                //return $this->redirect($this->Auth->redirectUrl());
+                //return $this->redirect(['controller' => 'users','action' => 'index']);
+                return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('Your username or password is incorrect.');
         }
@@ -395,7 +412,11 @@ class UsersController extends AppController
     
     public function loginmerchant()
     {
-        
+        if($this->Auth->user('role')=='2')
+        {
+            return $this->redirect(['controller' => 'merchant', 'action' => 'index']);
+        }
+
         $fields['role']=2;
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
@@ -413,12 +434,12 @@ class UsersController extends AppController
                         break;
                     case 1:
                         $this->Auth->setUser($user);
-                        return $this->redirect(['controller' => 'merchants','action' => 'index']);
+                        return $this->redirect($this->Auth->redirectUrl());//return $this->redirect(['controller' => 'merchants','action' => 'index']);
                         break;
                     case 2:
                          $user['role']=-2;
                          $this->Auth->setUser($user);
-                        return $this->redirect(['controller' => 'users','action' => 'editmerchant',$this->Auth->user('id')]);
+                         return $this->redirect($this->Auth->redirectUrl());//return $this->redirect(['controller' => 'users','action' => 'editmerchant',$this->Auth->user('id')]);
                         break;
                     case 3:
                         $this->Flash->alert('Your account had been rejected.');

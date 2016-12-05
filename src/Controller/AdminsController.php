@@ -16,12 +16,16 @@ class AdminsController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
+    public function index($status = null)
     {
-        $users = $this->paginate($this->Users);
-
-        $this->set(compact('users'));
-        $this->set('_serialize', ['users']);
+        if($status==null)
+        {
+            return $this->redirect(['controller' => 'admins', 'action' => 'index']);
+        }
+        else
+        {
+            return $this->redirect(['controller' => 'users', 'action' => 'indexadmin',$status]);
+        }
     }
 
     /**
@@ -108,7 +112,11 @@ class AdminsController extends AppController
 
     public function login()
     {
-    
+        if($this->Auth->user('role')=='1')
+        {
+            return $this->redirect(['controller' => 'admins', 'action' => 'index']);
+        }
+
         $fields['role']=1;
         if ($this->request->is('post')) 
         {
@@ -116,8 +124,8 @@ class AdminsController extends AppController
             if ($user) 
             {
                 $this->Auth->setUser($user);
-                return $this->redirect(['controller' => 'users', 'action' => 'indexadmin']);
-                //return $this->redirect($this->Auth->redirectUrl());
+                //return $this->redirect(['controller' => 'admins', 'action' => 'index']);
+                return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('Your username or password is incorrect.');
         }

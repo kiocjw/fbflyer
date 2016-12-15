@@ -483,6 +483,63 @@ class UsersController extends AppController
                                 $obj = new DefaultPasswordHasher;
                                 $postpassword = $obj->check($this->request->data['current_password'], $password);
                                 if($postpassword==1)
+                                {                                 
+                                        $user['status']=0; 
+                                        if ($this->Users->save($user)) {
+                                            $this->Flash->success(__('The user has been saved.'));
+                                            $this->logout();
+                                        } else {
+                                            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                                        }
+                                    
+                                }
+                                else
+                                {
+                                    $this->Flash->error(__('Current Password is not match.'));
+                                }
+                            }
+                            $this->set(compact('user'));
+                            $this->set('_serialize', ['user']);             
+                }
+                else
+                {
+                    $this->logout();
+                }
+            
+        }
+        else
+        {
+
+            return $this->redirect(['action' => 'index']);
+        }
+
+    }
+
+    public function changepasswordmerchant()
+    {
+        $id = $this->Auth->user('id');
+
+        $user = $this->Users->get($id, [
+            'contain' => ['Companies']
+        ]);
+
+        if( $user->company['users_id'] == $id)
+        { 
+             
+                if( $user['status']==2 || $user['status']==1)
+                {
+                        
+                        if($user['remark'])
+                            if($user['remark'] != "")
+                            {
+                                $this->Flash->info($user['remark']);
+                            }       
+                            if ($this->request->is(['patch', 'post', 'put'])) {
+                                $password= $user['password'];
+                                $user = $this->Users->patchEntity($user, $this->request->data);
+                                $obj = new DefaultPasswordHasher;
+                                $postpassword = $obj->check($this->request->data['current_password'], $password);
+                                if($postpassword==1)
                                 {
                                     if($this->request->data['new_password_(Optional)']!=NULL || $this->request->data['confirm_new_password_(Optional)']!=NULL)
                                     {
@@ -493,7 +550,6 @@ class UsersController extends AppController
                                         else
                                         {
                                             $user['password']=$this->request->data['new_password_(Optional)'];
-                                            $user['status']=0; 
                                             if ($this->Users->save($user)) {
                                                 $this->Flash->success(__('The user has been saved.'));
                                                 $this->logout();
@@ -505,7 +561,6 @@ class UsersController extends AppController
                                     }
                                     else
                                     {
-                                        $user['status']=0; 
                                         if ($this->Users->save($user)) {
                                             $this->Flash->success(__('The user has been saved.'));
                                             $this->logout();
@@ -535,7 +590,6 @@ class UsersController extends AppController
         }
 
     }
-
     public function login()
     {
      

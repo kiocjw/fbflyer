@@ -6,12 +6,7 @@
                     <h3 class="dark-grey">Edit Profile</h3>
                         <?= $this->Form->create($user); ?>
                             <?php
-                                                            if($user->status==1)
-                                                            {
-                                                                echo $this->Form->input('current password',array('type' => 'password','div'=>array('class'=>'form-group'),'class' => 'form-control'));
-                                                                echo $this->Form->input('new password (Optional)',array('type' => 'password','div'=>array('class'=>'form-group'),'class' => 'form-control'));
-                                                                echo $this->Form->input('confirm new password (Optional)',array('type' => 'password','div'=>array('class'=>'form-group'),'class' => 'form-control'));
-                                                            }
+                                                            echo $this->Form->input('current password',array('type' => 'password','div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                                             echo $this->Form->input('company.company_name',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                                             echo $this->Form->input('company.brand',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                                             echo $this->Form->input('company.business_address',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));

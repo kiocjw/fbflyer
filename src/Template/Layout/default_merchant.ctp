@@ -109,6 +109,9 @@ $cakeDescription = 'FBFlyer';
                                     $role = $role <= 0 ? -$role : $role ;
                                     if($role==2)
                                      {
+                                          echo $this->Html->link("Change Password", ['controller' => 'users','action' => 'changepasswordmerchant']);
+                                          echo "</li>";
+                                          echo "<li>";
                                           echo $this->Html->link("Edit Profile", ['controller' => 'users','action' => 'edit']);
                                           echo "</li>";
                                           echo "<li>";

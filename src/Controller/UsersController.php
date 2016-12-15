@@ -4,6 +4,7 @@ namespace App\Controller;
 use Cake\Event\Event;
 use App\Controller\AppController;
 use Cake\Mailer\Email;
+use Cake\Auth\DefaultPasswordHasher;
 
 /**
  * Users Controller
@@ -175,51 +176,6 @@ class UsersController extends AppController
         
     }
 
-    public function editmerchant($id = null)
-    {
-
-        $user = $this->Users->get($id, [
-            'contain' => ['Companies']
-        ]);
-
-        if( $user->company['users_id'] == $this->Auth->user('id'))
-        { 
-             
-                if( $user['status']==2)
-                {
-                        $this->Flash->warning('Your account required rework on your info.');
-                        if($user['remark'])
-                            if($user['remark'] != "")
-                            {
-                                $this->Flash->info($user['remark']);
-                            }       
-                            if ($this->request->is(['patch', 'post', 'put'])) {
-                                $user = $this->Users->patchEntity($user, $this->request->data);
-                                $user['status']=0; 
-                                if ($this->Users->save($user)) {
-                                    $this->Flash->success(__('The user has been saved.'));
-                                    $this->logout();
-                                } else {
-                                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
-                                }
-                            }
-                            $this->set(compact('user'));
-                            $this->set('_serialize', ['user']);             
-                }
-                else
-                {
-                    $this->logout();
-                }
-            
-        }
-        else
-        {
-
-            return $this->redirect(['action' => 'index']);
-        }
-
-    }
-
     public function approveadmin($id = null) {
 
         if($this->Auth->user('role')=='1')
@@ -370,25 +326,215 @@ class UsersController extends AppController
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-     /*
-    public function edit($id = null)
+     
+    public function edit()
     {
+        if($this->Auth->user('role')=='1')
+        {
+                return $this->redirect(['controller' => 'users','action' => 'editadmin']);
+        }
+
+        if($this->Auth->user('role')=='2')
+        {
+                return $this->redirect(['controller' => 'users','action' => 'editmerchant']);
+        }
+
+        $id = $this->Auth->user('id');
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+            $password= $user['password'];
             $user = $this->Users->patchEntity($user, $this->request->data);
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $obj = new DefaultPasswordHasher;
+            $postpassword = $obj->check($this->request->data['current_password'], $password);
+            if($postpassword==1)
+            {
+                if($this->request->data['new_password_(Optional)']!=NULL || $this->request->data['confirm_new_password_(Optional)']!=NULL)
+                {
+                    if($this->request->data['new_password_(Optional)']!=$this->request->data['confirm_new_password_(Optional)'] )
+                    {
+                            $this->Flash->error(__('New Passwords is not match.'));
+                    }
+                    else
+                    {
+                        $user['password']=$this->request->data['new_password_(Optional)'];
+                        if ($this->Users->save($user)) {
+                            $this->Flash->success(__('The user has been saved.'));
+                            $this->logout();
+                        } else {
+                            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                        }
+                    }
+
+                }
+                else
+                {
+                    if ($this->Users->save($user)) {
+                        $this->Flash->success(__('The user has been saved.'));
+                        $this->logout();
+                    } else {
+                        $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                    }
+                }
             }
+            else
+            {
+                $this->Flash->error(__('Current Password is not match.'));
+            }
+     
         }
         $this->set(compact('user'));
         $this->set('_serialize', ['user']);
     }
-    */
+
+    public function editadmin()
+    {
+        if($this->Auth->user('role')=='3')
+        {
+                return $this->redirect(['controller' => 'users','action' => 'index']);
+        }
+
+        if($this->Auth->user('role')=='2')
+        {
+                return $this->redirect(['controller' => 'merchants','action' => 'index']);
+        }
+
+        $id = $this->Auth->user('id');
+        $user = $this->Users->get($id, [
+            'contain' => []
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $password= $user['password'];
+            $user = $this->Users->patchEntity($user, $this->request->data);
+            $obj = new DefaultPasswordHasher;
+            $postpassword = $obj->check($this->request->data['current_password'], $password);
+            if($postpassword==1)
+            {
+                if($this->request->data['new_password']!=NULL || $this->request->data['confirm_new_password']!=NULL)
+                {
+                    if($this->request->data['new_password']!=$this->request->data['confirm_new_password'] )
+                    {
+                            $this->Flash->error(__('New Passwords is not match.'));
+                    }
+                    else
+                    {
+                        $user['password']=$this->request->data['new_password'];
+                        if ($this->Users->save($user)) {
+                            $this->Flash->success(__('The user has been saved.'));
+                            $this->logout();
+                        } else {
+                            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                        }
+                    }
+
+                }
+                else
+                {
+                    if ($this->Users->save($user)) {
+                        $this->Flash->success(__('The user has been saved.'));
+                        $this->logout();
+                    } else {
+                        $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                    }
+                }
+            }
+            else
+            {
+                $this->Flash->error(__('Current Password is not match.'));
+            }
+            
+        }
+        $this->set(compact('user'));
+        $this->set('_serialize', ['user']);
+    }
+    
+    public function editmerchant()
+    {
+        $id = $this->Auth->user('id');
+
+        $user = $this->Users->get($id, [
+            'contain' => ['Companies']
+        ]);
+
+        if( $user->company['users_id'] == $id)
+        { 
+             
+                if( $user['status']==2 || $user['status']==1)
+                {
+                        if($user['status']==2)
+                        {
+                            $this->Flash->warning('Your account required rework on your info.');
+                        }
+                        else if( $user['status']==1)
+                        {
+                             $this->Flash->warning('Edit Profile will required admin approvement again.');
+                        }
+
+                        
+                        if($user['remark'])
+                            if($user['remark'] != "")
+                            {
+                                $this->Flash->info($user['remark']);
+                            }       
+                            if ($this->request->is(['patch', 'post', 'put'])) {
+                                $password= $user['password'];
+                                $user = $this->Users->patchEntity($user, $this->request->data);
+                                $obj = new DefaultPasswordHasher;
+                                $postpassword = $obj->check($this->request->data['current_password'], $password);
+                                if($postpassword==1)
+                                {
+                                    if($this->request->data['new_password_(Optional)']!=NULL || $this->request->data['confirm_new_password_(Optional)']!=NULL)
+                                    {
+                                        if($this->request->data['new_password_(Optional)']!=$this->request->data['confirm_new_password_(Optional)'] )
+                                        {
+                                             $this->Flash->error(__('New Passwords is not match.'));
+                                        }
+                                        else
+                                        {
+                                            $user['password']=$this->request->data['new_password_(Optional)'];
+                                            $user['status']=0; 
+                                            if ($this->Users->save($user)) {
+                                                $this->Flash->success(__('The user has been saved.'));
+                                                $this->logout();
+                                            } else {
+                                                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                                            }
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        $user['status']=0; 
+                                        if ($this->Users->save($user)) {
+                                            $this->Flash->success(__('The user has been saved.'));
+                                            $this->logout();
+                                        } else {
+                                            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    $this->Flash->error(__('Current Password is not match.'));
+                                }
+                            }
+                            $this->set(compact('user'));
+                            $this->set('_serialize', ['user']);             
+                }
+                else
+                {
+                    $this->logout();
+                }
+            
+        }
+        else
+        {
+
+            return $this->redirect(['action' => 'index']);
+        }
+
+    }
 
     public function login()
     {
@@ -402,9 +548,12 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
-                $this->Auth->setUser($user);
-                //return $this->redirect(['controller' => 'users','action' => 'index']);
-                return $this->redirect($this->Auth->redirectUrl());
+                if($user['role']=='3')
+                {
+                    $this->Auth->setUser($user);
+                    //return $this->redirect(['controller' => 'users','action' => 'index']);
+                    return $this->redirect($this->Auth->redirectUrl());
+                }
             }
             $this->Flash->error('Your username or password is incorrect.');
         }
@@ -412,6 +561,11 @@ class UsersController extends AppController
     
     public function loginmerchant()
     {
+        if($this->Auth->user('role')=='1')
+        {
+            return $this->redirect(['controller' => 'admin', 'action' => 'index']);
+        }
+
         if($this->Auth->user('role')=='2')
         {
             return $this->redirect(['controller' => 'merchant', 'action' => 'index']);
@@ -422,33 +576,40 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
             if ($user) 
             {
-                switch($user['status'])
+                if($user['role']!='2')
                 {
-                    case 0:
-                        $this->Flash->info('Your account still pending for approval.');
-                        if($user['remark'])
-                            if($user['remark'] != "")
-                            {
-                                $this->Flash->info($user['remark']);
-                            }
+                     $this->Flash->error('Your username or password is incorrect.');
+                }
+                else
+                {
+                    switch($user['status'])
+                    {
+                        case 0:
+                            $this->Flash->info('Your account still pending for approval.');
+                            if($user['remark'])
+                                if($user['remark'] != "")
+                                {
+                                    $this->Flash->info($user['remark']);
+                                }
+                            break;
+                        case 1:
+                            $this->Auth->setUser($user);
+                            return $this->redirect($this->Auth->redirectUrl());//return $this->redirect(['controller' => 'merchants','action' => 'index']);
+                            break;
+                        case 2:
+                             $user['role']=-2;
+                             $this->Auth->setUser($user);
+                             return $this->redirect(['controller' => 'users','action' => 'editmerchant']);
+                            break;
+                        case 3:
+                            $this->Flash->alert('Your account had been rejected.');
+                            if($user['remark'])
+                                if($user['remark'] != "")
+                                {
+                                    $this->Flash->info($user['remark']);
+                                }
                         break;
-                    case 1:
-                        $this->Auth->setUser($user);
-                        return $this->redirect($this->Auth->redirectUrl());//return $this->redirect(['controller' => 'merchants','action' => 'index']);
-                        break;
-                    case 2:
-                         $user['role']=-2;
-                         $this->Auth->setUser($user);
-                         return $this->redirect($this->Auth->redirectUrl());//return $this->redirect(['controller' => 'users','action' => 'editmerchant',$this->Auth->user('id')]);
-                        break;
-                    case 3:
-                        $this->Flash->alert('Your account had been rejected.');
-                        if($user['remark'])
-                            if($user['remark'] != "")
-                            {
-                                $this->Flash->info($user['remark']);
-                            }
-                    break;
+                    }
                 }
                 //return $this->redirect($this->Auth->redirectUrl());
             }

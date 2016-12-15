@@ -615,15 +615,6 @@ class UsersController extends AppController
     
     public function loginmerchant()
     {
-        if($this->Auth->user('role')=='1')
-        {
-            return $this->redirect(['controller' => 'admin', 'action' => 'index']);
-        }
-
-        if($this->Auth->user('role')=='2')
-        {
-            return $this->redirect(['controller' => 'merchant', 'action' => 'index']);
-        }
 
         $fields['role']=2;
         if ($this->request->is('post')) {

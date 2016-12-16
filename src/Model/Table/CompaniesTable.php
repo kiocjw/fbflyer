@@ -78,6 +78,7 @@ class CompaniesTable extends Table
             ->requirePresence('bank_account_holder', 'create')
             ->notEmpty('bank_account_holder');
         $validator
+            ->numeric('bank_account_no')
             ->requirePresence('bank_account_no', 'create')
             ->notEmpty('bank_account_no');
 

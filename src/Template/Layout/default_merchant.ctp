@@ -161,7 +161,7 @@ $cakeDescription = 'FBFlyer';
                                 <ul class="nav navbar-nav navbar-left">
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><!--aria-expanded="false"-->
-                                            <i class="ti-home">
+                                            <i class="ti-direction">
                                                 </i> Outlets
                                             <span class="caret">
                                                 </span>
@@ -178,7 +178,7 @@ $cakeDescription = 'FBFlyer';
                                     </li>
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><!--aria-expanded="false"-->
-                                            <i class="ti-home">
+                                            <i class="ti-layout-grid2">
                                                 </i> Deals
                                             <span class="caret">
                                                 </span>
@@ -195,7 +195,7 @@ $cakeDescription = 'FBFlyer';
                                     </li>
                                     <li>
                                          <?php
-                                            echo $this->Html->link($this->Html->tag('i',"", array('class' => 'ti-home'))."Redeem", ['controller' => 'vouchers','action' => 'redeem'],array('escape'=>false));
+                                            echo $this->Html->link($this->Html->tag('i',"", array('class' => 'ti-receipt'))."Redeem", ['controller' => 'vouchers','action' => 'redeem'],array('escape'=>false));
                                           ?>
                                     </li>
                                 </ul>

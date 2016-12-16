@@ -12,6 +12,9 @@
                                                             echo $this->Form->input('SSM',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                                             echo $this->Form->input('telephone',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                                             echo $this->Form->input('business_person_in_charge',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
+                                                            echo $this->Form->input('bank_name',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
+                                                            echo $this->Form->input('bank_account_holder',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
+                                                            echo $this->Form->input('bank_account_no',array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                                             echo $this->Form->input('users_id', ['options' => $users],array('div'=>array('class'=>'form-group'),'class' => 'form-control'));
                                                         ?>
                 </div>

@@ -471,6 +471,7 @@ class UsersController extends AppController
                              $this->Flash->warning('Edit Profile will required admin approvement again.');
                         }
 
+                        $r=$user->company['bank_name'];
                         
                         if($user['remark'])
                             if($user['remark'] != "")
@@ -498,6 +499,7 @@ class UsersController extends AppController
                                     $this->Flash->error(__('Current Password is not match.'));
                                 }
                             }
+                            $this->set(compact('r'));
                             $this->set(compact('user'));
                             $this->set('_serialize', ['user']);             
                 }

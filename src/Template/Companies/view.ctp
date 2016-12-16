@@ -45,4 +45,16 @@
         <h4><?= __('Business Person In Charge') ?></h4>
         <?= $this->Text->autoParagraph(h($company->business_person_in_charge)); ?>
     </div>
+    <div class="row">
+        <h4><?= __('Bank Name') ?></h4>
+        <?= $this->Text->autoParagraph(h($company->bank_name)); ?>
+    </div>
+    <div class="row">
+        <h4><?= __('Bank Account Holder') ?></h4>
+        <?= $this->Text->autoParagraph(h($company->bank_account_holder)); ?>
+    </div>
+        <div class="row">
+        <h4><?= __('Bank AccountNo') ?></h4>
+        <?= $this->Number->format(($company->bank_account_no); ?>
+    </div>
 </div>

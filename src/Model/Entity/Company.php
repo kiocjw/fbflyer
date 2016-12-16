@@ -13,6 +13,9 @@ use Cake\ORM\Entity;
  * @property string $SSM
  * @property string $telephone
  * @property string $business_person_in_charge
+ * @property string $bank_name
+ * @property string $bank_account_holder
+ * @property string $bank_account_no
  * @property int $users_id
  * @property \App\Model\Entity\User $user
  */

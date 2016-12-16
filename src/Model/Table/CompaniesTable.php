@@ -70,6 +70,17 @@ class CompaniesTable extends Table
             ->requirePresence('business_person_in_charge', 'create')
             ->notEmpty('business_person_in_charge');
 
+        $validator
+            ->requirePresence('bank_name', 'create')
+            ->notEmpty('bank_name');
+         
+        $validator
+            ->requirePresence('bank_account_holder', 'create')
+            ->notEmpty('bank_account_holder');
+        $validator
+            ->requirePresence('bank_account_no', 'create')
+            ->notEmpty('bank_account_no');
+
         return $validator;
     }
 

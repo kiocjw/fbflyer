@@ -99,6 +99,16 @@
                                                   <p class="lead">
                                                         <?=nl2br(h($deal->description)) ?>
                                                   </p>
+                                                 <h4>
+                                                       Redeem Period
+                                                  </h4>
+                                                  <p class="lead">
+                                                        <?php 
+                                                                $startDateTime = $deal->redeem_start_date->format('l, F d y');
+                                                                $endDateTime = $deal->redeem_end_date->format('l, F d y');
+                                                        ?>
+                                                        <?php echo $startDateTime." <br>TILL<br>".$endDateTime;?>
+                                                  </p>
                                                     <h4>
                                                         Available Branch
                                                   </h4>

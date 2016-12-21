@@ -3,7 +3,7 @@
         <div class="col-sm-12">
             <div class="panel-body frameLR bg-white shadow space-sm">
                 <div class="col-md-6">
-                    <h3 class="dark-grey">Add Outlet</h3>
+                    <h3 class="dark-grey">Add Branch</h3>
                     
                         <?= $this->Form->create($merchant, ['type' => 'file']) ?>
                         <?php

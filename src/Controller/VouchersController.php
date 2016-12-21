@@ -266,6 +266,19 @@ class VouchersController extends AppController
             if(!$deal->isEmpty())
             {
                     $current_deal = $deal->first();
+                    if($current_deal->deals_end_date->isPast())
+                    {
+                        $this->Flash->error(__('Deal purchase period had been over!'));
+                        return $this->redirect(['controller' => 'users', 'action' => 'index']);
+                        
+                    }
+                    elseif ($current_deal->deals_start_date->isFuture())
+                    {
+                         $this->Flash->error(__('Deal purchase period not yet started!'));
+                         return $this->redirect(['controller' => 'users', 'action' => 'index']);
+                    }
+
+                    
                     if($current_deal->status==0)
                     {
                          $item1->setName($current_deal->title)
@@ -488,25 +501,38 @@ class VouchersController extends AppController
                    $voucher = $vouchers->first();
                     if($voucher->status==0)
                     {
-                        if($this->request->data['btn'] == 'Validate') 
-                        {
-                            $this->Flash->success(__("This is Valid Voucher Code."));     
-                        }
-                        elseif($this->request->data['btn'] == 'Redeem') 
-                        {
-                            $v = $this->Vouchers->get($voucher->id, [
-                                'contain' => ['Deals']
-                            ]);
+                        $deal = $this->Vouchers->Deals->get($voucher->deals_id);
 
-                            $v->status=1;                             
-                            if ($this->Vouchers->save($v)) {
-                                $this->Flash->success(__("Successfully redeemed."));
-                                $deal = $this->Vouchers->Deals->get($voucher->deals_id);
-                                $this->Flash->info(__($deal->title));
-                            } else {
-                                $this->Flash->error(__('Fail to redeeem this voucher.'));
+                        if($deal->redeem_end_date->isPast())
+                        {
+                            $this->Flash->error(__('Voucher redemption period had been over!'));
+                        }
+                        elseif ($deal->redeem_start_date->isFuture())
+                        {
+                            $this->Flash->error(__('Voucher redemption period not yet started!'));
+                        }
+                        else
+                        {
+                            if($this->request->data['btn'] == 'Validate') 
+                            {
+                                $this->Flash->success(__("This is Valid Voucher Code."));     
                             }
+                            elseif($this->request->data['btn'] == 'Redeem') 
+                            {
+                                $v = $this->Vouchers->get($voucher->id, [
+                                    'contain' => ['Deals']
+                                ]);
+
+                                $v->status=1;                             
+                                if ($this->Vouchers->save($v)) {
+                                    $this->Flash->success(__("Successfully redeemed."));
+                                
+                                    $this->Flash->info(__($deal->title));
+                                } else {
+                                    $this->Flash->error(__('Fail to redeeem this voucher.'));
+                                }
                         
+                            }
                         }
                     }
                     else

@@ -3,7 +3,7 @@
         <div class="col-sm-12">
             <div class="panel-body frameLR bg-white shadow space-sm">
                 <div class="col-md-6">
-                    <h3 class="dark-grey">Edit Outlet</h3>
+                    <h3 class="dark-grey">Edit Branch</h3>
                         <?= $this->Form->create($merchant, ['type' => 'file']); ?>
                             <?php
                                 echo $this->Form->input('photo', ['type' => 'file'],array('div'=>array('class'=>'form-group'),'class' => 'btn btn-primary'));

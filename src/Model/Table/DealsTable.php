@@ -122,6 +122,16 @@ class DealsTable extends Table
             ->notEmpty('deals_end_date');
 
         $validator
+            ->dateTime('redeem_start_date')
+            ->requirePresence('redeem_start_date', 'create')
+            ->notEmpty('redeem_start_date');
+
+        $validator
+            ->dateTime('redeem_end_date')
+            ->requirePresence('redeem_end_date', 'create')
+            ->notEmpty('redeem_end_date');
+
+        $validator
             ->requirePresence('additional_info', 'create')
             ->notEmpty('additional_info');
 

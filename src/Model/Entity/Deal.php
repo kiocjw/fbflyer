@@ -18,6 +18,8 @@ use Cake\ORM\Entity;
  * @property int $purchased_number
  * @property \Cake\I18n\Time $deals_start_date
  * @property \Cake\I18n\Time $deals_end_date
+ * @property \Cake\I18n\Time $redeem_start_date
+ * @property \Cake\I18n\Time $redeem_end_date
  * @property string $additional_info
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified

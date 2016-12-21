@@ -162,17 +162,17 @@ $cakeDescription = 'FBFlyer';
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><!--aria-expanded="false"-->
                                             <i class="ti-direction">
-                                                </i> Outlets
+                                                </i> Branches
                                             <span class="caret">
                                                 </span>
                                         </a>
                                         <ul class="dropdown-menu" role="menu">
                                             <li>
-                                               <?php echo $this->Html->link("MY OUTLETS", ['controller' => 'merchants','action' => 'index']);?>
+                                               <?php echo $this->Html->link("MY BRANCHES", ['controller' => 'merchants','action' => 'index']);?>
                                             </li>
 
                                             <li>
-                                               <?php echo $this->Html->link("NEW OUTLET", ['controller' => 'merchants','action' => 'add']);?>
+                                               <?php echo $this->Html->link("NEW BRANCHES", ['controller' => 'merchants','action' => 'add']);?>
                                             </li>
                                         </ul>
                                     </li>

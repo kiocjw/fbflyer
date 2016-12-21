@@ -2,7 +2,7 @@
     <div class="row">
        <div class="col-sm-12">
             <div class="panel-body frameLR bg-white shadow mTop-30">
-             <hr data-symbol="<?= __('Outlets') ?>">
+             <hr data-symbol="<?= __('Branches') ?>">
               <div class="row">
                    <?php if (isset($merchants)){foreach ($merchants as $merchant): ?>
                         <div class="col-sm-6">

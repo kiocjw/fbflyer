@@ -6,12 +6,20 @@
                 <?php
                 $now = new DateTime();
                 $date2 = $deal->deals_end_date;
+                $date3 = $deal->deals_start_date;
                 $difference = $now->diff($date2);
+                $difference2 = $date3->diff($now);
                 $isExpired = 0;
+                $isStarted = 0;
                 if ($difference->invert == 1) 
                 {
-                   $isExpired = 1;                
-                   $difference = $date2->diff($date2);
+                    $isExpired = 1;                
+                    $difference = $date2->diff($date2);
+                }
+                if ($difference2->invert == 1) 
+                {
+                    $isStarted = 1;                
+                    $difference = $date2->diff($date2);
                 }
                            
                 ?>
@@ -68,7 +76,7 @@
                           <i class="ti-timer">
                           </i>
                          
-                           <?php if ($isExpired==0){ ?>
+                           <?php if ($isExpired==0 && $isStarted==0){ ?>
                               <b>
                                 <?= h($difference->format('%d'))?> 
                               </b>
@@ -83,9 +91,13 @@
                               min(s)
                             <?php 
                             }
-                            else
+                            else if($isExpired!=0)
                             {
                                 echo "Expired";
+                            }
+                            else if($isStarted!=0)
+                            {
+                                echo "Coming Soon";
                             }
                             ?>
                         </li>

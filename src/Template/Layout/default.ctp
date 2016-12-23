@@ -235,6 +235,18 @@ $cakeDescription = 'FBFlyer';
                                         </ul>
 
                                     </li>
+
+                                    <li>
+                                         <?php
+                                            echo $this->Html->link($this->Html->tag('i',"", array('class' => 'ti-info'))."About Us", ['controller' => 'about','action' => ''],array('escape'=>false));
+                                          ?>
+                                    </li>
+
+                                    <li>
+                                         <?php
+                                            echo $this->Html->link($this->Html->tag('i',"", array('class' => 'ti-email'))."Contact Us", ['controller' => 'contacts','action' => ''],array('escape'=>false));
+                                          ?>
+                                    </li>
                                     <!--
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" ><!--aria-expanded="false"-->

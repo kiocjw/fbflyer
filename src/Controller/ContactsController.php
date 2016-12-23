@@ -21,7 +21,7 @@ class ContactsController extends AppController
      */
     public function index()
     {
-      $emailaddress= "contactus@fbflyer.com";
+      $emailaddress= "topkittechnology@gmail.com";
       $contact = new ContactForm();
       if ($this->request->is('post')) 
       {

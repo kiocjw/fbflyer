@@ -4,7 +4,7 @@
             <div class="inner-wrap frameLR bg-white shadow clearfix ">
                 <hr data-symbol="OUR LOCATION">
                 <div class="google-maps">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.545877667706!2d100.30464931477229!3d5.333284496131233!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304ac0f669993851%3A0x1b5d1ef678e8c175!2sQueensbay+Mall%2C+100%2C+Persiaran+Bayan+Indah%2C+Queens+Bay%2C+14300+Bayan+Lepas%2C+Pulau+Pinang%2C+Malaysia!5e0!3m2!1sen!2ssg!4v1482391179114" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.748461189101!2d100.25448331477219!3d5.301893496153724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304a9556863cb461%3A0xe78dac69f7e5d4fe!2sTop+Kit+Technology!5e0!3m2!1sen!2ssg!4v1482805994983" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
                 </div>
                 <hr data-symbol="CONTACT FORM">
                 <!-- widget -->
@@ -60,8 +60,7 @@ Mr. Loh (Business Manager)
                             <hr class="mBtm-50 mTop-30" data-symbol="WORKSPACE">
                             <div class="responsive-video">
                                 <div class="fluid-width-video-wrapper" style="padding-top: 56.2%;">
-                                    <iframe src="https://player.vimeo.com/video/122994198" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" id="fitvid0">
-                                    </iframe>
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/jHQGyMBtE9Y" frameborder="0" allowfullscreen></iframe>
                                 </div>
                             </div>
 

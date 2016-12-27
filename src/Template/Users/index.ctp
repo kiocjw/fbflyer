@@ -168,7 +168,7 @@
                         ?>                
                         <li>
                           <div class="col-sm-7 col-lg-7 omega">
-                              <article class="bg-image entry-lg" data-image-src="<?= "/".h(str_replace("\\", "/", $deal->photo_dir)).h(str_replace("\\", "/",$deal->photo)) ?>">
+                              <article class="bg-image entry-lg" data-image-src="<?= "/".h(str_replace("\\", "/", $deal->photo_dir)).h(str_replace("\\", "/",rawurlencode($deal->photo))) ?>">
                                <!--<div class="deal-short-entry">
                                
                                   <p class="lead">

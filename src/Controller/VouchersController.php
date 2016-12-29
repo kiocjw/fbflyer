@@ -445,6 +445,20 @@ class VouchersController extends AppController
                     file_put_contents('files/Vouchers/'.$voucher->id.'.png',$image);
                     $baseUrl = getBaseUrl();
                     $baseUrl= str_replace("/webroot","",$baseUrl);
+
+                    $this->loadModel('Deals');
+                    $deal = $this->Deals->findById($deals_id);
+          
+                    if(!$deal->isEmpty())
+                    {
+                            $current_deal = $deal->first();
+                            $current_deal->purchased_number = $current_deal->purchased_number+1;
+                            if ($this->Deals->save($current_deal)) {
+                                //$this->Flash->success(__('The deal has been saved.'));
+                            } else {
+                                $this->Flash->error(__('The purchased number of deal not updated!'));
+                            }
+                    }
                     $this->emailuservoucher($this->Auth->user('username'), $this->Auth->user('email'), $voucher->status, $baseUrl.Router::url(['action' => 'view', $voucher->id, '_ext' => 'pdf']));
                     return $this->redirect(['action' => 'view', $voucher->id, '_ext' => 'pdf']);
                 } else {

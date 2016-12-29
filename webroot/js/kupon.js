@@ -118,7 +118,7 @@ $(document).ready(function() {
         return bg;
     });
     // fit image nicely
-    $(".bg-image").css("background-size", "cover");
+    $(".bg-image").css("background-size", "auto 520px, cover");
 
 
 

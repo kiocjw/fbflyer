@@ -1,5 +1,4 @@
 <section id="page" class="container mTop-30 mBtm-50">
-    <!--/.row -->
     <hr data-symbol="DEALS">
               <div class="row">
                 <?php if (isset($deals)){foreach ($deals as $deal): ?>
@@ -26,7 +25,6 @@
                 ?>
                 <div class="col-sm-6">
                   <div class="deal-entry  orange">
-                    
                     <div class="offer-discount">
                       <?= h($deal->discount_percentage) ?>%
                     </div>
@@ -103,11 +101,10 @@
                             }
                             ?>
                         </li>
-                        <li class="info_link col-sm-5 col-xs-6 col-lg-4">
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $deal->id],array('class'=>'btn btn-block btn-default btn-raised btn-sm')) ?>                         
-                            <?= $this->Html->link(__('View Deal'), ['action' => 'view', $deal->id],array('class'=>'btn btn-block btn-default btn-raised btn-sm')) ?>
+                        <li class="info_link col-sm-5 col-xs-6 col-lg-4">                                        
+                            <?= $this->Html->link(__('View Deal'), ['controller' => 'Deals', 'action' => 'viewadmin', $deal->id],array('class'=>'btn btn-block btn-default btn-raised btn-sm')) ?>
+                            <?= $this->Html->link(__('Approve/Reject'), ['action' => 'approveadmin', $deal->id],array('class'=>'btn btn-block btn-default btn-raised btn-sm')) ?>                                              
                         </li>
-                        </br>
                         <li>
                              <span class="">
                               <i class="ti-tag">
@@ -116,12 +113,12 @@
                             </span>
                         </li>
                       </ul>
-                     
                     </footer>
                   </div>
                 </div>
                 <?php endforeach; }?>
               </div>
+    <!--/.row -->
         <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
@@ -132,3 +129,4 @@
     </div>
 </section>
       
+

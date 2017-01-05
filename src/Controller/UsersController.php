@@ -53,22 +53,22 @@ class UsersController extends AppController
                 {
                     if($category!=null)
                     {
-                        $deals = $this->paginate($this->Deals->find('all', array('conditions' => array('Deals.title LIKE' => "%". $text ."%", 'Deals.categories_id' => $category))));
+                        $deals = $this->paginate($this->Deals->find('all', array('conditions' => array('Deals.title LIKE' => "%". $text ."%", 'Deals.categories_id' => $category, 'Deals.status' =>1, 'Deals.status' =>1))));
                     }
                     else
                     {
-                        $deals = $this->paginate($this->Deals->find('all', array('conditions' => array('Deals.title LIKE' => "%". $text ."%"))));
+                        $deals = $this->paginate($this->Deals->find('all', array('conditions' => array('Deals.title LIKE' => "%". $text ."%", 'Deals.status' =>1))));
                     }
                 }
                 else
                 {
                     if($category!=null)
                     {
-                        $deals = $this->paginate($this->Deals->findAllByCategories_id($category));
+                        $deals = $this->paginate($this->Deals->findAllByCategories_idAndStatus($category,1));
                     }
                     else
                     {
-                        $deals = $this->paginate($this->Deals->find('all'));
+                        $deals = $this->paginate($this->Deals->findAllByStatus(1));
                     }
                 }
                 $this->set(compact('deals'));
@@ -104,22 +104,22 @@ class UsersController extends AppController
                 {
                     if($category!=null)
                     {
-                        $deals = $this->paginate($this->Deals->find('all', array('conditions' => array('Deals.title LIKE' => "%". $text ."%", 'Deals.categories_id' => $category))));
+                        $deals = $this->paginate($this->Deals->find('all', array('conditions' => array('Deals.title LIKE' => "%". $text ."%", 'Deals.categories_id' => $category, 'Deals.status' =>1, 'Deals.status' =>1))));
                     }
                     else
                     {
-                        $deals = $this->paginate($this->Deals->find('all', array('conditions' => array('Deals.title LIKE' => "%". $text ."%"))));
+                        $deals = $this->paginate($this->Deals->find('all', array('conditions' => array('Deals.title LIKE' => "%". $text ."%", 'Deals.status' =>1))));
                     }
                 }
                 else
                 {
                     if($category!=null)
                     {
-                        $deals = $this->paginate($this->Deals->findAllByCategories_id($category));
+                        $deals = $this->paginate($this->Deals->findAllByCategories_idAndStatus($category,1));
                     }
                     else
                     {
-                        $deals = $this->paginate($this->Deals->find('all'));
+                        $deals = $this->paginate($this->Deals->findAllByStatus(1));
                     }
                 }
                 $this->set(compact('deals'));
@@ -133,6 +133,10 @@ class UsersController extends AppController
     }
     public function view($id = null)
     {
+            if($id == null)
+            {
+                 return $this->redirect(['action' => 'index']);
+            }
             #if($this->Auth->user('role')=='3')
             #{
                 $this->loadModel('Deals');
@@ -170,7 +174,7 @@ class UsersController extends AppController
          }
          else 
          {
-           
+           return $this->redirect(['action' => 'index']);
          }
 
         

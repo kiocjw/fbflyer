@@ -183,6 +183,32 @@ $cakeDescription = 'FBFlyer';
                                     </li>
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><!--aria-expanded="false"-->
+                                            <i class="ti-layout-grid2">
+                                                </i> Deals
+                                            <span class="caret">
+                                                </span>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                               <?php echo $this->Html->link("ALL DEALS", ['controller' => 'deals','action' => 'indexadmin']);?>
+                                            </li>
+                                            <li>
+                                               <?php echo $this->Html->link("PENDING DEALS", ['controller' => 'deals','action' => 'indexadmin',0]);?>
+                                            </li>
+                                            <li>
+                                               <?php echo $this->Html->link("APPROVED DEALS", ['controller' => 'deals','action' => 'indexadmin',1]);?>
+                                            </li>
+                                            <li>
+                                               <?php echo $this->Html->link("REWORKED DEALS", ['controller' => 'deals','action' => 'indexadmin',2]);?>
+                                            </li>
+                                            <li>
+                                               <?php echo $this->Html->link("REJECTED DEALS", ['controller' => 'deals','action' => 'indexadmin',3]);?>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><!--aria-expanded="false"-->
                                             <i class="ti-direction">
                                                 </i> Branches
                                             <span class="caret">

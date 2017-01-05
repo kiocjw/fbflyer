@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Mailer\Email;
 
 /**
  * Deals Controller
@@ -37,6 +38,16 @@ class DealsController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
+    {
+        $deal = $this->Deals->get($id, [
+            'contain' => ['Users', 'Merchants']
+        ]);
+
+        $this->set('deal', $deal);
+        $this->set('_serialize', ['deal']);
+    }
+
+    public function viewadmin($id = null)
     {
         $deal = $this->Deals->get($id, [
             'contain' => ['Users', 'Merchants']
@@ -95,6 +106,7 @@ class DealsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $deal = $this->Deals->patchEntity($deal, $this->request->data);
+            $deal['status']=0; 
             if ($this->Deals->save($deal)) {
                 $this->Flash->success(__('The deal has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -127,5 +139,113 @@ class DealsController extends AppController
             $this->Flash->error(__('The deal could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function indexadmin($status = null)
+    {
+        
+            $this->paginate = [
+                'contain' => ['Users']
+            ];
+
+
+
+         if($this->Auth->user('role')=='1')
+         {
+             if($status!=null)
+             {
+                $deals = $this->paginate($this->Deals->findAllByStatus($status));
+             }
+             else
+             {
+                $deals = $this->paginate($this->Deals);
+             }
+             $this->set(compact('deals'));
+             $this->set('_serialize', ['deals']);
+         }
+         else 
+         {
+           
+         }
+
+        
+    }
+
+    public function approveadmin($id = null) {
+
+        if($this->Auth->user('role')=='1')
+        {
+            $deal = $this->Deals->get($id, [
+                'contain' => ['Users']
+            ]);
+            if ($this->request->is(['patch', 'post', 'put'])) {
+                $deal = $this->Deals->patchEntity($deal, $this->request->data, [
+                'associated' => ['Users']
+                ]);
+                if ($this->Deals->save($deal, [ 
+                    'validate' => true,
+                    'associated' => ['Users']
+                ])) {
+                    $this->emailapproveadmin("[".$deal['id']."] ".$deal['title'], $deal->user['email'], $deal['status'], $deal['remark']);
+                    $this->Flash->success(__('The deal has been saved.'));
+                    return $this->redirect(['controller' => 'deals', 'action' => 'indexadmin']);
+                } else {
+                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                }
+            }
+            $this->set(compact('deal'));
+            $this->set('_serialize', ['deal']);
+            if (!$this->Deals->exists($id)) 
+            {
+                throw new NotFoundException(__('Invalid'));
+            }
+        }
+        else
+        {
+            return $this->redirect(['action' => 'index']);
+        }
+
+    }
+
+    public function emailapproveadmin($title =null, $emailaddress= null, $status = null, $remark = null){
+        try 
+        {
+            $strStatus="";
+            $email =  new Email('default');
+            switch($status)
+            {
+                case 0:
+                $email->template('deal');
+                $strStatus="PENDING";
+                break;
+                case 1:
+                $email->template('deal');
+                $strStatus="APPROVED";
+                break;
+                case 2:
+                $email->template('deal');
+                $strStatus="REWORD REQUIRED";
+                break;
+                case 3:
+                $email->template('deal');
+                $strStatus="REJECTED";
+                break;
+
+            }
+            
+            $email->emailFormat('html')
+                  ->from(['noreply@fbflyer.com' => 'NO REPLY FBFLYER'])
+                  ->to($emailaddress)
+                  ->subject(sprintf('[%s] Your Deal Submission',$strStatus))
+                  ->viewVars(['deal' => ['title' => $title, 'remark' => $remark]])
+                  ->send();
+                   //$this->Flash->success(__('Email has been sent.'));
+
+        } 
+        catch (Exception $e) {
+
+            $this->Flash->error('Exception : '+  $e->getMessage()+"\n");
+
+        }
     }
 }

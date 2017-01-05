@@ -24,6 +24,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
  * @property int $status
+ * @property int $percentage_of_rebate
  * @property int $users_id
  * @property \App\Model\Entity\User $user
  * @property int $categories_id

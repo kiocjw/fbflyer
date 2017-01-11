@@ -126,6 +126,9 @@ $cakeDescription = 'FBFlyer';
                                 {
                                     if($role=='3')
                                      {
+                                          echo $this->Html->link("View Profile", ['controller' => 'users','action' => 'profile']);
+                                          echo "</li>";
+                                          echo "<li>";
                                           echo $this->Html->link("Edit Profile", ['controller' => 'users','action' => 'edit']);
                                           echo "</li>";
                                           echo "<li>";

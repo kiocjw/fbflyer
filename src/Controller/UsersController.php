@@ -392,6 +392,63 @@ class UsersController extends AppController
         $this->set('_serialize', ['user']);
     }
 
+    public function profile()
+    {
+
+        if($this->Auth->user('role')=='3')
+        {
+
+
+        $id = $this->Auth->user('id');
+        $user = $this->Users->get($id, [
+            'contain' => []
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $password= $user['password'];
+            $user = $this->Users->patchEntity($user, $this->request->data);
+            $obj = new DefaultPasswordHasher;
+            $postpassword = $obj->check($this->request->data['current_password'], $password);
+            if($postpassword==1)
+            {
+                if($this->request->data['new_password_(Optional)']!=NULL || $this->request->data['confirm_new_password_(Optional)']!=NULL)
+                {
+                    if($this->request->data['new_password_(Optional)']!=$this->request->data['confirm_new_password_(Optional)'] )
+                    {
+                            $this->Flash->error(__('New Passwords is not match.'));
+                    }
+                    else
+                    {
+                        $user['password']=$this->request->data['new_password_(Optional)'];
+                        if ($this->Users->save($user)) {
+                            $this->Flash->success(__('The user has been saved.'));
+                            $this->logout();
+                        } else {
+                            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                        }
+                    }
+
+                }
+                else
+                {
+                    if ($this->Users->save($user)) {
+                        $this->Flash->success(__('The user has been saved.'));
+                        $this->logout();
+                    } else {
+                        $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                    }
+                }
+            }
+            else
+            {
+                $this->Flash->error(__('Current Password is not match.'));
+            }
+     
+        }
+        $this->set(compact('user'));
+        $this->set('_serialize', ['user']);
+        }
+    }
+
     public function editadmin()
     {
         if($this->Auth->user('role')=='3')

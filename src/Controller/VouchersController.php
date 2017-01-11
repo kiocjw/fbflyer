@@ -279,7 +279,7 @@ class VouchersController extends AppController
                     }
 
                     
-                    if($current_deal->status==0)
+                    if($current_deal->status!=0)
                     {
                          $item1->setName($current_deal->title)
                         ->setCurrency('MYR')
@@ -459,6 +459,21 @@ class VouchersController extends AppController
                                 $this->Flash->error(__('The purchased number of deal not updated!'));
                             }
                     }
+
+                    $id = $this->Auth->user('id');
+
+                    $this->loadModel('Users');
+                    $user = $this->Users->get($id, [
+                
+                    ]);
+
+                    $user['points']= round($user['points']+ ($current_deal['percentage_of_rebate']*$current_deal['promo_price']/100));
+                    if ($this->Users->save($user)) {
+                        $this->Flash->info(__('Your current points: '.$user['points']));
+                    } else {
+                        $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                    }
+
                     $this->emailuservoucher($this->Auth->user('username'), $this->Auth->user('email'), $voucher->status, $baseUrl.Router::url(['action' => 'view', $voucher->id, '_ext' => 'pdf']));
                     return $this->redirect(['action' => 'view', $voucher->id, '_ext' => 'pdf']);
                 } else {

@@ -19,6 +19,7 @@ use Cake\ORM\Entity;
  * @property string $password
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
+ * @property int $points
  */
 class User extends Entity
 {

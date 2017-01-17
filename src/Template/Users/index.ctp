@@ -229,7 +229,17 @@
                                       <p class="text">
                                         SAVINGS
                                       </p>
+                                    </div>                                     
+                                    <div class="">
                                     </div>
+                                    <div class="point">
+                                            <p class="ti-gift value">
+                                                <?=round(($deal['percentage_of_rebate']*$deal['promo_price']/100)) ?>
+                                            </p>
+                                            <p class="text">
+                                                Points
+                                            </p>
+                                        </div>
                                   </div>
                                   <!-- /.value info -->
                                   <div class="timeLeft text-center">
@@ -389,6 +399,7 @@
                         <?= h($deal->description) ?>
                       </p>
                     </div>
+                    
                     <!--/.entry content -->
                     <footer class="info_bar clearfix">
                       <ul class="unstyled list-inline row">
@@ -420,6 +431,9 @@
                                 echo "Coming Soon";
                             }
                             ?>
+                        </li>
+                        <li class="ti-gift value">
+                                                <?=round(($deal['percentage_of_rebate']*$deal['promo_price']/100)) ?> Points                       
                         </li>
                         <li class="info_link col-sm-5 col-xs-6 col-lg-4">                         
                             <?= $this->Html->link(__('View Deal'), ['action' => 'view', $deal->id],array('class'=>'btn btn-block btn-default btn-raised btn-sm')) ?>

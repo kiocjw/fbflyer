@@ -101,6 +101,9 @@
                             }
                             ?>
                         </li>
+                        <li class="ti-gift value">
+                                                <?=round(($deal['percentage_of_rebate']*$deal['promo_price']/100)) ?> Points                       
+                        </li>
                         <li class="info_link col-sm-5 col-xs-6 col-lg-4">                         
                             <?= $this->Html->link(__('View Deal'), ['action' => 'view', $deal->id],array('class'=>'btn btn-block btn-default btn-raised btn-sm')) ?>
                         </li>

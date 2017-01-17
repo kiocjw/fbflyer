@@ -315,7 +315,7 @@
                                         <div class="value">
                                             <p class="ti-money value">
                                                 <?= $this->Number->format($deal->actual_price) ?>
-                                            </p>
+                                            </p>                                            
                                             <p class="text">
                                                 Value
                                             </p>
@@ -334,6 +334,14 @@
                                             </p>
                                             <p class="text">
                                                 SAVINGS
+                                            </p>
+                                        </div>
+                                        <div class="point">
+                                            <p class="ti-gift value">
+                                                <?=round(($deal['percentage_of_rebate']*$deal['promo_price']/100)) ?>
+                                            </p>
+                                            <p class="text">
+                                                Points
                                             </p>
                                         </div>
                                     </div>

@@ -60,12 +60,13 @@ class ShoppingCartsController extends AppController
             $deals = $this->Deals->findById($this->request->data['deals_id']);
             $deal = $deals->first();
             $ShoppingCarts = $this->ShoppingCarts->find('all', array('conditions'=>array('ShoppingCarts.users_id' =>$this->Auth->user('id'),'ShoppingCarts.deals_id' =>$deal['id'])));
-            $numShoppingCarts = sizeof($ShoppingCarts);
+            $numShoppingCarts = $ShoppingCarts->count();
             if(!$deals->isEmpty())
             {
                 $this->request->data['users_id']=$this->Auth->user('id');
-                if($numShoppingCarts>0)
+                if($numShoppingCarts>=1)
                 {
+                    // $this->Flash->success(__('Existing.'));
                     $shoppingCart = $ShoppingCarts->first();
                     $this->request->data['quantity']=$shoppingCart['quantity']+1;
                 }
@@ -73,6 +74,7 @@ class ShoppingCartsController extends AppController
                 {
                      $this->request->data['quantity']=1;
                 }
+
                 $shoppingCart = $this->ShoppingCarts->patchEntity($shoppingCart, $this->request->data);
 
                 if ($this->ShoppingCarts->save($shoppingCart)) {

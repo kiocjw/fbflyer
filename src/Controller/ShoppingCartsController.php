@@ -19,12 +19,14 @@ class ShoppingCartsController extends AppController
     public function index()
     {
 
-        $shoppingCarts = $this->ShoppingCarts->find('all', array('conditions' => array('ShoppingCarts.users_id' =>2)))->contain([
+        $shoppingCarts = $this->ShoppingCarts->find('all', array('conditions' => array('ShoppingCarts.users_id' =>$this->Auth->user('id'))))->contain([
              'Users', 'Deals'
             ]);
 
-        $this->set(compact('shoppingCarts'));
-        $this->set('_serialize', ['shoppingCarts']);
+        $points=$this->Auth->user('points');
+
+        $this->set(compact('points','shoppingCarts'));
+        $this->set('_serialize', ['points','shoppingCarts']);
     }
 
     /**

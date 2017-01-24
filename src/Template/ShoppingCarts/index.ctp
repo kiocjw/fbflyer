@@ -153,17 +153,28 @@
         <!-- /Cart -->
 
         <!-- Cart Buttons -->
-        <div class="cart-buttons clearfix mBtm-30">
+        <div class="cart-buttons clearfix mBtm-30 col-sm-12">
+            <?= $this->Form->create("", array('url'=>array('controller'=>'vouchers', 'action'=>'add'))) ?>
+            <label  for="points" style="float: right;left:0px;" >Points (Your Point: <?=$points?>)</label>
+            <div class="clearfix">
+           </div>
+            <?php 
+            echo $this->Form->input('points',['div'=>array('class'=>'input form-group'),'class' => 'form-control','type' => 'number','label'=> false,
+              'min' => 0,
+              'max' => $points,
+              'value'=>0]);
+            ?>
+           <div class="clearfix">
+           </div>
 
-            <a class="btn btn-raised btn-primary ripple-effect checkout" href="#">
-                <i class="ti-shopping-cart">
-        </i> checkout
-            </a>
+            <?= $this->Form->button($this->Html->tag('i', '', array('class' => 'ti-shopping-cart')).'Checkout',['class' => 'btn btn-raised btn-primary ripple-effect checkout']) ?>                                     
+            <?= $this->Form->end() ?> 
             <a class="btn btn-raised btn-success ripple-effect checkout" href="/users">
                 <i class="ti-plus">
-        </i> continue shopping
+                </i> continue shopping
             </a>
         </div>
+
         <!-- /Cart Buttons -->
 
     </div>

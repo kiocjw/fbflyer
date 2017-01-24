@@ -197,10 +197,10 @@
                                     </h3>
                                   </li>
                                   <li class="buy-now">
-                                      <?php echo $this->Form->create(null, ['url' => ['controller' => 'Vouchers', 'action' => 'add']]); ?>
+                                      <?php echo $this->Form->create(null, ['url' => ['controller' => 'shopping-carts', 'action' => 'add']]); ?>
                                       <?php echo $this->Form->input('deals_id', ['type' => 'hidden', 'value' => h($deal->id)]);?>   
                                       <?php if ($isExpired==0 && $isStarted==0){ $enable='';}else{$enable=' disabled';}?>                                   
-                                      <?= $this->Form->submit('BUY NOW',array('div'=>array('class'=>'form-group'),'class' => 'btn btn-danger btn-lg btn-raised ripple-effect'.$enable)) ?>
+                                      <?= $this->Form->submit('ADD TO CART',array('div'=>array('class'=>'form-group'),'class' => 'btn btn-danger btn-lg btn-raised ripple-effect'.$enable)) ?>
                                       <?= $this->Form->end() ?>
                                   </li>
                                 </ul>

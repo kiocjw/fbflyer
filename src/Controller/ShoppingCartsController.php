@@ -55,13 +55,33 @@ class ShoppingCartsController extends AppController
     {
         $shoppingCart = $this->ShoppingCarts->newEntity();
         if ($this->request->is('post')) {
-            $shoppingCart = $this->ShoppingCarts->patchEntity($shoppingCart, $this->request->data);
-            if ($this->ShoppingCarts->save($shoppingCart)) {
-                $this->Flash->success(__('The shopping cart has been saved.'));
+            $this->loadModel('Deals');
+          
+            $deals = $this->Deals->findById($this->request->data['deals_id']);
+            $deal = $deals->first();
+            $ShoppingCarts = $this->ShoppingCarts->find('all', array('conditions'=>array('ShoppingCarts.users_id' =>$this->Auth->user('id'),'ShoppingCarts.deals_id' =>$deal['id'])));
+            $numShoppingCarts = sizeof($ShoppingCarts);
+            if(!$deals->isEmpty())
+            {
+                $this->request->data['users_id']=$this->Auth->user('id');
+                if($numShoppingCarts>0)
+                {
+                    $shoppingCart = $ShoppingCarts->first();
+                    $this->request->data['quantity']=$shoppingCart['quantity']+1;
+                }
+                else
+                {
+                     $this->request->data['quantity']=1;
+                }
+                $shoppingCart = $this->ShoppingCarts->patchEntity($shoppingCart, $this->request->data);
 
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The shopping cart could not be saved. Please, try again.'));
+                if ($this->ShoppingCarts->save($shoppingCart)) {
+                    $this->Flash->success(__('The shopping cart has been saved.'));
+
+                    return $this->redirect(['action' => 'index']);
+                } else {
+                    $this->Flash->error(__('The shopping cart could not be saved. Please, try again.'));
+                }
             }
         }
         $users = $this->ShoppingCarts->Users->find('list', ['limit' => 200]);

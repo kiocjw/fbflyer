@@ -68,6 +68,10 @@ class VouchersTable extends Table
             ->notEmpty('code');
 
         $validator
+            ->requirePresence('quantity', 'create')
+            ->notEmpty('quantity');
+
+        $validator
             ->integer('status')
             ->requirePresence('status', 'create')
             ->notEmpty('status');
